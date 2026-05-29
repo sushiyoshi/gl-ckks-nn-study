@@ -1,0 +1,23 @@
+# local virtualenv created at the repository root
+bin/
+include/
+lib/
+pyvenv.cfg
+
+# ignore generated / heavy files by default
+data/*.joblib
+data/*.npz
+results/*.json
+results/*.csv
+results/*.md
+__pycache__/
+*.pyc
+.DS_Store
+
+# keep source files
+!README.md
+!requirements.txt
+!src/
+!src/*.py
+!scripts/
+!scripts/*.py

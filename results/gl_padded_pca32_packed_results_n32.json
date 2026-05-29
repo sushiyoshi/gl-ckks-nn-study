@@ -1,0 +1,80 @@
+{
+  "ok": true,
+  "semantic_validation_passed": true,
+  "shape": [
+    256,
+    32,
+    32
+  ],
+  "logical_dims": [
+    32,
+    32,
+    10
+  ],
+  "physical_dim": 32,
+  "slot_count": 262144,
+  "accuracy_relu_plain": 0.9375,
+  "accuracy_poly_plain": 0.9375,
+  "accuracy_gl_decrypted": 0.9375,
+  "argmax_agreement_poly_vs_gl": 1.0,
+  "error_metrics": {
+    "logits_linf": 1.584308937374601e-07,
+    "logits_mae": 4.001305624572313e-08,
+    "logits_relative_l2": 1.5592214038364035e-08
+  },
+  "operation_counts": {
+    "matrix_multiply": 2,
+    "add": 2,
+    "polynomial": 1
+  },
+  "polynomial_degree": 3,
+  "used_batches": 1,
+  "used_columns_last_batch": 32,
+  "output_padding_ratio": 0.6875,
+  "n_samples": 32,
+  "feature_dim": 32,
+  "samples_per_ciphertext_capacity": 8192,
+  "sample_packing_utilization": 0.00390625,
+  "matrix_entry_utilization_input": 0.00390625,
+  "used_input_entries": 1024,
+  "total_matrix_entries": 262144,
+  "level_log": [
+    {
+      "stage": "input",
+      "type": "GLCiphertext",
+      "level": 6,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    {
+      "stage": "linear1",
+      "type": "GLCiphertext",
+      "level": 5,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    {
+      "stage": "activation",
+      "type": "GLCiphertext",
+      "level": 2,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    {
+      "stage": "linear2",
+      "type": "GLCiphertext",
+      "level": 1,
+      "nbytes": null,
+      "serialized_nbytes": null
+    }
+  ],
+  "timing_log": {
+    "encrypt_s": 0.4725969999853987,
+    "linear1_add_s": 3.1277138329751324,
+    "activation_s": 3.7872396250022575,
+    "linear2_add_s": 1.0188389999966603,
+    "decrypt_s": 0.48002383299171925
+  },
+  "runtime_total_s": 15.791952375002438,
+  "runtime_per_sample_amortized_s": 0.4934985117188262
+}

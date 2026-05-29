@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "semantic_validation_passed": true,
+  "shape": [
+    256,
+    32,
+    32
+  ],
+  "logical_dims": [
+    32,
+    32,
+    32
+  ],
+  "physical_dim": 32,
+  "slot_count": 262144,
+  "logical_dim": [
+    32,
+    32,
+    32
+  ],
+  "used_slots": 32,
+  "total_slots": 262144,
+  "packing_utilization": 0.0001220703125,
+  "matrix_multiply_count": 2,
+  "add_count": 2,
+  "polynomial_degree": 3,
+  "mask_count": 0,
+  "block_count": 1,
+  "operation_counts": {
+    "matrix_multiply": 2,
+    "add": 2,
+    "polynomial": 1
+  },
+  "level_log": [
+    {
+      "stage": "input",
+      "type": "GLCiphertext",
+      "level": 6,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    {
+      "stage": "linear1",
+      "type": "GLCiphertext",
+      "level": 5,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    {
+      "stage": "activation",
+      "type": "GLCiphertext",
+      "level": 2,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    {
+      "stage": "linear2",
+      "type": "GLCiphertext",
+      "level": 1,
+      "nbytes": null,
+      "serialized_nbytes": null
+    }
+  ],
+  "timing_log": {
+    "encrypt_s": 0.47103766701184213,
+    "linear1_add_s": 3.393668916018214,
+    "activation_s": 3.8588570000138134,
+    "linear2_add_s": 1.227031459013233,
+    "decrypt_s": 0.48734037499525584
+  },
+  "argmax_agreement": 1.0,
+  "error_metrics": {
+    "logits_linf": 5.517527312814963e-08,
+    "logits_mae": 1.6454850662025794e-08,
+    "logits_relative_l2": 1.0064367935974697e-07
+  }
+}
