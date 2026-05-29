@@ -1,4 +1,7 @@
 # local virtualenv created at the repository root
+pyvenv/
+.venv/
+venv/
 bin/
 include/
 lib/

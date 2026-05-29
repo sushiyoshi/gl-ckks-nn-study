@@ -1,7 +1,0 @@
-condition,ok,accuracy_relu_plain,accuracy_poly_plain,argmax_agreement,notes,semantic_validation_passed,logical_dims,physical_dim,slot_count,used_slots,packing_utilization,matrix_multiply_count,add_count,polynomial_degree,accuracy,output_padding_ratio,hidden_padding_ratio,input_block_count,logits_linf,logits_mae,logits_relative_l2
-plain_digits64_baselines,True,0.9577777777777777,0.9577777777777777,0.9688888888888889,64->16->10 plaintext baselines,,,,,,,,,,,,,,,,
-ckks_digits64_poly,True,,,1.0,existing 64->16->10 CKKS baseline,,,,8192,,,,,,1.0,,,,,,
-ckks_pca32_poly,True,,,1.0,PCA32 32->32->10 CKKS baseline,True,"[32, 32, 10]",8192,8192,32,0.00390625,2,2,3,1.0,,,,3.431357509242616e-08,1.7451522495853798e-08,9.079653202921593e-09
-gl_native_toy_32,True,,,1.0,synthetic 32->32->32 native GL layout,True,"[32, 32, 32]",32,262144,32,0.0001220703125,2,2,3,,,,,5.517527312814963e-08,1.6454850662025794e-08,1.0064367935974697e-07
-gl_padded_pca32,True,,,1.0,PCA32 32->32->10 with 22 padded output rows,True,"[32, 32, 10]",32,262144,32,0.0001220703125,2,2,3,1.0,0.6875,,,9.636862086104259e-08,4.600227721737738e-08,2.429541873981036e-08
-gl_blocked_digits64,True,,,1.0,64->16->10 decomposed into 32x32 GL blocks,True,"[64, 16, 10]",32,262144,64,0.000244140625,3,3,3,,,0.5,2,8.27724773166949e-08,3.3038601229828934e-08,1.5181364693522952e-08

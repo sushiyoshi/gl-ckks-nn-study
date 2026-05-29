@@ -75,6 +75,25 @@ python3 scripts/16_run_gl_blocked_digits64_packed.py --degree 3 --n-samples 450
 python3 scripts/17_compare_single_vs_packed_gl.py
 ```
 
+Packed CKKS baseline:
+
+```bash
+python3 scripts/18_run_ckks_pca32_packed.py --degree 3 --n-samples 32
+python3 scripts/18_run_ckks_pca32_packed.py --degree 3 --n-samples 450
+python3 scripts/19_compare_gl_ckks_packed.py
+```
+
+Packed matrix-path sweep:
+
+```bash
+python3 scripts/20_probe_ckks_matrix_api.py
+python3 scripts/21_run_ckks_pca32_packed_sweep.py --mode dense
+python3 scripts/21_run_ckks_pca32_packed_sweep.py --mode plainmatrix
+python3 scripts/21_run_ckks_pca32_packed_sweep.py --mode lightplainmatrix
+python3 scripts/22_run_gl_pca32_packed_sweep.py
+python3 scripts/23_compare_packed_sweep.py
+```
+
 ## Fairness Condition
 
 The intended comparison is only fair if both CKKS and GL can run the same threat model:
@@ -91,6 +110,10 @@ For GL layout semantics, run `scripts/08_probe_gl_layout.py` first.  The probe c
 The blocked `64 -> 16 -> 10` experiment is the main overhead measurement for placing an ordinary load_digits MLP on GL's fixed `32 x 32` matrix slots.  The PCA32 classifier is intentionally GL-friendly and should not be interpreted as a general MLP result.
 
 Single-sample GL inference places one sample in one column of one `32 x 32` matrix, so it mostly behaves like matrix-vector inference and does not use GL's matrix-matrix primitive well.  Packed GL inference uses columns as the sample axis: one `32 x 32` matrix holds up to 32 samples, and the `GLEngine.shape=(256, 32, 32)` batch axis gives a theoretical capacity of `256 * 32 = 8192` samples per ciphertext.  The relevant GL comparison is therefore amortized throughput, sample packing utilization, matrix entry utilization, and blocking overhead, not just single-sample latency.
+
+CKKS packed PCA32 uses 32 contiguous CKKS slots per sample.  With the default `slot_count=8192`, this gives 256 samples per ciphertext, so the 450-sample test split uses two ciphertexts.  This improves CKKS amortized cost compared with per-sample inference, but the current implementation still uses dense `8192 x 8192` block diagonal matrices for `Engine.multiply_matrix`.
+
+The CKKS matrix-path sweep separates dense numpy `multiply_matrix`, `PlainMatrix`, and `LightPlainMatrix` paths.  It records matrix construction, matrix encoding, key generation, encryption, each linear layer, activation, decryption, dense matrix memory, and amortized runtime.  The dense path builds two `8192 x 8192` float64 matrices, about 1024 MiB total.
 
 ## Result Files
 
@@ -110,6 +133,8 @@ Single-sample GL inference places one sample in one column of one `32 x 32` matr
 - `results/gl_padded_pca32_packed_results_n32.json` and `results/gl_padded_pca32_packed_results_n450.json`
 - `results/gl_blocked_digits64_packed_results_n32.json` and `results/gl_blocked_digits64_packed_results_n450.json`
 - `results/gl_packing_summary.csv`
+- `results/ckks_pca32_packed_results_n32.json` and `results/ckks_pca32_packed_results_n450.json`
+- `results/gl_ckks_packed_comparison.csv`
 - `results/unsupported_gl_plain_weight.md` when GL plaintext-weight inference cannot be made comparable
 
 ## Notes

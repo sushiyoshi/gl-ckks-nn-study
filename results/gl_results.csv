@@ -1,2 +1,0 @@
-sample_index,true_label,plain_poly_pred,fhe_pred,ok,encrypt_s,linear1_s,activation_s,linear2_s,decrypt_s,linear1_level,activation_level,linear2_level
-0,1,1,4,True,0.4715427909977734,0.8145911249739584,3.787176583020482,0.42985699998098426,0.4923994169803336,5,2,1

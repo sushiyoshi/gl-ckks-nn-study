@@ -1,5 +1,0 @@
-condition,accuracy,notes,argmax_agreement,slot_count,packing_utilization_input
-plain_relu,0.9577777777777777,scikit-learn MLPClassifier ReLU baseline,,,
-plain_polynomial_relu,0.9577777777777777,"same trained weights, ReLU replaced by fitted power polynomial",0.9688888888888889,,
-ckks_polynomial_relu,1.0,"input encrypted, weights plaintext, CKKS multiply_matrix",1.0,8192,0.0079345703125
-gl_polynomial_relu,0.0,"input encrypted, weights plaintext if public API path succeeded; see unsupported markdown otherwise",0.0,262144,0.000247955322265625
