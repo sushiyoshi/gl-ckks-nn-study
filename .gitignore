@@ -6,6 +6,7 @@ bin/
 include/
 lib/
 pyvenv.cfg
+.openfhe_numpy_venv/
 
 # ignore generated / heavy files by default
 data/*.joblib

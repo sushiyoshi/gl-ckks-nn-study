@@ -4,6 +4,7 @@ This directory contains a small CPU-only experiment for Apple Silicon/macOS.  It
 
 - A. CKKS linear layers with plaintext weights plus polynomial ReLU.
 - B. GL linear layers with plaintext weights plus polynomial ReLU, only if the public `desilofhe` API supports that threat model.
+- C. GL ciphertext-weight matrix multiplication experiments, where both model weights and inputs are encrypted.
 
 It intentionally does not cover functional bootstrapping, RBOOT, ordinary bootstrapping, GPU/CUDA, or encrypted training.
 
@@ -18,6 +19,7 @@ The GL experiments should be read as layout and overhead measurements.  GL is us
 - PCA32 model: `32 -> 32 -> 10`, where PCA is fitted on the training split.  This is GL-friendly and is not evidence that a general MLP maps naturally to GL.
 - GL-native toy model: synthetic `32 -> 32 -> 32`.
 - Weights stay plaintext. Inputs are encrypted in FHE runs.
+- The original GL/CKKS inference runs use plaintext weights and encrypted inputs.  The encrypted-weight GL scripts are a separate model-privacy threat model.
 - ReLU is replaced by a fitted power-basis polynomial, degree 3 by default.
 
 ## Setup
@@ -94,6 +96,21 @@ python3 scripts/22_run_gl_pca32_packed_sweep.py
 python3 scripts/23_compare_packed_sweep.py
 ```
 
+Encrypted-weight GL matrix multiplication path:
+
+```bash
+python3 scripts/30_probe_gl_ctct_matrix_multiply.py
+python3 scripts/31_run_gl_encrypted_weight_pca32_linear.py --n-samples 1
+python3 scripts/31_run_gl_encrypted_weight_pca32_linear.py --n-samples 32
+python3 scripts/31_run_gl_encrypted_weight_pca32_linear.py --n-samples 450
+python3 scripts/32_run_gl_encrypted_weight_pca32_two_linear.py --n-samples 1
+python3 scripts/32_run_gl_encrypted_weight_pca32_two_linear.py --n-samples 32
+python3 scripts/32_run_gl_encrypted_weight_pca32_two_linear.py --n-samples 450
+python3 scripts/33_run_gl_encrypted_weight_pca32_mlp.py --degree 3 --n-samples 1
+python3 scripts/33_run_gl_encrypted_weight_pca32_mlp.py --degree 3 --n-samples 32
+python3 scripts/34_compare_gl_plain_vs_encrypted_weight.py
+```
+
 ## Fairness Condition
 
 The intended comparison is only fair if both CKKS and GL can run the same threat model:
@@ -102,6 +119,10 @@ The intended comparison is only fair if both CKKS and GL can run the same threat
 - plaintext model weights,
 - plaintext bias,
 - polynomial activation over ciphertext.
+
+The encrypted-weight GL scripts are not a replacement for the plaintext-weight packed inference comparison.  They test a different threat model where model weights are ciphertexts, so they are intended to validate GL ciphertext-ciphertext matrix multiplication and model privacy feasibility.  Start with `scripts/30_probe_gl_ctct_matrix_multiply.py` and `scripts/31_run_gl_encrypted_weight_pca32_linear.py`; the degree-3 polynomial MLP has much higher multiplicative depth, so level exhaustion or scale failure is an important negative result rather than a hidden error.
+
+OpenFHE/CKKS rotation-based ciphertext-ciphertext matrix multiplication is not covered here.  That remains a separate comparison track.
 
 `GLEngine.matrix_multiply` is checked explicitly for `numpy/plaintext x GLCiphertext`.  If this path fails, `scripts/06_run_gl_poly_inference.py` writes `results/unsupported_gl_plain_weight.md` and records only a GL ciphertext-ciphertext matrix multiplication microbenchmark.
 
@@ -136,6 +157,11 @@ The CKKS matrix-path sweep separates dense numpy `multiply_matrix`, `PlainMatrix
 - `results/ckks_pca32_packed_results_n32.json` and `results/ckks_pca32_packed_results_n450.json`
 - `results/gl_ckks_packed_comparison.csv`
 - `results/unsupported_gl_plain_weight.md` when GL plaintext-weight inference cannot be made comparable
+- `results/gl_ctct_matrix_multiply_probe.json`
+- `results/gl_encrypted_weight_pca32_linear_n*.json` and `.csv`
+- `results/gl_encrypted_weight_pca32_two_linear_n*.json` and `.csv`
+- `results/gl_encrypted_weight_pca32_mlp_n*.json` and `.csv`
+- `results/gl_plain_vs_encrypted_weight_comparison.csv` and `.md`
 
 ## Notes
 
