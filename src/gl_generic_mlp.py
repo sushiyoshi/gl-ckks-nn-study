@@ -8,6 +8,7 @@ from .gl_block_linear import (
     apply_polynomial_to_blocks,
     bias_block_tensor,
     block_linear_encrypted,
+    block_linear_plain_weight_encrypted_input,
     block_linear_plain_gl_layout,
     broadcast_weight_blocks_to_gl,
     pack_sample_columns_for_blocks,
@@ -265,6 +266,205 @@ def run_encrypted_weight_generic_mlp(
         + schedule["ciphertext_counts"]["W2"],
         "input_ciphertext_count": schedule["ciphertext_counts"]["input"],
         "weight_ciphertext_count": schedule["ciphertext_counts"]["W1"] + schedule["ciphertext_counts"]["W2"],
+        "block_matmul_count": schedule["total_linear_block_matmuls"],
+        "used_batches": layout["used_batches"],
+        "used_columns_last_batch": layout["used_columns_last_batch"],
+        **packing_stats(n_samples, n_in, shape),
+        **mlp_utilization_stats(n_samples, n_in, n_hidden, n_out, shape, block_size),
+        "plain_gl_layout_validation": {
+            key: value
+            for key, value in plain_validation.items()
+            if key not in {"logical", "gl_logits", "gl_hidden", "gl_hidden_poly", "output_blocks", "layout"}
+        },
+        "metadata": metadata or {},
+        **err,
+        "relative_l2": err["logits_relative_l2"],
+        "linf": err["logits_linf"],
+        "mae": err["logits_mae"],
+        "allclose": logits_allclose,
+        "logits_allclose": logits_allclose,
+        "accuracy": accuracy_value,
+        "argmax_agreement": argmax_agreement,
+        "level_log": level_log,
+        "timing_log": timing,
+        "key_generation_s": key_generation_s,
+        "server_only_s": server_only_s,
+        "total_s": runtime_total,
+        "runtime_total_s": runtime_total,
+        "runtime_per_sample_s": runtime_total / n_samples,
+        "total_minus_keygen_s": total_minus_keygen_s,
+        "server_per_sample_s": server_only_s / n_samples,
+        "no_keygen_per_sample_s": total_minus_keygen_s / n_samples,
+    }
+
+
+def run_plain_weight_generic_mlp(
+    x: np.ndarray,
+    w1: np.ndarray,
+    b1: np.ndarray,
+    w2: np.ndarray,
+    b2: np.ndarray,
+    coeffs: np.ndarray,
+    polynomial_radius: float,
+    y: np.ndarray | None = None,
+    task_type: str = "generic_mlp_poly_relu",
+    metadata: dict[str, Any] | None = None,
+    max_block_matmuls: int | None = None,
+    shape: tuple[int, int, int] | None = None,
+    block_size: int = 32,
+) -> dict[str, Any]:
+    from desilofhe import GLEngine
+
+    t_total = now_seconds()
+    x = np.asarray(x, dtype=np.float64)
+    w1 = np.asarray(w1, dtype=np.float64)
+    b1 = np.asarray(b1, dtype=np.float64)
+    w2 = np.asarray(w2, dtype=np.float64)
+    b2 = np.asarray(b2, dtype=np.float64)
+    coeffs = np.asarray(coeffs, dtype=np.float64)
+    n_samples, n_in = x.shape
+    w1_in, n_hidden = w1.shape
+    w2_in, n_out = w2.shape
+    if w1_in != n_in or w2_in != n_hidden:
+        raise ValueError(f"incompatible dims x={x.shape}, w1={w1.shape}, w2={w2.shape}")
+
+    requested_shape = tuple(int(v) for v in shape) if shape is not None else None
+    engine = GLEngine(shape=requested_shape) if requested_shape is not None else GLEngine()
+    shape = tuple(int(v) for v in engine.shape)
+    if requested_shape is not None and shape != requested_shape:
+        raise RuntimeError(f"GLEngine returned shape {shape}, requested {requested_shape}")
+    if shape[1] != shape[2]:
+        raise ValueError(f"generic MLP requires square GL block rows/cols, got {shape[1:]}")
+    if shape[1] < block_size or shape[2] < block_size:
+        raise ValueError(f"block_size {block_size} exceeds GL matrix shape {shape[1:]}")
+    schedule = mlp_block_schedule(n_in, n_hidden, n_out, n_samples, block_size=block_size, shape=shape)
+    if max_block_matmuls is not None and schedule["total_linear_block_matmuls"] > max_block_matmuls:
+        raise RuntimeError(
+            f"block matmul count {schedule['total_linear_block_matmuls']} exceeds max_block_matmuls={max_block_matmuls}"
+        )
+
+    plain_validation = validate_plain_gl_layout(x, w1, b1, w2, b2, coeffs, shape=shape, block_size=block_size)
+    if not plain_validation["ok"]:
+        raise RuntimeError("plain GL-layout validation failed")
+    logits_plain = plain_validation["logical"]["logits"]
+
+    input_blocks, layout = pack_sample_columns_for_blocks(split_features_to_blocks(x, block_size), shape)
+    w1_blocks = split_weight_matrix_for_column_vector_eval(w1, n_in, n_hidden, block_size)
+    w2_blocks = split_weight_matrix_for_column_vector_eval(w2, n_hidden, n_out, block_size)
+    w1_tensors = broadcast_weight_blocks_to_gl(w1_blocks, shape, layout["used_batches"])
+    w2_tensors = broadcast_weight_blocks_to_gl(w2_blocks, shape, layout["used_batches"])
+
+    timing: dict[str, float] = {}
+    level_log: list[dict[str, Any]] = []
+    t = now_seconds()
+    sk = engine.create_secret_key()
+    mm_key = engine.create_matrix_multiplication_key(sk)
+    had_key = engine.create_hadamard_multiplication_key(sk)
+    key_generation_s = elapsed(t)
+
+    t = now_seconds()
+    ct_inputs = [engine.encrypt(block, sk) for block in input_blocks]
+    timing["encryption_input_s"] = elapsed(t)
+    for i, ct in enumerate(ct_inputs):
+        level_log.append({"stage": f"input_block{i}", **ct_info(ct)})
+
+    t = now_seconds()
+    pt_w1 = [[engine.encode(block) for block in row] for row in w1_tensors]
+    pt_w2 = [[engine.encode(block) for block in row] for row in w2_tensors]
+    timing["plaintext_weight_encode_s"] = elapsed(t)
+
+    b1_plain = [
+        engine.encode(bias_block_tensor(b1, j, layout, shape, n_hidden, block_size))
+        for j in range(schedule["hidden_blocks"])
+    ]
+    b2_plain = [
+        engine.encode(bias_block_tensor(b2, j, layout, shape, n_out, block_size))
+        for j in range(schedule["output_blocks"])
+    ]
+
+    ct_hidden = block_linear_plain_weight_encrypted_input(
+        engine,
+        ct_inputs,
+        pt_w1,
+        b1_plain,
+        mm_key,
+        level_log=level_log,
+        timing_log=timing,
+        stage_prefix="linear1",
+        timer=now_seconds,
+        elapsed_fn=elapsed,
+        ct_info_fn=ct_info,
+    )
+    ct_activated = apply_polynomial_to_blocks(
+        engine,
+        ct_hidden,
+        coeffs,
+        had_key,
+        level_log=level_log,
+        timing_log=timing,
+        timer=now_seconds,
+        elapsed_fn=elapsed,
+        ct_info_fn=ct_info,
+    )
+    ct_outputs = block_linear_plain_weight_encrypted_input(
+        engine,
+        ct_activated,
+        pt_w2,
+        b2_plain,
+        mm_key,
+        level_log=level_log,
+        timing_log=timing,
+        stage_prefix="linear2",
+        timer=now_seconds,
+        elapsed_fn=elapsed,
+        ct_info_fn=ct_info,
+    )
+
+    t = now_seconds()
+    dec_blocks = [np.asarray(engine.decrypt(ct, sk), dtype=np.float64) for ct in ct_outputs]
+    timing["decryption_s"] = elapsed(t)
+    logits = unpack_output_blocks(dec_blocks, layout, n_out, block_size)
+
+    err = error_metrics(logits_plain, logits, "logits")
+    logits_allclose = bool(np.allclose(logits, logits_plain, rtol=1e-5, atol=1e-5))
+    runtime_total = elapsed(t_total)
+    server_only_s = sum(
+        value
+        for key, value in timing.items()
+        if key.endswith("_matrix_multiply_s") or key.startswith("activation_block")
+    )
+    total_minus_keygen_s = runtime_total - key_generation_s
+    accuracy_value = None
+    argmax_agreement = None
+    if y is not None:
+        from .metrics import accuracy as accuracy_fn
+        from .metrics import argmax_agreement as agreement_fn
+
+        accuracy_value = accuracy_fn(logits, np.asarray(y))
+        argmax_agreement = agreement_fn(logits_plain, logits)
+
+    return {
+        "ok": True,
+        "semantic_validation_passed": bool(err["logits_relative_l2"] < 1e-5 and logits_allclose),
+        "failure_category": None,
+        "task_type": task_type,
+        "weight_privacy": "plaintext_weight",
+        "activation": "degree3_poly",
+        "polynomial_degree": int(len(coeffs) - 1),
+        "polynomial_radius": float(polynomial_radius),
+        "coefficients": coeffs.tolist(),
+        "dims": [n_in, n_hidden, n_out],
+        "logical_dims": [n_in, n_hidden, n_out],
+        "n_samples": n_samples,
+        "block_size": block_size,
+        "shape": list(shape),
+        "selected_shape": list(shape),
+        "sample_capacity": shape[0] * shape[2],
+        "schedule": schedule,
+        "ciphertext_count": schedule["ciphertext_counts"]["input"],
+        "input_ciphertext_count": schedule["ciphertext_counts"]["input"],
+        "weight_ciphertext_count": 0,
+        "plaintext_weight_count": schedule["ciphertext_counts"]["W1"] + schedule["ciphertext_counts"]["W2"],
         "block_matmul_count": schedule["total_linear_block_matmuls"],
         "used_batches": layout["used_batches"],
         "used_columns_last_batch": layout["used_columns_last_batch"],

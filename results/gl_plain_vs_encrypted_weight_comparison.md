@@ -6,3 +6,5 @@
 | gl_encrypted_weight_two_linear_450 | False | auxiliary | 450 | True | two_linear | encrypted_weight | none | 17.355269457999384 | 0.038567265462220855 | 6.217061730230042e-08 | 1.0 | None |
 | gl_encrypted_weight_mlp_1 | False | auxiliary | 1 | True | mlp_poly_relu | encrypted_weight | degree3_poly | 18.700840167000024 | 18.700840167000024 | 4.610697531712777e-08 | 1.0 | None |
 | gl_encrypted_weight_mlp_32 | False | auxiliary | 32 | True | mlp_poly_relu | encrypted_weight | degree3_poly | 18.63443179199976 | 0.5823259934999925 | 5.0847456880180104e-08 | 1.0 | None |
+| gl_transformer_ffn_512_2048_512_plain_weight | True | main | 8192 | True | transformer_ffn_component_poly_relu | plaintext_weight | degree3_poly | 1411.590886124999 | 0.17231334059143055 | 3.4946763240689663e-07 | None | None |
+| gl_transformer_ffn_512_2048_512_encrypted_weight | True | main | 8192 | True | transformer_ffn_component_poly_relu | encrypted_weight | degree3_poly | 2216.0641234170034 | 0.2705156400655522 | 7.646037265198966e-06 | None | None |

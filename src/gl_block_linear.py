@@ -204,6 +204,40 @@ def block_linear_encrypted(
     return outputs
 
 
+def block_linear_plain_weight_encrypted_input(
+    engine: Any,
+    ct_input_blocks: list[Any],
+    pt_weight_blocks: list[list[Any]],
+    bias_plain_blocks: list[Any],
+    mm_key: Any,
+    level_log: list[dict[str, Any]] | None = None,
+    timing_log: dict[str, float] | None = None,
+    stage_prefix: str = "linear",
+    timer: Any | None = None,
+    elapsed_fn: Any | None = None,
+    ct_info_fn: Any | None = None,
+) -> list[Any]:
+    outputs: list[Any] = []
+    for out_block_index, row in enumerate(pt_weight_blocks):
+        acc = None
+        for in_block_index, pt_w in enumerate(row):
+            start = timer() if timer else None
+            prod = engine.matrix_multiply(pt_w, ct_input_blocks[in_block_index], mm_key)
+            key = f"{stage_prefix}_out{out_block_index}_in{in_block_index}_matrix_multiply_s"
+            if timing_log is not None and start is not None and elapsed_fn is not None:
+                timing_log[key] = elapsed_fn(start)
+            if level_log is not None and ct_info_fn is not None:
+                level_log.append({"stage": f"{stage_prefix}_out{out_block_index}_in{in_block_index}", **ct_info_fn(prod)})
+            acc = prod if acc is None else engine.add(acc, prod)
+        if acc is None:
+            raise ValueError("empty weight row")
+        acc = engine.add(acc, bias_plain_blocks[out_block_index])
+        if level_log is not None and ct_info_fn is not None:
+            level_log.append({"stage": f"{stage_prefix}_out{out_block_index}_sum", **ct_info_fn(acc)})
+        outputs.append(acc)
+    return outputs
+
+
 def apply_polynomial_to_blocks(
     engine: Any,
     ct_blocks: list[Any],
