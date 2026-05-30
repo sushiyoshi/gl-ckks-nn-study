@@ -70,11 +70,11 @@
   "legacy_matrix_entry_utilization_input_single_tensor_basis": 1.0,
   "level_log": [],
   "timing_log": {
-    "dry_run_total_s": 0.0002209169979323633
+    "dry_run_total_s": 0.00038012500590411946
   },
   "server_only_s": 0.0,
-  "total_s": 0.0002209169979323633,
-  "total_minus_keygen_s": 0.0002209169979323633,
+  "total_s": 0.00038012500590411946,
+  "total_minus_keygen_s": 0.00038012500590411946,
   "relative_l2": null,
   "linf": null,
   "mae": null,
