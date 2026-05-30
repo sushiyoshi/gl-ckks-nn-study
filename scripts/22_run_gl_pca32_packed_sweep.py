@@ -12,7 +12,7 @@ sys.path.append(str(Path(__file__).resolve().parents[1]))
 from src.gl_packing import broadcast_bias_to_columns, broadcast_weight_to_batches, pack_columns, packing_stats, unpack_logits
 from src.logging_utils import RESULTS, ct_info, elapsed, exception_record, now_seconds, write_csv
 from src.metrics import accuracy, argmax_agreement, error_metrics
-from src.model_pca32 import load_pca32_model
+from src.model_pca32 import load_pca32_model, require_sample_count
 from src.polynomial import fit_relu_power_polynomial
 
 
@@ -50,7 +50,7 @@ def run_one(n: int, degree: int) -> dict[str, Any]:
 
     t_total = now_seconds()
     model, arrays = load_pca32_model()
-    n = min(n, arrays["x_test_32"].shape[0])
+    require_sample_count(n, arrays["x_test_32"].shape[0], label="x_test_32")
     x = arrays["x_test_32"][:n]
     y = arrays["y_test"][:n]
     z_train = model.relu_forward(arrays["x_train_32"])["z1"]

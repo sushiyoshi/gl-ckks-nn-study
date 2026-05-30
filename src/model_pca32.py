@@ -41,14 +41,41 @@ class PCA32MLP:
         return {"z1": z1, "h1": h1, "logits": logits}
 
 
-def train_pca32_model(hidden: int = 32, max_iter: int = 800) -> tuple[PCA32MLP, dict[str, np.ndarray]]:
+def expand_eval_split(
+    x_test: np.ndarray,
+    y_test: np.ndarray,
+    *,
+    target_size: int,
+    seed: int = SEED,
+) -> tuple[np.ndarray, np.ndarray]:
+    if target_size < 0:
+        raise ValueError(f"target_size must be non-negative, got {target_size}")
+    if target_size <= len(x_test):
+        return x_test[:target_size], y_test[:target_size]
+    rng = np.random.default_rng(seed)
+    idx = rng.choice(len(x_test), size=target_size, replace=True)
+    return x_test[idx], y_test[idx]
+
+
+def require_sample_count(n_samples: int, available: int, *, label: str) -> None:
+    if n_samples < 0:
+        raise ValueError(f"{label} must be non-negative, got {n_samples}")
+    if n_samples > available:
+        raise ValueError(f"requested {n_samples} samples for {label}, but only {available} are available")
+
+
+def train_pca32_model(
+    hidden: int = 32,
+    max_iter: int = 800,
+    test_eval_size: int | None = None,
+) -> tuple[PCA32MLP, dict[str, np.ndarray]]:
     x_train, x_test, y_train, y_test = load_digits_split()
     scaler = StandardScaler()
     x_train_s = scaler.fit_transform(x_train)
     x_test_s = scaler.transform(x_test)
     pca = PCA(n_components=32, random_state=SEED)
     x_train_32 = pca.fit_transform(x_train_s)
-    x_test_32 = pca.transform(x_test_s)
+    x_test_32_base = pca.transform(x_test_s)
     clf = MLPClassifier(
         hidden_layer_sizes=(hidden,),
         activation="relu",
@@ -79,13 +106,20 @@ def train_pca32_model(hidden: int = 32, max_iter: int = 800) -> tuple[PCA32MLP, 
             "seed": SEED,
         },
     )
+    if test_eval_size is None:
+        x_test_32 = x_test_32_base
+        y_test_eval = y_test
+    else:
+        x_test_32, y_test_eval = expand_eval_split(x_test_32_base, y_test, target_size=test_eval_size)
     arrays = {
         "x_train": x_train,
         "x_test": x_test,
         "y_train": y_train,
-        "y_test": y_test,
+        "y_test": y_test_eval,
         "x_train_32": x_train_32,
         "x_test_32": x_test_32,
+        "x_test_32_base": x_test_32_base,
+        "y_test_base": y_test,
     }
     return model, arrays
 

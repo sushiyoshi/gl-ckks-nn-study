@@ -18,5 +18,5 @@
   "pca_explained_variance_ratio_sum": 0.9095439859157219,
   "seed": 42,
   "accuracy_train_relu": 0.9851521900519673,
-  "accuracy_test_relu": 0.9555555555555556
+  "accuracy_test_relu": 0.9508056640625
 }

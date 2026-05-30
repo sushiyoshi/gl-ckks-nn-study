@@ -14,18 +14,18 @@
     32,
     32
   ],
-  "n_samples": 450,
+  "n_samples": 8192,
   "ciphertext_count": 2,
-  "key_generation_s": 6.30773945799956,
-  "input_encryption_s": 0.47750379200078896,
-  "weight_encryption_s": 0.4613659170026949,
-  "used_batches": 15,
-  "used_columns_last_batch": 2,
+  "key_generation_s": 6.44627241699709,
+  "input_encryption_s": 0.4801415840011032,
+  "weight_encryption_s": 0.4782125419988006,
+  "used_batches": 256,
+  "used_columns_last_batch": 32,
   "feature_dim": 32,
   "samples_per_ciphertext_capacity": 8192,
-  "sample_packing_utilization": 0.054931640625,
-  "matrix_entry_utilization_input": 0.054931640625,
-  "used_input_entries": 14400,
+  "sample_packing_utilization": 1.0,
+  "matrix_entry_utilization_input": 1.0,
+  "used_input_entries": 262144,
   "total_matrix_entries": 262144,
   "ct_W1_type": "GLCiphertext",
   "ct_W2_type": null,
@@ -35,9 +35,9 @@
     "right": "ciphertext",
     "left_w2": "none"
   },
-  "hidden_relative_l2": 6.006769653317394e-08,
-  "hidden_linf": 2.2382442450563644e-06,
-  "hidden_mae": 7.686909769668161e-08,
+  "hidden_relative_l2": 5.915680577946549e-08,
+  "hidden_linf": 4.00104114817168e-06,
+  "hidden_mae": 7.251625680962968e-08,
   "hidden_allclose": true,
   "level_log": [
     {
@@ -63,13 +63,13 @@
     }
   ],
   "timing_log": {
-    "encryption_input_s": 0.47750379200078896,
-    "encryption_weight_s": 0.4613659170026949,
-    "matrix_multiply_s": 4.502600292002171,
-    "decryption_s": 0.7257552080009191
+    "encryption_input_s": 0.4801415840011032,
+    "encryption_weight_s": 0.4782125419988006,
+    "matrix_multiply_s": 4.636590916998102,
+    "decryption_s": 0.745575832999748
   },
-  "server_only_s": 4.502600292002171,
-  "total_s": 12.594828958997823,
-  "runtime_total_s": 12.594828958997823,
-  "runtime_per_sample_s": 0.02798850879777294
+  "server_only_s": 4.636590916998102,
+  "total_s": 12.922693083000922,
+  "runtime_total_s": 12.922693083000922,
+  "runtime_per_sample_s": 0.001577477182983511
 }

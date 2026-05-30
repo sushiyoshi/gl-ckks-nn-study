@@ -11,9 +11,6 @@ pyvenv.cfg
 # ignore generated / heavy files by default
 data/*.joblib
 data/*.npz
-results/*.json
-results/*.csv
-results/*.md
 __pycache__/
 *.pyc
 .DS_Store

@@ -11,7 +11,7 @@ from src.model_pca32 import save_pca32_model, train_pca32_model
 
 
 def main() -> None:
-    model, arrays = train_pca32_model()
+    model, arrays = train_pca32_model(test_eval_size=8192)
     save_pca32_model(model, arrays)
     train_logits = model.relu_forward(arrays["x_train_32"])["logits"]
     test_logits = model.relu_forward(arrays["x_test_32"])["logits"]

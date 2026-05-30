@@ -11,7 +11,7 @@ sys.path.append(str(Path(__file__).resolve().parents[1]))
 from src.gl_layout import make_gl_bias_column, make_gl_column, make_gl_weight_matrix, read_gl_column
 from src.logging_utils import RESULTS, ct_info, elapsed, now_seconds, write_csv, write_json
 from src.metrics import accuracy, argmax_agreement, error_metrics
-from src.model_pca32 import load_pca32_model
+from src.model_pca32 import load_pca32_model, require_sample_count
 from src.overhead_metrics import overhead_record
 from src.polynomial import fit_relu_power_polynomial
 
@@ -25,6 +25,7 @@ def main() -> None:
     from desilofhe import GLEngine
 
     model, arrays = load_pca32_model()
+    require_sample_count(args.n_samples, arrays["x_test_32"].shape[0], label="x_test_32")
     z_train = model.relu_forward(arrays["x_train_32"])["z1"]
     radius = float(max(3.0, min(8.0, np.ceil(np.quantile(np.abs(z_train), 0.995)))))
     coeffs = fit_relu_power_polynomial(args.degree, (-radius, radius))

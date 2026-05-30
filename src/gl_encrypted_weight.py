@@ -64,12 +64,20 @@ def operand_types(ct_w1: Any, ct_w2: Any, ct_x: Any) -> dict[str, Any]:
     }
 
 
+def require_sample_count(n_samples: int, available: int, *, label: str) -> None:
+    if n_samples < 0:
+        raise ValueError(f"{label} must be non-negative, got {n_samples}")
+    if n_samples > available:
+        raise ValueError(f"requested {n_samples} samples for {label}, but only {available} are available")
+
+
 def encrypted_weight_linear(n_samples: int) -> dict[str, Any]:
     from desilofhe import GLEngine
 
     t_total = now_seconds()
     model, arrays = load_pca32_model()
-    n = min(n_samples, arrays["x_test_32"].shape[0])
+    require_sample_count(n_samples, arrays["x_test_32"].shape[0], label="x_test_32")
+    n = n_samples
     x = arrays["x_test_32"][:n]
     z_plain = model.relu_forward(x)["z1"]
 
@@ -141,7 +149,8 @@ def encrypted_weight_two_linear(n_samples: int) -> dict[str, Any]:
 
     t_total = now_seconds()
     model, arrays = load_pca32_model()
-    n = min(n_samples, arrays["x_test_32"].shape[0])
+    require_sample_count(n_samples, arrays["x_test_32"].shape[0], label="x_test_32")
+    n = n_samples
     x = arrays["x_test_32"][:n]
     y = arrays["y_test"][:n]
     hidden_plain = x @ model.w1 + model.b1
@@ -225,7 +234,8 @@ def encrypted_weight_mlp(n_samples: int, degree: int) -> dict[str, Any]:
 
     t_total = now_seconds()
     model, arrays = load_pca32_model()
-    n = min(n_samples, arrays["x_test_32"].shape[0])
+    require_sample_count(n_samples, arrays["x_test_32"].shape[0], label="x_test_32")
+    n = n_samples
     x = arrays["x_test_32"][:n]
     y = arrays["y_test"][:n]
     z_train = model.relu_forward(arrays["x_train_32"])["z1"]
@@ -347,7 +357,8 @@ def mutation_results(*, n_samples: int, degree: int = 3, mutation: str = "correc
 
     t_total = now_seconds()
     model, arrays = load_pca32_model()
-    n = min(n_samples, arrays["x_test_32"].shape[0])
+    require_sample_count(n_samples, arrays["x_test_32"].shape[0], label="x_test_32")
+    n = n_samples
     x = arrays["x_test_32"][:n]
     y = arrays["y_test"][:n]
     z_train = model.relu_forward(arrays["x_train_32"])["z1"]
