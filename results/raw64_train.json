@@ -1,0 +1,46 @@
+{
+  "hidden": 32,
+  "feature_dim": 64,
+  "classes": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "n_iter": 50,
+  "loss": 0.033756703507821506,
+  "seed": 42,
+  "split_policy": "sklearn digits, train_test_split(test_size=0.25, random_state=42, stratify=y)",
+  "ok": true,
+  "task_type": "raw64_mlp_poly_relu",
+  "model_path": "data/raw64_mlp.joblib",
+  "logical_dims": [
+    64,
+    32,
+    10
+  ],
+  "test_eval_size": 8192,
+  "test_base_size": 450,
+  "eval_resampling": "deterministic replacement resampling from x_test_64_base/y_test_base for throughput evaluation; not unique 8192-sample accuracy.",
+  "polynomial_degree": 3,
+  "polynomial_radius": 7.0,
+  "coefficients": [
+    0.65641381646772,
+    0.4999999999999994,
+    0.06694756137347353,
+    2.0984989936123263e-17
+  ],
+  "coefficients_power_basis_order": "ascending",
+  "accuracy_train_relu": 0.9703043801039347,
+  "accuracy_test_relu": 0.9464111328125,
+  "accuracy_train_poly": 0.9532293986636972,
+  "accuracy_test_poly": 0.91943359375,
+  "argmax_agreement_train_relu_vs_poly": 0.9710467706013363,
+  "argmax_agreement_test_relu_vs_poly": 0.9698486328125
+}

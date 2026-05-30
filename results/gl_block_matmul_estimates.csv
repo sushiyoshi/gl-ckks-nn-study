@@ -1,0 +1,7 @@
+model,type,block_size,dims,linear1_block_matmuls,linear2_block_matmuls,gate_proj_block_matmuls,up_proj_block_matmuls,down_proj_block_matmuls,total_block_matmuls,metadata
+PCA32 toy,MLP,32,32->32->10,1,1,,,,2,estimate only; not a runtime benchmark
+raw64 digits,MLP,32,64->32->10,2,1,,,,3,estimate only; not a runtime benchmark
+original Transformer base FFN,MLP,32,512->2048->512,1024,1024,,,,2048,estimate only; not a runtime benchmark
+GPT-3 175B rough FFN,MLP,32,12288->49152->12288,589824,589824,,,,1179648,estimate only; not a runtime benchmark
+Llama2-7B style SwiGLU,SwiGLU,32,"hidden=4096, intermediate=11008",,,44032,44032,44032,132096,estimate only; not a runtime benchmark
+Llama3-8B style SwiGLU,SwiGLU,32,"hidden=4096, intermediate=14336",,,57344,57344,57344,172032,estimate only; not a runtime benchmark

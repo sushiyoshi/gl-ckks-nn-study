@@ -1,0 +1,215 @@
+{
+  "n_samples": 8192,
+  "task_type": "raw64_mlp_poly_relu",
+  "logical_dims": [
+    64,
+    32,
+    10
+  ],
+  "gl_shape": [
+    256,
+    32,
+    32
+  ],
+  "block_structure": {
+    "linear1_input_blocks": 2,
+    "linear1_weight_blocks": 2,
+    "linear1_block_matmuls": 2,
+    "linear2_block_matmuls": 1,
+    "total_linear_block_matmuls": 3
+  },
+  "warmup": 5,
+  "repeat": 50,
+  "model_path": "data/raw64_mlp.joblib",
+  "coefficient_source": "raw64 train pre-activation q0.995 radius fit",
+  "polynomial_degree": 3,
+  "polynomial_radius": 7.0,
+  "coefficients": [
+    0.65641381646772,
+    0.4999999999999994,
+    0.06694756137347353,
+    2.0984989936123263e-17
+  ],
+  "used_batches": 256,
+  "used_columns_last_batch": 32,
+  "logical_mlp": {
+    "min_s": 0.0011286250010016374,
+    "median_s": 0.0013189994988351827,
+    "mean_s": 0.0013036356798693306,
+    "max_s": 0.0017055409989552572
+  },
+  "gl_layout_mlp": {
+    "min_s": 0.004323375000240048,
+    "median_s": 0.004757271501148352,
+    "mean_s": 0.004927585840196116,
+    "max_s": 0.005903833000047598
+  },
+  "encrypted_reference": {
+    "ok": true,
+    "semantic_validation_passed": true,
+    "failure_category": null,
+    "task_type": "raw64_mlp_poly_relu",
+    "weight_privacy": "encrypted_weight",
+    "activation": "degree3_poly",
+    "polynomial_degree": 3,
+    "polynomial_radius": 7.0,
+    "coefficients": [
+      0.65641381646772,
+      0.4999999999999994,
+      0.06694756137347353,
+      2.0984989936123263e-17
+    ],
+    "logical_dims": [
+      64,
+      32,
+      10
+    ],
+    "shape": [
+      256,
+      32,
+      32
+    ],
+    "n_samples": 8192,
+    "ciphertext_count": 5,
+    "input_ciphertext_count": 2,
+    "weight_ciphertext_count": 3,
+    "block_matmul_count": 3,
+    "block_structure": {
+      "linear1_input_blocks": 2,
+      "linear1_weight_blocks": 2,
+      "linear1_block_matmuls": 2,
+      "linear2_block_matmuls": 1,
+      "total_linear_block_matmuls": 3
+    },
+    "used_batches": 256,
+    "used_columns_last_batch": 32,
+    "feature_dim": 64,
+    "samples_per_ciphertext_capacity": 8192,
+    "sample_packing_utilization": 1.0,
+    "matrix_entry_utilization_input": 2.0,
+    "used_input_entries": 524288,
+    "total_matrix_entries": 262144,
+    "metadata": {
+      "evaluation_sampling": "x_test_64/y_test are deterministic resamples of the base sklearn digits test split when n=8192; intended for throughput measurement, not unique-sample accuracy.",
+      "baseline": "semantic validation compares against the degree3_poly MLP baseline, not the original ReLU MLP.",
+      "model_path": "data/raw64_mlp.joblib"
+    },
+    "logits_linf": 1.129901698160296e-05,
+    "logits_mae": 1.5116795753983884e-07,
+    "logits_relative_l2": 8.238253436583026e-08,
+    "logits_allclose": true,
+    "accuracy": 0.91943359375,
+    "argmax_agreement": 1.0,
+    "level_log": [
+      {
+        "stage": "input_x0",
+        "type": "GLCiphertext",
+        "level": 6,
+        "nbytes": null,
+        "serialized_nbytes": null
+      },
+      {
+        "stage": "input_x1",
+        "type": "GLCiphertext",
+        "level": 6,
+        "nbytes": null,
+        "serialized_nbytes": null
+      },
+      {
+        "stage": "weight_w1a",
+        "type": "GLCiphertext",
+        "level": 6,
+        "nbytes": null,
+        "serialized_nbytes": null
+      },
+      {
+        "stage": "weight_w1b",
+        "type": "GLCiphertext",
+        "level": 6,
+        "nbytes": null,
+        "serialized_nbytes": null
+      },
+      {
+        "stage": "weight_w2",
+        "type": "GLCiphertext",
+        "level": 6,
+        "nbytes": null,
+        "serialized_nbytes": null
+      },
+      {
+        "stage": "linear1_block0",
+        "type": "GLCiphertext",
+        "level": 5,
+        "nbytes": null,
+        "serialized_nbytes": null
+      },
+      {
+        "stage": "linear1_block1",
+        "type": "GLCiphertext",
+        "level": 5,
+        "nbytes": null,
+        "serialized_nbytes": null
+      },
+      {
+        "stage": "linear1_sum",
+        "type": "GLCiphertext",
+        "level": 5,
+        "nbytes": null,
+        "serialized_nbytes": null
+      },
+      {
+        "stage": "activation",
+        "type": "GLCiphertext",
+        "level": 2,
+        "nbytes": null,
+        "serialized_nbytes": null
+      },
+      {
+        "stage": "linear2",
+        "type": "GLCiphertext",
+        "level": 1,
+        "nbytes": null,
+        "serialized_nbytes": null
+      }
+    ],
+    "timing_log": {
+      "encryption_input_s": 0.9421564580006816,
+      "encryption_weight_s": 1.4110420840006554,
+      "linear1_block0_matrix_multiply_s": 4.563057041999855,
+      "linear1_block1_matrix_multiply_s": 4.517006084002787,
+      "linear1_accumulation_s": 0.026622542001859983,
+      "activation_s": 3.7272207499991055,
+      "linear2_matrix_multiply_s": 1.5273006669995084,
+      "decryption_s": 0.48729804100003093
+    },
+    "key_generation_s": 6.359721625001839,
+    "server_only_s": 14.361207085003116,
+    "total_s": 23.781588041998475,
+    "runtime_total_s": 23.781588041998475,
+    "runtime_per_sample_s": 0.002903025884033017,
+    "total_minus_keygen_s": 17.421866416996636,
+    "server_per_sample_s": 0.0017530770367435444,
+    "no_keygen_per_sample_s": 0.0021266926778560347
+  },
+  "slowdown": {
+    "encrypted_server_only_over_plaintext_logical_median": 10887.954921655082,
+    "encrypted_no_keygen_over_plaintext_logical_median": 13208.395023942012,
+    "encrypted_server_only_over_plaintext_gl_layout_median": 3018.7907252164355,
+    "encrypted_no_keygen_over_plaintext_gl_layout_median": 3662.1551687329998
+  },
+  "metadata": {
+    "evaluation_sampling": "x_test_64/y_test are deterministic resamples of the base sklearn digits test split for throughput measurement.",
+    "plaintext_gl_layout": "packs X0/X1 and broadcasts padded W1a/W1b/W2 into [256,32,32] tensors, then unpacks logits."
+  },
+  "validation": {
+    "gl_layout_vs_logical_linf": 2.1316282072803006e-14,
+    "gl_layout_vs_logical_mae": 4.862557381621552e-16,
+    "gl_layout_vs_logical_relative_l2": 2.7592987697598835e-16,
+    "allclose": true,
+    "logical_accuracy": 0.91943359375,
+    "gl_layout_accuracy": 0.91943359375,
+    "argmax_agreement": 1.0,
+    "logical_checksum": -84189.03374666421,
+    "gl_layout_checksum": -84189.03374666421
+  }
+}
