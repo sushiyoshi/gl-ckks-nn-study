@@ -1,0 +1,207 @@
+{
+  "ok": true,
+  "semantic_validation_passed": true,
+  "failure_category": null,
+  "task_type": "generic_raw64_mlp_poly_relu",
+  "weight_privacy": "encrypted_weight",
+  "activation": "degree3_poly",
+  "polynomial_degree": 3,
+  "polynomial_radius": 7.0,
+  "coefficients": [
+    0.65641381646772,
+    0.4999999999999994,
+    0.06694756137347353,
+    2.0984989936123263e-17
+  ],
+  "dims": [
+    64,
+    32,
+    10
+  ],
+  "logical_dims": [
+    64,
+    32,
+    10
+  ],
+  "n_samples": 8192,
+  "block_size": 32,
+  "shape": [
+    256,
+    32,
+    32
+  ],
+  "schedule": {
+    "block_size": 32,
+    "n_samples": 8192,
+    "shape": [
+      256,
+      32,
+      32
+    ],
+    "capacity_per_ciphertext": 8192,
+    "input_blocks": 2,
+    "hidden_blocks": 1,
+    "output_blocks": 1,
+    "linear1_block_matmuls": 2,
+    "linear2_block_matmuls": 1,
+    "total_linear_block_matmuls": 3,
+    "activation_blocks": 1,
+    "ciphertext_counts": {
+      "input": 2,
+      "W1": 2,
+      "hidden": 1,
+      "W2": 1,
+      "output": 1,
+      "total_live_logical": 7
+    }
+  },
+  "ciphertext_count": 5,
+  "input_ciphertext_count": 2,
+  "weight_ciphertext_count": 3,
+  "block_matmul_count": 3,
+  "used_batches": 256,
+  "used_columns_last_batch": 32,
+  "feature_dim": 64,
+  "samples_per_ciphertext_capacity": 8192,
+  "sample_packing_utilization": 1.0,
+  "matrix_entry_utilization_input": 2.0,
+  "used_input_entries": 524288,
+  "total_matrix_entries": 262144,
+  "plain_gl_layout_validation": {
+    "ok": true,
+    "plain_gl_z1_linf": 1.0658141036401503e-14,
+    "plain_gl_z1_mae": 2.8300110680824103e-16,
+    "plain_gl_z1_relative_l2": 2.364571633507194e-16,
+    "plain_gl_h1_linf": 2.4868995751603507e-14,
+    "plain_gl_h1_mae": 1.6688391357569995e-16,
+    "plain_gl_h1_relative_l2": 3.451940269030311e-16,
+    "plain_gl_logits_linf": 2.1316282072803006e-14,
+    "plain_gl_logits_mae": 4.862557381621552e-16,
+    "plain_gl_logits_relative_l2": 2.7592987697598835e-16
+  },
+  "metadata": {
+    "baseline": "semantic validation compares against the degree3_poly MLP baseline, not the original ReLU MLP.",
+    "model_path": "data/raw64_mlp.joblib",
+    "reference_script": "scripts/48_run_gl_encrypted_weight_raw64_mlp.py"
+  },
+  "logits_linf": 1.2843118327054981e-05,
+  "logits_mae": 1.4893623288351428e-07,
+  "logits_relative_l2": 8.186662526007226e-08,
+  "relative_l2": 8.186662526007226e-08,
+  "linf": 1.2843118327054981e-05,
+  "mae": 1.4893623288351428e-07,
+  "allclose": true,
+  "logits_allclose": true,
+  "accuracy": 0.91943359375,
+  "argmax_agreement": 1.0,
+  "level_log": [
+    {
+      "stage": "input_block0",
+      "type": "GLCiphertext",
+      "level": 6,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    {
+      "stage": "input_block1",
+      "type": "GLCiphertext",
+      "level": 6,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    {
+      "stage": "weight_w1_out0_in0",
+      "type": "GLCiphertext",
+      "level": 6,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    {
+      "stage": "weight_w1_out0_in1",
+      "type": "GLCiphertext",
+      "level": 6,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    {
+      "stage": "weight_w2_out0_in0",
+      "type": "GLCiphertext",
+      "level": 6,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    {
+      "stage": "linear1_out0_in0",
+      "type": "GLCiphertext",
+      "level": 5,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    {
+      "stage": "linear1_out0_in1",
+      "type": "GLCiphertext",
+      "level": 5,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    {
+      "stage": "linear1_out0_sum",
+      "type": "GLCiphertext",
+      "level": 5,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    {
+      "stage": "activation_block0",
+      "type": "GLCiphertext",
+      "level": 2,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    {
+      "stage": "linear2_out0_in0",
+      "type": "GLCiphertext",
+      "level": 1,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    {
+      "stage": "linear2_out0_sum",
+      "type": "GLCiphertext",
+      "level": 1,
+      "nbytes": null,
+      "serialized_nbytes": null
+    }
+  ],
+  "timing_log": {
+    "encryption_input_s": 0.9956230829993729,
+    "encryption_weight_s": 1.5342784999993455,
+    "linear1_out0_in0_matrix_multiply_s": 5.176704833000258,
+    "linear1_out0_in1_matrix_multiply_s": 5.238761249998788,
+    "activation_block0_s": 4.031185333002213,
+    "linear2_out0_in0_matrix_multiply_s": 1.6821139589992526,
+    "decryption_s": 0.506347624999762
+  },
+  "key_generation_s": 6.812428917000943,
+  "server_only_s": 16.128765375000512,
+  "total_s": 26.306446582999342,
+  "runtime_total_s": 26.306446582999342,
+  "runtime_per_sample_s": 0.003211236155151287,
+  "total_minus_keygen_s": 19.4940176659984,
+  "server_per_sample_s": 0.001968843429565492,
+  "no_keygen_per_sample_s": 0.002379640828368945,
+  "raw64_reference_comparison": {
+    "available": true,
+    "path": "/Users/Eito_1/gl/results/gl_encrypted_weight_raw64_mlp_n8192.json",
+    "relative_l2_delta": -5.159091057579962e-10,
+    "argmax_agreement_delta": 0.0,
+    "server_only_s_delta": 1.767558289997396,
+    "schedule_matches": true,
+    "reference_server_only_s": 14.361207085003116,
+    "generic_server_only_s": 16.128765375000512,
+    "reference_relative_l2": 8.238253436583026e-08,
+    "generic_relative_l2": 8.186662526007226e-08,
+    "reference_argmax_agreement": 1.0,
+    "generic_argmax_agreement": 1.0
+  }
+}

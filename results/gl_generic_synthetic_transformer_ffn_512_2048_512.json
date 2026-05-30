@@ -1,0 +1,63 @@
+{
+  "ok": true,
+  "semantic_validation_passed": true,
+  "failure_category": null,
+  "dry_run": true,
+  "task_type": "generic_mlp_poly_relu",
+  "dims": [
+    512,
+    2048,
+    512
+  ],
+  "n_samples": 8192,
+  "block_size": 32,
+  "shape": [
+    256,
+    32,
+    32
+  ],
+  "schedule": {
+    "block_size": 32,
+    "n_samples": 8192,
+    "shape": [
+      256,
+      32,
+      32
+    ],
+    "capacity_per_ciphertext": 8192,
+    "input_blocks": 16,
+    "hidden_blocks": 64,
+    "output_blocks": 16,
+    "linear1_block_matmuls": 1024,
+    "linear2_block_matmuls": 1024,
+    "total_linear_block_matmuls": 2048,
+    "activation_blocks": 64,
+    "ciphertext_counts": {
+      "input": 16,
+      "W1": 1024,
+      "hidden": 64,
+      "W2": 1024,
+      "output": 16,
+      "total_live_logical": 2144
+    }
+  },
+  "activation": "degree3_poly",
+  "polynomial_degree": 3,
+  "polynomial_radius": 3.0,
+  "ciphertext_count": 0,
+  "block_matmul_count": 2048,
+  "sample_packing_utilization": 1.0,
+  "timing_log": {
+    "dry_run_total_s": 1.9525483750003332
+  },
+  "server_only_s": 0.0,
+  "total_s": 1.9525483750003332,
+  "total_minus_keygen_s": 1.9525483750003332,
+  "server_per_sample_s": 0.0,
+  "no_keygen_per_sample_s": 0.00023834819030765786,
+  "relative_l2": 0.0,
+  "linf": 0.0,
+  "mae": 0.0,
+  "allclose": true,
+  "level_log": []
+}

@@ -1,0 +1,152 @@
+{
+  "ok": true,
+  "dry_run": true,
+  "execution_mode": "dry_run",
+  "semantic_validation_passed": null,
+  "failure_category": null,
+  "task_type": "transformer_ffn_component_poly_relu",
+  "dims": [
+    512,
+    2048,
+    512
+  ],
+  "n_samples": 8192,
+  "shape": [
+    16,
+    512,
+    512
+  ],
+  "selected_shape": [
+    16,
+    512,
+    512
+  ],
+  "block_size": 512,
+  "sample_capacity": 8192,
+  "schedule": {
+    "block_size": 512,
+    "n_samples": 8192,
+    "shape": [
+      16,
+      512,
+      512
+    ],
+    "capacity_per_ciphertext": 8192,
+    "input_blocks": 1,
+    "hidden_blocks": 4,
+    "output_blocks": 1,
+    "linear1_block_matmuls": 4,
+    "linear2_block_matmuls": 4,
+    "total_linear_block_matmuls": 8,
+    "activation_blocks": 4,
+    "ciphertext_counts": {
+      "input": 1,
+      "W1": 4,
+      "hidden": 4,
+      "W2": 4,
+      "output": 1,
+      "total_live_logical": 14
+    }
+  },
+  "input_blocks": 1,
+  "hidden_blocks": 4,
+  "output_blocks": 1,
+  "total_block_matmuls": 8,
+  "activation_blocks": 4,
+  "block_matmul_count": 8,
+  "activation": "degree3_poly",
+  "polynomial_degree": 3,
+  "polynomial_radius": 3.0,
+  "peak_ciphertext_count_estimate": 14,
+  "sample_packs": 1,
+  "sample_capacity_per_pack": 8192,
+  "sample_packing_utilization": 1.0,
+  "feature_padding_utilization_input": 1.0,
+  "feature_padding_utilization_hidden": 1.0,
+  "feature_padding_utilization_output": 1.0,
+  "input_entry_utilization_bounded": 1.0,
+  "hidden_entry_utilization_bounded": 1.0,
+  "output_entry_utilization_bounded": 1.0,
+  "legacy_matrix_entry_utilization_input_single_tensor_basis": 1.0,
+  "level_log": [],
+  "timing_log": {
+    "dry_run_total_s": 0.0002209169979323633
+  },
+  "server_only_s": 0.0,
+  "total_s": 0.0002209169979323633,
+  "total_minus_keygen_s": 0.0002209169979323633,
+  "relative_l2": null,
+  "linf": null,
+  "mae": null,
+  "allclose": null,
+  "shape_selection": {
+    "shape": [
+      16,
+      512,
+      512
+    ],
+    "batch_count": 16,
+    "block_size": 512,
+    "block_rows": 512,
+    "block_cols": 512,
+    "sample_capacity": 8192,
+    "schedule": {
+      "block_size": 512,
+      "n_samples": 8192,
+      "shape": [
+        16,
+        512,
+        512
+      ],
+      "capacity_per_ciphertext": 8192,
+      "input_blocks": 1,
+      "hidden_blocks": 4,
+      "output_blocks": 1,
+      "linear1_block_matmuls": 4,
+      "linear2_block_matmuls": 4,
+      "total_linear_block_matmuls": 8,
+      "activation_blocks": 4,
+      "ciphertext_counts": {
+        "input": 1,
+        "W1": 4,
+        "hidden": 4,
+        "W2": 4,
+        "output": 1,
+        "total_live_logical": 14
+      }
+    },
+    "memory_estimate": {
+      "entries_per_tensor": 4194304,
+      "bytes_per_tensor_f64": 33554432,
+      "mib_per_tensor_f64": 32.0,
+      "peak_ciphertext_count_estimate": 14,
+      "logical_tensor_entries_estimate": 58720256,
+      "logical_tensor_mib_f64_estimate": 448.0
+    },
+    "utilization": {
+      "sample_packs": 1,
+      "sample_capacity_per_pack": 8192,
+      "sample_packing_utilization": 1.0,
+      "feature_padding_utilization_input": 1.0,
+      "feature_padding_utilization_hidden": 1.0,
+      "feature_padding_utilization_output": 1.0,
+      "input_entry_utilization_bounded": 1.0,
+      "hidden_entry_utilization_bounded": 1.0,
+      "output_entry_utilization_bounded": 1.0,
+      "legacy_matrix_entry_utilization_input_single_tensor_basis": 1.0
+    },
+    "total_block_matmuls": 8,
+    "activation_blocks": 4,
+    "estimated_single_matmul_cost_factor": 64.0,
+    "cost_factor_source": "fallback",
+    "measured_probe": null,
+    "feature_padding_utilization_product": 1.0,
+    "balanced_score": 512.0,
+    "policy": "exact",
+    "single_pack_only": true,
+    "candidate_filter": "n_samples <= sample_capacity",
+    "measured_costs_path": "/Users/Eito_1/gl/results/gl_large_shape_probe.json",
+    "measured_costs_loaded": true,
+    "selection_reason": "explicit supported shape"
+  }
+}

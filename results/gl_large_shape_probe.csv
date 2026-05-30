@@ -1,0 +1,5 @@
+ok,requested_shape,engine_shape,block_size,max_level,slot_count,keygen_s,encrypt_decrypt_s,encrypt_decrypt_ok,matrix_multiply_s,matrix_multiply_ok,evaluate_polynomial_s,evaluate_polynomial_ok,total_s,exception_type,exception
+False,"[16, 256, 256]","[16, 256, 256]",256,1,1048576,5.391586792000453,2.178264084002876,True,5.265659541000787,True,,,12.857587999998941,RuntimeError,Evaluate Polynomial With Ciphertext: the target level cannot be reached.
+False,"[16, 512, 512]",,512,,,,,,,,,,,TimeoutExpired,"Command '['/Users/Eito_1/gl/bin/python3', '/Users/Eito_1/gl/scripts/64_probe_large_gl_shapes.py', '--worker', '--shape', '16,512,512']' timed out after 300 seconds"
+False,"[4, 1024, 1024]","[4, 1024, 1024]",1024,1,4194304,25.08383683399734,10.14061162500002,True,64.27912866700353,True,,,99.57452891599678,RuntimeError,Evaluate Polynomial With Ciphertext: the target level cannot be reached.
+False,"[4, 2048, 2048]",,2048,,,,,,,,,,,SubprocessFailed,

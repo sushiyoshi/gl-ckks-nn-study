@@ -1,0 +1,112 @@
+{
+  "ok": false,
+  "exception_type": "ValueError",
+  "exception": "Not supported shape.",
+  "task_type": "generic_mlp_poly_relu",
+  "dims": [
+    96,
+    64,
+    10
+  ],
+  "n_samples": 1024,
+  "block_size": 32,
+  "shape": [
+    32,
+    32,
+    32
+  ],
+  "shape_selection": {
+    "shape": [
+      32,
+      32,
+      32
+    ],
+    "batch_count": 32,
+    "block_size": 32,
+    "columns": 32,
+    "schedule": {
+      "block_size": 32,
+      "n_samples": 1024,
+      "shape": [
+        32,
+        32,
+        32
+      ],
+      "capacity_per_ciphertext": 1024,
+      "input_blocks": 3,
+      "hidden_blocks": 2,
+      "output_blocks": 1,
+      "linear1_block_matmuls": 6,
+      "linear2_block_matmuls": 2,
+      "total_linear_block_matmuls": 8,
+      "activation_blocks": 2,
+      "ciphertext_counts": {
+        "input": 3,
+        "W1": 6,
+        "hidden": 2,
+        "W2": 2,
+        "output": 1,
+        "total_live_logical": 14
+      }
+    },
+    "memory_estimate": {
+      "entries_per_tensor": 32768,
+      "bytes_per_tensor_f64": 262144,
+      "mib_per_tensor_f64": 0.25,
+      "peak_ciphertext_count_estimate": 14,
+      "logical_tensor_entries_estimate": 458752,
+      "logical_tensor_mib_f64_estimate": 3.5
+    },
+    "selection_reason": "minimum allowed batch_count satisfying n_samples <= batch_count * columns",
+    "source": "auto_shape",
+    "allowed_batches": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64,
+      128,
+      256
+    ]
+  },
+  "schedule": {
+    "block_size": 32,
+    "n_samples": 1024,
+    "shape": [
+      32,
+      32,
+      32
+    ],
+    "capacity_per_ciphertext": 1024,
+    "input_blocks": 3,
+    "hidden_blocks": 2,
+    "output_blocks": 1,
+    "linear1_block_matmuls": 6,
+    "linear2_block_matmuls": 2,
+    "total_linear_block_matmuls": 8,
+    "activation_blocks": 2,
+    "ciphertext_counts": {
+      "input": 3,
+      "W1": 6,
+      "hidden": 2,
+      "W2": 2,
+      "output": 1,
+      "total_live_logical": 14
+    }
+  },
+  "activation": "degree3_poly",
+  "polynomial_degree": 3,
+  "sample_capacity_per_pack": 1024,
+  "sample_packing_utilization": 1.0,
+  "feature_padding_utilization_input": 1.0,
+  "feature_padding_utilization_hidden": 1.0,
+  "feature_padding_utilization_output": 0.3125,
+  "input_entry_utilization_bounded": 1.0,
+  "hidden_entry_utilization_bounded": 1.0,
+  "output_entry_utilization_bounded": 0.3125,
+  "legacy_matrix_entry_utilization_input_single_tensor_basis": 3.0,
+  "semantic_validation_passed": false,
+  "failure_category": "api_failure"
+}

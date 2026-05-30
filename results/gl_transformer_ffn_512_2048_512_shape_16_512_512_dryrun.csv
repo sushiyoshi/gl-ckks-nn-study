@@ -1,0 +1,2 @@
+ok,execution_mode,failure_category,dims,n_samples,selected_shape,block_size,sample_capacity,sample_packs,sample_packing_utilization,input_blocks,hidden_blocks,output_blocks,total_block_matmuls,activation_blocks,server_only_s,total_s,total_minus_keygen_s,server_per_sample_s,relative_l2,linf,mae,allclose,encryption_input_s,encryption_weight_s,failure_reason
+True,dry_run,,"[512, 2048, 512]",8192,"[16, 512, 512]",512,8192,1,1.0,1,4,1,8,4,0.0,0.0002209169979323633,0.0002209169979323633,,,,,,,,

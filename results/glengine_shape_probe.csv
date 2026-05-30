@@ -1,0 +1,28 @@
+ok,batch_count,block_size,requested_shape,engine_shape,max_level,slot_count,engine_create_s,keygen_s,encrypt_decrypt_ok,matrix_multiply_ok,evaluate_polynomial_ok,total_s,exception_type,exception
+False,1,16,"[1, 16, 16]",,,,,,,,,0.0006135000003268942,ValueError,Not supported shape.
+False,2,16,"[2, 16, 16]",,,,,,,,,0.0006332079974527005,ValueError,Not supported shape.
+False,4,16,"[4, 16, 16]",,,,,,,,,0.0005071659979876131,ValueError,Not supported shape.
+False,8,16,"[8, 16, 16]",,,,,,,,,0.0004555000014079269,ValueError,Not supported shape.
+False,16,16,"[16, 16, 16]",,,,,,,,,0.00042799999937415123,ValueError,Not supported shape.
+False,32,16,"[32, 16, 16]",,,,,,,,,0.0004044579982291907,ValueError,Not supported shape.
+False,64,16,"[64, 16, 16]",,,,,,,,,0.00041391699778614566,ValueError,Not supported shape.
+False,128,16,"[128, 16, 16]",,,,,,,,,0.0004845420007768553,ValueError,Not supported shape.
+False,256,16,"[256, 16, 16]","[256, 16, 16]",1,65536,0.03588070899786544,0.3332121250023192,True,True,,0.7582280829992669,RuntimeError,Evaluate Polynomial With Ciphertext: the target level cannot be reached.
+False,1,32,"[1, 32, 32]",,,,,,,,,0.00047054099923116155,ValueError,Not supported shape.
+False,2,32,"[2, 32, 32]",,,,,,,,,0.0004587500006891787,ValueError,Not supported shape.
+False,4,32,"[4, 32, 32]",,,,,,,,,0.0005744580012105871,ValueError,Not supported shape.
+False,8,32,"[8, 32, 32]",,,,,,,,,0.0006632089971390087,ValueError,Not supported shape.
+False,16,32,"[16, 32, 32]",,,,,,,,,0.0004365839995443821,ValueError,Not supported shape.
+False,32,32,"[32, 32, 32]",,,,,,,,,0.0004265829993528314,ValueError,Not supported shape.
+False,64,32,"[64, 32, 32]",,,,,,,,,0.0006033330028003547,ValueError,Not supported shape.
+False,128,32,"[128, 32, 32]",,,,,,,,,0.000580833999265451,ValueError,Not supported shape.
+True,256,32,"[256, 32, 32]","[256, 32, 32]",6,262144,0.03628549999848474,6.66159454100125,True,True,True,16.315740083999117,,
+False,1,64,"[1, 64, 64]",,,,,,,,,0.001146333001088351,ValueError,Not supported shape.
+False,2,64,"[2, 64, 64]",,,,,,,,,0.0004443749967322219,ValueError,Not supported shape.
+False,4,64,"[4, 64, 64]",,,,,,,,,0.0004019170009996742,ValueError,Not supported shape.
+False,8,64,"[8, 64, 64]",,,,,,,,,0.00040795800305204466,ValueError,Not supported shape.
+False,16,64,"[16, 64, 64]",,,,,,,,,0.0005970419988443609,ValueError,Not supported shape.
+False,32,64,"[32, 64, 64]",,,,,,,,,0.00046633300007670186,ValueError,Not supported shape.
+False,64,64,"[64, 64, 64]",,,,,,,,,0.0003892500026267953,ValueError,Not supported shape.
+False,128,64,"[128, 64, 64]",,,,,,,,,0.0005927079982939176,ValueError,Not supported shape.
+False,256,64,"[256, 64, 64]",,,,,,,,,,TimeoutExpired,"Command '['/Users/Eito_1/gl/bin/python3', '/Users/Eito_1/gl/scripts/61_probe_glengine_shapes.py', '--worker', '--batch-count', '256', '--block-size', '64']' timed out after 120 seconds"

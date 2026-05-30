@@ -1,0 +1,437 @@
+{
+  "ok": true,
+  "candidate_count": 27,
+  "results": [
+    {
+      "ok": false,
+      "batch_count": 1,
+      "block_size": 16,
+      "requested_shape": [
+        1,
+        16,
+        16
+      ],
+      "exception_type": "ValueError",
+      "exception": "Not supported shape.",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/Eito_1/gl/scripts/61_probe_glengine_shapes.py\", line 35, in run_candidate\n    engine = GLEngine(shape=shape)\nValueError: Not supported shape.\n",
+      "total_s": 0.0006135000003268942
+    },
+    {
+      "ok": false,
+      "batch_count": 2,
+      "block_size": 16,
+      "requested_shape": [
+        2,
+        16,
+        16
+      ],
+      "exception_type": "ValueError",
+      "exception": "Not supported shape.",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/Eito_1/gl/scripts/61_probe_glengine_shapes.py\", line 35, in run_candidate\n    engine = GLEngine(shape=shape)\nValueError: Not supported shape.\n",
+      "total_s": 0.0006332079974527005
+    },
+    {
+      "ok": false,
+      "batch_count": 4,
+      "block_size": 16,
+      "requested_shape": [
+        4,
+        16,
+        16
+      ],
+      "exception_type": "ValueError",
+      "exception": "Not supported shape.",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/Eito_1/gl/scripts/61_probe_glengine_shapes.py\", line 35, in run_candidate\n    engine = GLEngine(shape=shape)\nValueError: Not supported shape.\n",
+      "total_s": 0.0005071659979876131
+    },
+    {
+      "ok": false,
+      "batch_count": 8,
+      "block_size": 16,
+      "requested_shape": [
+        8,
+        16,
+        16
+      ],
+      "exception_type": "ValueError",
+      "exception": "Not supported shape.",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/Eito_1/gl/scripts/61_probe_glengine_shapes.py\", line 35, in run_candidate\n    engine = GLEngine(shape=shape)\nValueError: Not supported shape.\n",
+      "total_s": 0.0004555000014079269
+    },
+    {
+      "ok": false,
+      "batch_count": 16,
+      "block_size": 16,
+      "requested_shape": [
+        16,
+        16,
+        16
+      ],
+      "exception_type": "ValueError",
+      "exception": "Not supported shape.",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/Eito_1/gl/scripts/61_probe_glengine_shapes.py\", line 35, in run_candidate\n    engine = GLEngine(shape=shape)\nValueError: Not supported shape.\n",
+      "total_s": 0.00042799999937415123
+    },
+    {
+      "ok": false,
+      "batch_count": 32,
+      "block_size": 16,
+      "requested_shape": [
+        32,
+        16,
+        16
+      ],
+      "exception_type": "ValueError",
+      "exception": "Not supported shape.",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/Eito_1/gl/scripts/61_probe_glengine_shapes.py\", line 35, in run_candidate\n    engine = GLEngine(shape=shape)\nValueError: Not supported shape.\n",
+      "total_s": 0.0004044579982291907
+    },
+    {
+      "ok": false,
+      "batch_count": 64,
+      "block_size": 16,
+      "requested_shape": [
+        64,
+        16,
+        16
+      ],
+      "exception_type": "ValueError",
+      "exception": "Not supported shape.",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/Eito_1/gl/scripts/61_probe_glengine_shapes.py\", line 35, in run_candidate\n    engine = GLEngine(shape=shape)\nValueError: Not supported shape.\n",
+      "total_s": 0.00041391699778614566
+    },
+    {
+      "ok": false,
+      "batch_count": 128,
+      "block_size": 16,
+      "requested_shape": [
+        128,
+        16,
+        16
+      ],
+      "exception_type": "ValueError",
+      "exception": "Not supported shape.",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/Eito_1/gl/scripts/61_probe_glengine_shapes.py\", line 35, in run_candidate\n    engine = GLEngine(shape=shape)\nValueError: Not supported shape.\n",
+      "total_s": 0.0004845420007768553
+    },
+    {
+      "ok": false,
+      "batch_count": 256,
+      "block_size": 16,
+      "requested_shape": [
+        256,
+        16,
+        16
+      ],
+      "engine_create_s": 0.03588070899786544,
+      "engine_shape": [
+        256,
+        16,
+        16
+      ],
+      "max_level": 1,
+      "slot_count": 65536,
+      "keygen_s": 0.3332121250023192,
+      "encrypt_decrypt_s": 0.16782624999905238,
+      "encrypt_decrypt_ok": true,
+      "ciphertext_info": {
+        "type": "GLCiphertext",
+        "level": 1,
+        "nbytes": null,
+        "serialized_nbytes": null
+      },
+      "matrix_multiply_s": 0.2188068329996895,
+      "matrix_multiply_ok": true,
+      "matrix_multiply_output": {
+        "type": "GLCiphertext",
+        "level": 0,
+        "nbytes": null,
+        "serialized_nbytes": null
+      },
+      "exception_type": "RuntimeError",
+      "exception": "Evaluate Polynomial With Ciphertext: the target level cannot be reached.",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/Eito_1/gl/scripts/61_probe_glengine_shapes.py\", line 68, in run_candidate\n    ct_poly = engine.evaluate_polynomial(ct, coeffs, had_key)\nRuntimeError: Evaluate Polynomial With Ciphertext: the target level cannot be reached.\n",
+      "total_s": 0.7582280829992669
+    },
+    {
+      "ok": false,
+      "batch_count": 1,
+      "block_size": 32,
+      "requested_shape": [
+        1,
+        32,
+        32
+      ],
+      "exception_type": "ValueError",
+      "exception": "Not supported shape.",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/Eito_1/gl/scripts/61_probe_glengine_shapes.py\", line 35, in run_candidate\n    engine = GLEngine(shape=shape)\nValueError: Not supported shape.\n",
+      "total_s": 0.00047054099923116155
+    },
+    {
+      "ok": false,
+      "batch_count": 2,
+      "block_size": 32,
+      "requested_shape": [
+        2,
+        32,
+        32
+      ],
+      "exception_type": "ValueError",
+      "exception": "Not supported shape.",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/Eito_1/gl/scripts/61_probe_glengine_shapes.py\", line 35, in run_candidate\n    engine = GLEngine(shape=shape)\nValueError: Not supported shape.\n",
+      "total_s": 0.0004587500006891787
+    },
+    {
+      "ok": false,
+      "batch_count": 4,
+      "block_size": 32,
+      "requested_shape": [
+        4,
+        32,
+        32
+      ],
+      "exception_type": "ValueError",
+      "exception": "Not supported shape.",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/Eito_1/gl/scripts/61_probe_glengine_shapes.py\", line 35, in run_candidate\n    engine = GLEngine(shape=shape)\nValueError: Not supported shape.\n",
+      "total_s": 0.0005744580012105871
+    },
+    {
+      "ok": false,
+      "batch_count": 8,
+      "block_size": 32,
+      "requested_shape": [
+        8,
+        32,
+        32
+      ],
+      "exception_type": "ValueError",
+      "exception": "Not supported shape.",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/Eito_1/gl/scripts/61_probe_glengine_shapes.py\", line 35, in run_candidate\n    engine = GLEngine(shape=shape)\nValueError: Not supported shape.\n",
+      "total_s": 0.0006632089971390087
+    },
+    {
+      "ok": false,
+      "batch_count": 16,
+      "block_size": 32,
+      "requested_shape": [
+        16,
+        32,
+        32
+      ],
+      "exception_type": "ValueError",
+      "exception": "Not supported shape.",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/Eito_1/gl/scripts/61_probe_glengine_shapes.py\", line 35, in run_candidate\n    engine = GLEngine(shape=shape)\nValueError: Not supported shape.\n",
+      "total_s": 0.0004365839995443821
+    },
+    {
+      "ok": false,
+      "batch_count": 32,
+      "block_size": 32,
+      "requested_shape": [
+        32,
+        32,
+        32
+      ],
+      "exception_type": "ValueError",
+      "exception": "Not supported shape.",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/Eito_1/gl/scripts/61_probe_glengine_shapes.py\", line 35, in run_candidate\n    engine = GLEngine(shape=shape)\nValueError: Not supported shape.\n",
+      "total_s": 0.0004265829993528314
+    },
+    {
+      "ok": false,
+      "batch_count": 64,
+      "block_size": 32,
+      "requested_shape": [
+        64,
+        32,
+        32
+      ],
+      "exception_type": "ValueError",
+      "exception": "Not supported shape.",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/Eito_1/gl/scripts/61_probe_glengine_shapes.py\", line 35, in run_candidate\n    engine = GLEngine(shape=shape)\nValueError: Not supported shape.\n",
+      "total_s": 0.0006033330028003547
+    },
+    {
+      "ok": false,
+      "batch_count": 128,
+      "block_size": 32,
+      "requested_shape": [
+        128,
+        32,
+        32
+      ],
+      "exception_type": "ValueError",
+      "exception": "Not supported shape.",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/Eito_1/gl/scripts/61_probe_glengine_shapes.py\", line 35, in run_candidate\n    engine = GLEngine(shape=shape)\nValueError: Not supported shape.\n",
+      "total_s": 0.000580833999265451
+    },
+    {
+      "ok": true,
+      "batch_count": 256,
+      "block_size": 32,
+      "requested_shape": [
+        256,
+        32,
+        32
+      ],
+      "engine_create_s": 0.03628549999848474,
+      "engine_shape": [
+        256,
+        32,
+        32
+      ],
+      "max_level": 6,
+      "slot_count": 262144,
+      "keygen_s": 6.66159454100125,
+      "encrypt_decrypt_s": 1.2612304169997515,
+      "encrypt_decrypt_ok": true,
+      "ciphertext_info": {
+        "type": "GLCiphertext",
+        "level": 6,
+        "nbytes": null,
+        "serialized_nbytes": null
+      },
+      "matrix_multiply_s": 4.042675500000769,
+      "matrix_multiply_ok": true,
+      "matrix_multiply_output": {
+        "type": "GLCiphertext",
+        "level": 5,
+        "nbytes": null,
+        "serialized_nbytes": null
+      },
+      "evaluate_polynomial_s": 4.311154582999734,
+      "evaluate_polynomial_ok": true,
+      "evaluate_polynomial_output": {
+        "type": "GLCiphertext",
+        "level": 5,
+        "nbytes": null,
+        "serialized_nbytes": null
+      },
+      "total_s": 16.315740083999117
+    },
+    {
+      "ok": false,
+      "batch_count": 1,
+      "block_size": 64,
+      "requested_shape": [
+        1,
+        64,
+        64
+      ],
+      "exception_type": "ValueError",
+      "exception": "Not supported shape.",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/Eito_1/gl/scripts/61_probe_glengine_shapes.py\", line 35, in run_candidate\n    engine = GLEngine(shape=shape)\nValueError: Not supported shape.\n",
+      "total_s": 0.001146333001088351
+    },
+    {
+      "ok": false,
+      "batch_count": 2,
+      "block_size": 64,
+      "requested_shape": [
+        2,
+        64,
+        64
+      ],
+      "exception_type": "ValueError",
+      "exception": "Not supported shape.",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/Eito_1/gl/scripts/61_probe_glengine_shapes.py\", line 35, in run_candidate\n    engine = GLEngine(shape=shape)\nValueError: Not supported shape.\n",
+      "total_s": 0.0004443749967322219
+    },
+    {
+      "ok": false,
+      "batch_count": 4,
+      "block_size": 64,
+      "requested_shape": [
+        4,
+        64,
+        64
+      ],
+      "exception_type": "ValueError",
+      "exception": "Not supported shape.",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/Eito_1/gl/scripts/61_probe_glengine_shapes.py\", line 35, in run_candidate\n    engine = GLEngine(shape=shape)\nValueError: Not supported shape.\n",
+      "total_s": 0.0004019170009996742
+    },
+    {
+      "ok": false,
+      "batch_count": 8,
+      "block_size": 64,
+      "requested_shape": [
+        8,
+        64,
+        64
+      ],
+      "exception_type": "ValueError",
+      "exception": "Not supported shape.",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/Eito_1/gl/scripts/61_probe_glengine_shapes.py\", line 35, in run_candidate\n    engine = GLEngine(shape=shape)\nValueError: Not supported shape.\n",
+      "total_s": 0.00040795800305204466
+    },
+    {
+      "ok": false,
+      "batch_count": 16,
+      "block_size": 64,
+      "requested_shape": [
+        16,
+        64,
+        64
+      ],
+      "exception_type": "ValueError",
+      "exception": "Not supported shape.",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/Eito_1/gl/scripts/61_probe_glengine_shapes.py\", line 35, in run_candidate\n    engine = GLEngine(shape=shape)\nValueError: Not supported shape.\n",
+      "total_s": 0.0005970419988443609
+    },
+    {
+      "ok": false,
+      "batch_count": 32,
+      "block_size": 64,
+      "requested_shape": [
+        32,
+        64,
+        64
+      ],
+      "exception_type": "ValueError",
+      "exception": "Not supported shape.",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/Eito_1/gl/scripts/61_probe_glengine_shapes.py\", line 35, in run_candidate\n    engine = GLEngine(shape=shape)\nValueError: Not supported shape.\n",
+      "total_s": 0.00046633300007670186
+    },
+    {
+      "ok": false,
+      "batch_count": 64,
+      "block_size": 64,
+      "requested_shape": [
+        64,
+        64,
+        64
+      ],
+      "exception_type": "ValueError",
+      "exception": "Not supported shape.",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/Eito_1/gl/scripts/61_probe_glengine_shapes.py\", line 35, in run_candidate\n    engine = GLEngine(shape=shape)\nValueError: Not supported shape.\n",
+      "total_s": 0.0003892500026267953
+    },
+    {
+      "ok": false,
+      "batch_count": 128,
+      "block_size": 64,
+      "requested_shape": [
+        128,
+        64,
+        64
+      ],
+      "exception_type": "ValueError",
+      "exception": "Not supported shape.",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/Eito_1/gl/scripts/61_probe_glengine_shapes.py\", line 35, in run_candidate\n    engine = GLEngine(shape=shape)\nValueError: Not supported shape.\n",
+      "total_s": 0.0005927079982939176
+    },
+    {
+      "ok": false,
+      "batch_count": 256,
+      "block_size": 64,
+      "requested_shape": [
+        256,
+        64,
+        64
+      ],
+      "exception_type": "TimeoutExpired",
+      "exception": "Command '['/Users/Eito_1/gl/bin/python3', '/Users/Eito_1/gl/scripts/61_probe_glengine_shapes.py', '--worker', '--batch-count', '256', '--block-size', '64']' timed out after 120 seconds"
+    }
+  ]
+}

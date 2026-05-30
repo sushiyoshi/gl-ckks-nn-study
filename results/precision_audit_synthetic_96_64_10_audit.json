@@ -1,0 +1,504 @@
+{
+  "ok": true,
+  "audit_precision": true,
+  "audit_run_kind": "precision_noise_audit",
+  "performance_run": false,
+  "ciphertext_payload_saved": false,
+  "task_type": "generic_mlp_poly_relu",
+  "weight_privacy": "encrypted_weight",
+  "activation": "degree3_poly",
+  "polynomial_degree": 3,
+  "polynomial_radius": 3.0,
+  "coefficients": [
+    0.28132020705759425,
+    0.5000000000000014,
+    0.156210976538105,
+    -2.580994426810177e-16
+  ],
+  "dims": [
+    96,
+    64,
+    10
+  ],
+  "n_samples": 8192,
+  "block_size": 32,
+  "shape": [
+    256,
+    32,
+    32
+  ],
+  "schedule": {
+    "block_size": 32,
+    "n_samples": 8192,
+    "shape": [
+      256,
+      32,
+      32
+    ],
+    "capacity_per_ciphertext": 8192,
+    "input_blocks": 3,
+    "hidden_blocks": 2,
+    "output_blocks": 1,
+    "linear1_block_matmuls": 6,
+    "linear2_block_matmuls": 2,
+    "total_linear_block_matmuls": 8,
+    "activation_blocks": 2,
+    "ciphertext_counts": {
+      "input": 3,
+      "W1": 6,
+      "hidden": 2,
+      "W2": 2,
+      "output": 1,
+      "total_live_logical": 14
+    }
+  },
+  "metadata": {
+    "synthetic": true,
+    "seed": 42,
+    "scale": 0.5,
+    "out_name": "synthetic_96_64_10_audit",
+    "benchmark_result": "/Users/Eito_1/gl/results/gl_generic_synthetic_synthetic_96_64_10_audit.json",
+    "noise_budget": "direct noise budget unavailable",
+    "noise_budget_proxy": "level_log and decrypted error metrics"
+  },
+  "level_log": [
+    {
+      "stage": "input_block0",
+      "type": "GLCiphertext",
+      "level": 6,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    {
+      "stage": "input_block1",
+      "type": "GLCiphertext",
+      "level": 6,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    {
+      "stage": "input_block2",
+      "type": "GLCiphertext",
+      "level": 6,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    {
+      "stage": "weight_w1_out0_in0",
+      "type": "GLCiphertext",
+      "level": 6,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    {
+      "stage": "weight_w1_out0_in1",
+      "type": "GLCiphertext",
+      "level": 6,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    {
+      "stage": "weight_w1_out0_in2",
+      "type": "GLCiphertext",
+      "level": 6,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    {
+      "stage": "weight_w1_out1_in0",
+      "type": "GLCiphertext",
+      "level": 6,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    {
+      "stage": "weight_w1_out1_in1",
+      "type": "GLCiphertext",
+      "level": 6,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    {
+      "stage": "weight_w1_out1_in2",
+      "type": "GLCiphertext",
+      "level": 6,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    {
+      "stage": "weight_w2_out0_in0",
+      "type": "GLCiphertext",
+      "level": 6,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    {
+      "stage": "weight_w2_out0_in1",
+      "type": "GLCiphertext",
+      "level": 6,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    {
+      "stage": "linear1_out0_in0",
+      "type": "GLCiphertext",
+      "level": 5,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    {
+      "stage": "linear1_out0_in1",
+      "type": "GLCiphertext",
+      "level": 5,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    {
+      "stage": "linear1_out0_in2",
+      "type": "GLCiphertext",
+      "level": 5,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    {
+      "stage": "linear1_out0_sum",
+      "type": "GLCiphertext",
+      "level": 5,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    {
+      "stage": "linear1_out1_in0",
+      "type": "GLCiphertext",
+      "level": 5,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    {
+      "stage": "linear1_out1_in1",
+      "type": "GLCiphertext",
+      "level": 5,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    {
+      "stage": "linear1_out1_in2",
+      "type": "GLCiphertext",
+      "level": 5,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    {
+      "stage": "linear1_out1_sum",
+      "type": "GLCiphertext",
+      "level": 5,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    {
+      "stage": "activation_block0",
+      "type": "GLCiphertext",
+      "level": 2,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    {
+      "stage": "activation_block1",
+      "type": "GLCiphertext",
+      "level": 2,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    {
+      "stage": "linear2_out0_in0",
+      "type": "GLCiphertext",
+      "level": 1,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    {
+      "stage": "linear2_out0_in1",
+      "type": "GLCiphertext",
+      "level": 1,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    {
+      "stage": "linear2_out0_sum",
+      "type": "GLCiphertext",
+      "level": 1,
+      "nbytes": null,
+      "serialized_nbytes": null
+    }
+  ],
+  "stages": [
+    {
+      "stage": "logical_plain.packed_input_blocks",
+      "shape": [
+        3,
+        256,
+        32,
+        32
+      ],
+      "level": null,
+      "rms_plain": 0.5001887919954641,
+      "max_abs_plain": 2.5036176159544983,
+      "nan_count": 0,
+      "inf_count": 0,
+      "comparison": "summary"
+    },
+    {
+      "stage": "packed_input_blocks",
+      "shape": [
+        3,
+        256,
+        32,
+        32
+      ],
+      "level": 6,
+      "relative_l2": 6.025945495670743e-10,
+      "linf": 1.5305799960785293e-09,
+      "mae": 2.40490186039606e-10,
+      "rms_plain": 0.5001887919954641,
+      "rms_error": 3.014110398110058e-10,
+      "max_abs_plain": 2.5036176159544983,
+      "max_abs_error": 1.5305799960785293e-09,
+      "allclose_rtol_1e-5_atol_1e-6": true,
+      "allclose_rtol_1e-4_atol_1e-5": true,
+      "nan_count": 0,
+      "inf_count": 0,
+      "comparison": "gl_layout_plain_vs_encrypted_decrypted",
+      "levels": [
+        6,
+        6,
+        6
+      ]
+    },
+    {
+      "stage": "linear1_block_outputs",
+      "shape": [
+        2,
+        256,
+        32,
+        32
+      ],
+      "level": null,
+      "relative_l2": 3.4330551209327897e-16,
+      "linf": 9.992007221626409e-16,
+      "mae": 5.94087181237426e-17,
+      "rms_plain": 0.25284143696620814,
+      "rms_error": 8.680185899608463e-17,
+      "max_abs_plain": 1.2929699711772873,
+      "max_abs_error": 9.992007221626409e-16,
+      "allclose_rtol_1e-5_atol_1e-6": true,
+      "allclose_rtol_1e-4_atol_1e-5": true,
+      "nan_count": 0,
+      "inf_count": 0,
+      "comparison": "logical_plain_vs_gl_layout_plain"
+    },
+    {
+      "stage": "linear1_accumulated_output",
+      "shape": [
+        8192,
+        64
+      ],
+      "level": null,
+      "relative_l2": 3.4330551209327897e-16,
+      "linf": 9.992007221626409e-16,
+      "mae": 5.94087181237426e-17,
+      "rms_plain": 0.25284143696620814,
+      "rms_error": 8.680185899608463e-17,
+      "max_abs_plain": 1.2929699711772873,
+      "max_abs_error": 9.992007221626409e-16,
+      "allclose_rtol_1e-5_atol_1e-6": true,
+      "allclose_rtol_1e-4_atol_1e-5": true,
+      "nan_count": 0,
+      "inf_count": 0,
+      "comparison": "logical_plain_vs_gl_layout_plain"
+    },
+    {
+      "stage": "activation_output",
+      "shape": [
+        8192,
+        64
+      ],
+      "level": null,
+      "relative_l2": 1.6032306524449395e-16,
+      "linf": 8.881784197001252e-16,
+      "mae": 2.9675852246613616e-17,
+      "rms_plain": 0.316447732568654,
+      "rms_error": 5.0733870475076486e-17,
+      "max_abs_plain": 1.1889542272105251,
+      "max_abs_error": 8.881784197001252e-16,
+      "allclose_rtol_1e-5_atol_1e-6": true,
+      "allclose_rtol_1e-4_atol_1e-5": true,
+      "nan_count": 0,
+      "inf_count": 0,
+      "comparison": "logical_plain_vs_gl_layout_plain"
+    },
+    {
+      "stage": "linear2_final_logits",
+      "shape": [
+        1,
+        256,
+        32,
+        32
+      ],
+      "level": null,
+      "relative_l2": 3.433205662562397e-16,
+      "linf": 4.440892098500626e-16,
+      "mae": 1.3114005626129943e-17,
+      "rms_plain": 0.09381305028387417,
+      "rms_error": 3.2207949545684765e-17,
+      "max_abs_plain": 0.5597675085731534,
+      "max_abs_error": 4.440892098500626e-16,
+      "allclose_rtol_1e-5_atol_1e-6": true,
+      "allclose_rtol_1e-4_atol_1e-5": true,
+      "nan_count": 0,
+      "inf_count": 0,
+      "comparison": "logical_plain_vs_gl_layout_plain"
+    },
+    {
+      "stage": "unpacked_logits",
+      "shape": [
+        8192,
+        10
+      ],
+      "level": null,
+      "relative_l2": 3.433205662562397e-16,
+      "linf": 4.440892098500626e-16,
+      "mae": 4.196481800361582e-17,
+      "rms_plain": 0.16781788608907885,
+      "rms_error": 5.761533168002768e-17,
+      "max_abs_plain": 0.5597675085731534,
+      "max_abs_error": 4.440892098500626e-16,
+      "allclose_rtol_1e-5_atol_1e-6": true,
+      "allclose_rtol_1e-4_atol_1e-5": true,
+      "nan_count": 0,
+      "inf_count": 0,
+      "comparison": "logical_plain_vs_gl_layout_plain"
+    },
+    {
+      "stage": "encrypted_decrypted_linear1_block_outputs",
+      "shape": [
+        2,
+        256,
+        32,
+        32
+      ],
+      "level": 5,
+      "relative_l2": 2.7252754827545783e-07,
+      "linf": 7.958716476894057e-07,
+      "mae": 4.8630451335058256e-08,
+      "rms_plain": 0.25284143696620814,
+      "rms_error": 6.890625691884445e-08,
+      "max_abs_plain": 1.2929699711772882,
+      "max_abs_error": 7.958716476894057e-07,
+      "allclose_rtol_1e-5_atol_1e-6": true,
+      "allclose_rtol_1e-4_atol_1e-5": true,
+      "nan_count": 0,
+      "inf_count": 0,
+      "comparison": "gl_layout_plain_vs_encrypted_decrypted",
+      "levels": [
+        5,
+        5
+      ]
+    },
+    {
+      "stage": "linear1_accumulated_output",
+      "shape": [
+        8192,
+        64
+      ],
+      "level": 5,
+      "relative_l2": 2.725275482754579e-07,
+      "linf": 7.958716476894057e-07,
+      "mae": 4.8630451335058256e-08,
+      "rms_plain": 0.25284143696620814,
+      "rms_error": 6.890625691884444e-08,
+      "max_abs_plain": 1.2929699711772882,
+      "max_abs_error": 7.958716476894057e-07,
+      "allclose_rtol_1e-5_atol_1e-6": true,
+      "allclose_rtol_1e-4_atol_1e-5": true,
+      "nan_count": 0,
+      "inf_count": 0,
+      "comparison": "gl_layout_plain_vs_encrypted_decrypted",
+      "levels": [
+        5,
+        5
+      ]
+    },
+    {
+      "stage": "activation_output",
+      "shape": [
+        8192,
+        64
+      ],
+      "level": 2,
+      "relative_l2": 1.2870462915840704e-07,
+      "linf": 4.2738015770815707e-07,
+      "mae": 2.852942818860462e-08,
+      "rms_plain": 0.316447732568654,
+      "rms_error": 4.072828806826736e-08,
+      "max_abs_plain": 1.188954227210526,
+      "max_abs_error": 4.2738015770815707e-07,
+      "allclose_rtol_1e-5_atol_1e-6": true,
+      "allclose_rtol_1e-4_atol_1e-5": true,
+      "nan_count": 0,
+      "inf_count": 0,
+      "comparison": "gl_layout_plain_vs_encrypted_decrypted",
+      "levels": [
+        2,
+        2
+      ]
+    },
+    {
+      "stage": "linear2_final_logits",
+      "shape": [
+        1,
+        256,
+        32,
+        32
+      ],
+      "level": 1,
+      "relative_l2": 5.550645988519501e-07,
+      "linf": 4.94364956586525e-07,
+      "mae": 3.6992705419131835e-08,
+      "rms_plain": 0.09381305028387417,
+      "rms_error": 5.207230312289642e-08,
+      "max_abs_plain": 0.5597675085731535,
+      "max_abs_error": 4.94364956586525e-07,
+      "allclose_rtol_1e-5_atol_1e-6": true,
+      "allclose_rtol_1e-4_atol_1e-5": true,
+      "nan_count": 0,
+      "inf_count": 0,
+      "comparison": "gl_layout_plain_vs_encrypted_decrypted",
+      "levels": [
+        1
+      ]
+    },
+    {
+      "stage": "unpacked_logits",
+      "shape": [
+        8192,
+        10
+      ],
+      "level": 1,
+      "relative_l2": 3.3163428488317477e-07,
+      "linf": 3.7620513129721367e-07,
+      "mae": 4.078611416335418e-08,
+      "rms_plain": 0.16781788608907885,
+      "rms_error": 5.565416464375774e-08,
+      "max_abs_plain": 0.5597675085731535,
+      "max_abs_error": 3.7620513129721367e-07,
+      "allclose_rtol_1e-5_atol_1e-6": true,
+      "allclose_rtol_1e-4_atol_1e-5": true,
+      "nan_count": 0,
+      "inf_count": 0,
+      "comparison": "gl_layout_plain_vs_encrypted_decrypted",
+      "levels": [
+        1
+      ]
+    }
+  ]
+}
