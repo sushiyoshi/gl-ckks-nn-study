@@ -1,0 +1,86 @@
+{
+  "ok": true,
+  "semantic_validation_passed": true,
+  "shape": [
+    256,
+    32,
+    32
+  ],
+  "tested_batches": [
+    0,
+    1
+  ],
+  "key_generation_s": 6.500766582999859,
+  "encryption_s": 0.9576074589999735,
+  "runtime_total_s": 18.2369107909999,
+  "inputs": {
+    "ct_a": {
+      "type": "GLCiphertext",
+      "level": 6,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    "ct_b": {
+      "type": "GLCiphertext",
+      "level": 6,
+      "nbytes": null,
+      "serialized_nbytes": null
+    }
+  },
+  "cases": [
+    {
+      "ok": true,
+      "case": "ct_ct",
+      "semantic_validation_passed": true,
+      "failure_category": null,
+      "matrix_multiply_s": 4.614102583000204,
+      "decryption_s": 0.7726533330001075,
+      "output": {
+        "type": "GLCiphertext",
+        "level": 5,
+        "nbytes": null,
+        "serialized_nbytes": null
+      },
+      "matrix_relative_l2": 9.912692346573798e-08,
+      "matrix_linf": 1.3269037613117263e-07,
+      "matrix_mae": 2.417640677394277e-10,
+      "matrix_allclose": true
+    },
+    {
+      "ok": true,
+      "case": "pt_ct",
+      "semantic_validation_passed": true,
+      "failure_category": null,
+      "matrix_multiply_s": 3.0631560830001945,
+      "decryption_s": 0.7375276660000054,
+      "output": {
+        "type": "GLCiphertext",
+        "level": 5,
+        "nbytes": null,
+        "serialized_nbytes": null
+      },
+      "matrix_relative_l2": 7.141117175467717e-08,
+      "matrix_linf": 9.837264766665577e-08,
+      "matrix_mae": 1.986374485316781e-10,
+      "matrix_allclose": true
+    },
+    {
+      "ok": true,
+      "case": "ct_pt",
+      "semantic_validation_passed": true,
+      "failure_category": null,
+      "matrix_multiply_s": 0.6388414579996606,
+      "decryption_s": 0.735936749999837,
+      "output": {
+        "type": "GLCiphertext",
+        "level": 5,
+        "nbytes": null,
+        "serialized_nbytes": null
+      },
+      "matrix_relative_l2": 6.956918998018621e-08,
+      "matrix_linf": 1.1808021271875191e-07,
+      "matrix_mae": 1.963604958282569e-10,
+      "matrix_allclose": true
+    }
+  ]
+}

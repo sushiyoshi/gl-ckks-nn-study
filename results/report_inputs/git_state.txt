@@ -1,0 +1,22 @@
+===== GIT REV =====
+37d9145cc4ea3a3487e37d3c40a6227909f1e631
+main
+
+===== GIT STATUS =====
+A  results/gl_encrypted_weight_pca32_mlp_n8192.csv
+A  results/gl_encrypted_weight_pca32_mlp_n8192.json
+?? results/report_inputs/environment.txt
+?? results/report_inputs/git_state.txt
+?? scripts/45_collect_report_inputs.sh
+
+===== GIT DIFF STAT =====
+
+===== RECENT COMMITS =====
+37d9145 8192 samples
+3c4f23b results commit
+e4f6412 inspect openfhe
+381a6bc add packed PCA32 reproducibility runbook and throughput measurements
+8903a2c compare
+f4e5f7e Add GL packed layout experiments
+5d722e5 add scripts
+66c35f7 first commit

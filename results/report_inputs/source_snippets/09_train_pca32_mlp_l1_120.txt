@@ -1,0 +1,27 @@
+     1	from __future__ import annotations
+     2	
+     3	import sys
+     4	from pathlib import Path
+     5	
+     6	sys.path.append(str(Path(__file__).resolve().parents[1]))
+     7	
+     8	from src.logging_utils import RESULTS, write_json
+     9	from src.metrics import accuracy
+    10	from src.model_pca32 import save_pca32_model, train_pca32_model
+    11	
+    12	
+    13	def main() -> None:
+    14	    model, arrays = train_pca32_model(test_eval_size=8192)
+    15	    save_pca32_model(model, arrays)
+    16	    train_logits = model.relu_forward(arrays["x_train_32"])["logits"]
+    17	    test_logits = model.relu_forward(arrays["x_test_32"])["logits"]
+    18	    write_json(RESULTS / "pca32_train.json", {
+    19	        **model.metadata,
+    20	        "accuracy_train_relu": accuracy(train_logits, arrays["y_train"]),
+    21	        "accuracy_test_relu": accuracy(test_logits, arrays["y_test"]),
+    22	    })
+    23	    print(RESULTS / "pca32_train.json")
+    24	
+    25	
+    26	if __name__ == "__main__":
+    27	    main()

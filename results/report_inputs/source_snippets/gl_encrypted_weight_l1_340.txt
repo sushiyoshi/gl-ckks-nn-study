@@ -1,0 +1,340 @@
+     1	from __future__ import annotations
+     2	
+     3	from typing import Any
+     4	
+     5	import numpy as np
+     6	
+     7	from .gl_packing import (
+     8	    broadcast_bias_to_columns,
+     9	    broadcast_weight_to_batches,
+    10	    pack_columns,
+    11	    packing_stats,
+    12	    unpack_logits,
+    13	)
+    14	from .logging_utils import ct_info, elapsed, exception_record, now_seconds
+    15	from .metrics import accuracy, argmax_agreement, error_metrics
+    16	from .model_pca32 import load_pca32_model
+    17	from .polynomial import eval_power_polynomial, fit_relu_power_polynomial
+    18	
+    19	
+    20	def classify_failure(exc: BaseException) -> str:
+    21	    text = f"{type(exc).__name__}: {exc}".lower()
+    22	    if "level" in text or "depth" in text or "modulus" in text:
+    23	        return "level_insufficient"
+    24	    if "scale" in text:
+    25	        return "scale_mismatch"
+    26	    if "matrix_multiply" in text or "argument" in text or "incompatible" in text or "unsupported" in text:
+    27	        return "api_failure"
+    28	    return "api_failure"
+    29	
+    30	
+    31	def scalar_metrics(reference: np.ndarray, actual: np.ndarray, prefix: str) -> dict[str, Any]:
+    32	    err = error_metrics(reference, actual, prefix)
+    33	    return {
+    34	        f"{prefix}_relative_l2": err[f"{prefix}_relative_l2"],
+    35	        f"{prefix}_linf": err[f"{prefix}_linf"],
+    36	        f"{prefix}_mae": err[f"{prefix}_mae"],
+    37	        f"{prefix}_allclose": bool(np.allclose(actual, reference, rtol=1e-5, atol=1e-5)),
+    38	    }
+    39	
+    40	
+    41	def operand_kind(obj: Any) -> str:
+    42	    if obj is None:
+    43	        return "none"
+    44	    kind = type(obj).__name__
+    45	    if "Cipher" in kind or kind.startswith("Ct"):
+    46	        return "ciphertext"
+    47	    if "Plain" in kind:
+    48	        return "plaintext"
+    49	    if kind == "ndarray":
+    50	        return "numpy.ndarray"
+    51	    return kind
+    52	
+    53	
+    54	def operand_types(ct_w1: Any, ct_w2: Any, ct_x: Any) -> dict[str, Any]:
+    55	    return {
+    56	        "ct_W1_type": type(ct_w1).__name__ if ct_w1 is not None else None,
+    57	        "ct_W2_type": type(ct_w2).__name__ if ct_w2 is not None else None,
+    58	        "ct_X_type": type(ct_x).__name__ if ct_x is not None else None,
+    59	        "matrix_multiply_operand_kinds": {
+    60	            "left": operand_kind(ct_w1),
+    61	            "right": operand_kind(ct_x),
+    62	            "left_w2": operand_kind(ct_w2),
+    63	        },
+    64	    }
+    65	
+    66	
+    67	def require_sample_count(n_samples: int, available: int, *, label: str) -> None:
+    68	    if n_samples < 0:
+    69	        raise ValueError(f"{label} must be non-negative, got {n_samples}")
+    70	    if n_samples > available:
+    71	        raise ValueError(f"requested {n_samples} samples for {label}, but only {available} are available")
+    72	
+    73	
+    74	def encrypted_weight_linear(n_samples: int) -> dict[str, Any]:
+    75	    from desilofhe import GLEngine
+    76	
+    77	    t_total = now_seconds()
+    78	    model, arrays = load_pca32_model()
+    79	    require_sample_count(n_samples, arrays["x_test_32"].shape[0], label="x_test_32")
+    80	    n = n_samples
+    81	    x = arrays["x_test_32"][:n]
+    82	    z_plain = model.relu_forward(x)["z1"]
+    83	
+    84	    engine = GLEngine()
+    85	    shape = tuple(int(v) for v in engine.shape)
+    86	    t = now_seconds()
+    87	    sk = engine.create_secret_key()
+    88	    mm_key = engine.create_matrix_multiplication_key(sk)
+    89	    key_generation_s = elapsed(t)
+    90	
+    91	    input_tensor, layout = pack_columns(x, shape)
+    92	    used_batches = layout["used_batches"]
+    93	    w1_tensor = broadcast_weight_to_batches(model.w1.T, shape, used_batches, 32, 32)
+    94	    b1_tensor = broadcast_bias_to_columns(model.b1, shape, layout, 32)
+    95	    b1_pt = engine.encode(b1_tensor)
+    96	
+    97	    timing: dict[str, float] = {}
+    98	    level_log: list[dict[str, Any]] = []
+    99	    t = now_seconds()
+   100	    ct_x = engine.encrypt(input_tensor, sk)
+   101	    timing["encryption_input_s"] = elapsed(t)
+   102	    level_log.append({"stage": "input", **ct_info(ct_x)})
+   103	    t = now_seconds()
+   104	    ct_w1 = engine.encrypt(w1_tensor, sk)
+   105	    timing["encryption_weight_s"] = elapsed(t)
+   106	    level_log.append({"stage": "weight_w1", **ct_info(ct_w1)})
+   107	    t = now_seconds()
+   108	    ct_h = engine.matrix_multiply(ct_w1, ct_x, mm_key)
+   109	    ct_h = engine.add(ct_h, b1_pt)
+   110	    timing["matrix_multiply_s"] = elapsed(t)
+   111	    level_log.append({"stage": "linear1", **ct_info(ct_h)})
+   112	    t = now_seconds()
+   113	    dec = np.asarray(engine.decrypt(ct_h, sk), dtype=np.float64)
+   114	    timing["decryption_s"] = elapsed(t)
+   115	
+   116	    hidden = unpack_logits(dec, layout, 32)
+   117	    metrics = scalar_metrics(z_plain, hidden, "hidden")
+   118	    runtime_total = elapsed(t_total)
+   119	    return {
+   120	        "ok": True,
+   121	        "semantic_validation_passed": bool(metrics["hidden_relative_l2"] < 1e-5 and metrics["hidden_allclose"]),
+   122	        "failure_category": None,
+   123	        "task_type": "linear",
+   124	        "weight_privacy": "encrypted_weight",
+   125	        "activation": "none",
+   126	        "shape": shape,
+   127	        "logical_dims": [32, 32],
+   128	        "n_samples": n,
+   129	        "ciphertext_count": 2,
+   130	        "key_generation_s": key_generation_s,
+   131	        "input_encryption_s": timing.get("encryption_input_s"),
+   132	        "weight_encryption_s": timing.get("encryption_weight_s"),
+   133	        "used_batches": used_batches,
+   134	        "used_columns_last_batch": layout["used_columns_last_batch"],
+   135	        **packing_stats(n, 32, shape),
+   136	        **operand_types(ct_w1, None, ct_x),
+   137	        **metrics,
+   138	        "level_log": level_log,
+   139	        "timing_log": timing,
+   140	        "server_only_s": timing.get("matrix_multiply_s"),
+   141	        "total_s": runtime_total,
+   142	        "runtime_total_s": runtime_total,
+   143	        "runtime_per_sample_s": runtime_total / n,
+   144	    }
+   145	
+   146	
+   147	def encrypted_weight_two_linear(n_samples: int) -> dict[str, Any]:
+   148	    from desilofhe import GLEngine
+   149	
+   150	    t_total = now_seconds()
+   151	    model, arrays = load_pca32_model()
+   152	    require_sample_count(n_samples, arrays["x_test_32"].shape[0], label="x_test_32")
+   153	    n = n_samples
+   154	    x = arrays["x_test_32"][:n]
+   155	    y = arrays["y_test"][:n]
+   156	    hidden_plain = x @ model.w1 + model.b1
+   157	    logits_plain = hidden_plain @ model.w2 + model.b2
+   158	
+   159	    engine = GLEngine()
+   160	    shape = tuple(int(v) for v in engine.shape)
+   161	    t = now_seconds()
+   162	    sk = engine.create_secret_key()
+   163	    mm_key = engine.create_matrix_multiplication_key(sk)
+   164	    key_generation_s = elapsed(t)
+   165	
+   166	    input_tensor, layout = pack_columns(x, shape)
+   167	    used_batches = layout["used_batches"]
+   168	    w1_tensor = broadcast_weight_to_batches(model.w1.T, shape, used_batches, 32, 32)
+   169	    w2_tensor = broadcast_weight_to_batches(model.w2.T, shape, used_batches, 10, 32)
+   170	    b1_pt = engine.encode(broadcast_bias_to_columns(model.b1, shape, layout, 32))
+   171	    b2_pt = engine.encode(broadcast_bias_to_columns(model.b2, shape, layout, 10))
+   172	
+   173	    timing: dict[str, float] = {}
+   174	    level_log: list[dict[str, Any]] = []
+   175	    t = now_seconds()
+   176	    ct_x = engine.encrypt(input_tensor, sk)
+   177	    timing["encryption_input_s"] = elapsed(t)
+   178	    level_log.append({"stage": "input", **ct_info(ct_x)})
+   179	    t = now_seconds()
+   180	    ct_w1 = engine.encrypt(w1_tensor, sk)
+   181	    ct_w2 = engine.encrypt(w2_tensor, sk)
+   182	    timing["encryption_weight_s"] = elapsed(t)
+   183	    level_log.append({"stage": "weight_w1", **ct_info(ct_w1)})
+   184	    level_log.append({"stage": "weight_w2", **ct_info(ct_w2)})
+   185	    t = now_seconds()
+   186	    ct_h = engine.matrix_multiply(ct_w1, ct_x, mm_key)
+   187	    ct_h = engine.add(ct_h, b1_pt)
+   188	    timing["linear1_matrix_multiply_s"] = elapsed(t)
+   189	    level_log.append({"stage": "linear1", **ct_info(ct_h)})
+   190	    t = now_seconds()
+   191	    ct_y = engine.matrix_multiply(ct_w2, ct_h, mm_key)
+   192	    ct_y = engine.add(ct_y, b2_pt)
+   193	    timing["linear2_matrix_multiply_s"] = elapsed(t)
+   194	    level_log.append({"stage": "linear2", **ct_info(ct_y)})
+   195	    t = now_seconds()
+   196	    dec = np.asarray(engine.decrypt(ct_y, sk), dtype=np.float64)
+   197	    timing["decryption_s"] = elapsed(t)
+   198	
+   199	    logits = unpack_logits(dec, layout, 10)
+   200	    metrics = scalar_metrics(logits_plain, logits, "logits")
+   201	    runtime_total = elapsed(t_total)
+   202	    return {
+   203	        "ok": True,
+   204	        "semantic_validation_passed": bool(metrics["logits_relative_l2"] < 1e-5 and metrics["logits_allclose"]),
+   205	        "failure_category": None,
+   206	        "task_type": "two_linear",
+   207	        "weight_privacy": "encrypted_weight",
+   208	        "activation": "none",
+   209	        "shape": shape,
+   210	        "logical_dims": [32, 32, 10],
+   211	        "n_samples": n,
+   212	        "ciphertext_count": 3,
+   213	        "key_generation_s": key_generation_s,
+   214	        "input_encryption_s": timing.get("encryption_input_s"),
+   215	        "weight_encryption_s": timing.get("encryption_weight_s"),
+   216	        "used_batches": used_batches,
+   217	        "used_columns_last_batch": layout["used_columns_last_batch"],
+   218	        **packing_stats(n, 32, shape),
+   219	        **operand_types(ct_w1, ct_w2, ct_x),
+   220	        **metrics,
+   221	        "accuracy": accuracy(logits, y),
+   222	        "argmax_agreement": argmax_agreement(logits_plain, logits),
+   223	        "level_log": level_log,
+   224	        "timing_log": timing,
+   225	        "server_only_s": (timing.get("linear1_matrix_multiply_s") or 0.0) + (timing.get("linear2_matrix_multiply_s") or 0.0),
+   226	        "total_s": runtime_total,
+   227	        "runtime_total_s": runtime_total,
+   228	        "runtime_per_sample_s": runtime_total / n,
+   229	    }
+   230	
+   231	
+   232	def encrypted_weight_mlp(n_samples: int, degree: int) -> dict[str, Any]:
+   233	    from desilofhe import GLEngine
+   234	
+   235	    t_total = now_seconds()
+   236	    model, arrays = load_pca32_model()
+   237	    require_sample_count(n_samples, arrays["x_test_32"].shape[0], label="x_test_32")
+   238	    n = n_samples
+   239	    x = arrays["x_test_32"][:n]
+   240	    y = arrays["y_test"][:n]
+   241	    z_train = model.relu_forward(arrays["x_train_32"])["z1"]
+   242	    radius = float(max(3.0, min(8.0, np.ceil(np.quantile(np.abs(z_train), 0.995)))))
+   243	    coeffs = fit_relu_power_polynomial(degree, (-radius, radius)).astype(np.float64)
+   244	    logits_plain = model.poly_forward(x, coeffs)["logits"]
+   245	
+   246	    engine = GLEngine()
+   247	    shape = tuple(int(v) for v in engine.shape)
+   248	    t = now_seconds()
+   249	    sk = engine.create_secret_key()
+   250	    mm_key = engine.create_matrix_multiplication_key(sk)
+   251	    had_key = engine.create_hadamard_multiplication_key(sk)
+   252	    key_generation_s = elapsed(t)
+   253	
+   254	    input_tensor, layout = pack_columns(x, shape)
+   255	    used_batches = layout["used_batches"]
+   256	    w1_tensor = broadcast_weight_to_batches(model.w1.T, shape, used_batches, 32, 32)
+   257	    w2_tensor = broadcast_weight_to_batches(model.w2.T, shape, used_batches, 10, 32)
+   258	    b1_pt = engine.encode(broadcast_bias_to_columns(model.b1, shape, layout, 32))
+   259	    b2_pt = engine.encode(broadcast_bias_to_columns(model.b2, shape, layout, 10))
+   260	
+   261	    timing: dict[str, float] = {}
+   262	    level_log: list[dict[str, Any]] = []
+   263	    t = now_seconds()
+   264	    ct_x = engine.encrypt(input_tensor, sk)
+   265	    timing["encryption_input_s"] = elapsed(t)
+   266	    level_log.append({"stage": "input", **ct_info(ct_x)})
+   267	    t = now_seconds()
+   268	    ct_w1 = engine.encrypt(w1_tensor, sk)
+   269	    ct_w2 = engine.encrypt(w2_tensor, sk)
+   270	    timing["encryption_weight_s"] = elapsed(t)
+   271	    level_log.append({"stage": "weight_w1", **ct_info(ct_w1)})
+   272	    level_log.append({"stage": "weight_w2", **ct_info(ct_w2)})
+   273	    t = now_seconds()
+   274	    ct_h = engine.matrix_multiply(ct_w1, ct_x, mm_key)
+   275	    ct_h = engine.add(ct_h, b1_pt)
+   276	    timing["linear1_matrix_multiply_s"] = elapsed(t)
+   277	    level_log.append({"stage": "linear1", **ct_info(ct_h)})
+   278	    t = now_seconds()
+   279	    ct_a = engine.evaluate_polynomial(ct_h, coeffs, had_key)
+   280	    timing["activation_s"] = elapsed(t)
+   281	    level_log.append({"stage": "activation", **ct_info(ct_a)})
+   282	    t = now_seconds()
+   283	    ct_y = engine.matrix_multiply(ct_w2, ct_a, mm_key)
+   284	    ct_y = engine.add(ct_y, b2_pt)
+   285	    timing["linear2_matrix_multiply_s"] = elapsed(t)
+   286	    level_log.append({"stage": "linear2", **ct_info(ct_y)})
+   287	    t = now_seconds()
+   288	    dec = np.asarray(engine.decrypt(ct_y, sk), dtype=np.float64)
+   289	    timing["decryption_s"] = elapsed(t)
+   290	
+   291	    logits = unpack_logits(dec, layout, 10)
+   292	    metrics = scalar_metrics(logits_plain, logits, "logits")
+   293	    runtime_total = elapsed(t_total)
+   294	    return {
+   295	        "ok": True,
+   296	        "semantic_validation_passed": bool(metrics["logits_relative_l2"] < 1e-5 and metrics["logits_allclose"]),
+   297	        "failure_category": None,
+   298	        "task_type": "mlp_poly_relu",
+   299	        "weight_privacy": "encrypted_weight",
+   300	        "activation": f"degree{degree}_poly",
+   301	        "polynomial_degree": degree,
+   302	        "polynomial_radius": radius,
+   303	        "shape": shape,
+   304	        "logical_dims": [32, 32, 10],
+   305	        "n_samples": n,
+   306	        "ciphertext_count": 3,
+   307	        "key_generation_s": key_generation_s,
+   308	        "input_encryption_s": timing.get("encryption_input_s"),
+   309	        "weight_encryption_s": timing.get("encryption_weight_s"),
+   310	        "used_batches": used_batches,
+   311	        "used_columns_last_batch": layout["used_columns_last_batch"],
+   312	        **packing_stats(n, 32, shape),
+   313	        **operand_types(ct_w1, ct_w2, ct_x),
+   314	        **metrics,
+   315	        "accuracy": accuracy(logits, y),
+   316	        "argmax_agreement": argmax_agreement(logits_plain, logits),
+   317	        "level_log": level_log,
+   318	        "timing_log": timing,
+   319	        "server_only_s": (timing.get("linear1_matrix_multiply_s") or 0.0) + (timing.get("activation_s") or 0.0) + (timing.get("linear2_matrix_multiply_s") or 0.0),
+   320	        "total_s": runtime_total,
+   321	        "runtime_total_s": runtime_total,
+   322	        "runtime_per_sample_s": runtime_total / n,
+   323	    }
+   324	
+   325	
+   326	def failure_payload(exc: BaseException, **context: Any) -> dict[str, Any]:
+   327	    payload = exception_record(exc, **context)
+   328	    payload["semantic_validation_passed"] = False
+   329	    payload["failure_category"] = classify_failure(exc)
+   330	    return payload
+   331	
+   332	
+   333	def packed_plaintext_logits(
+   334	    x: np.ndarray,
+   335	    layout: dict[str, Any],
+   336	    w1_tensor: np.ndarray,
+   337	    w2_tensor: np.ndarray,
+   338	    b1: np.ndarray,
+   339	    b2: np.ndarray,
+   340	    coeffs: np.ndarray,

@@ -1,0 +1,219 @@
+src/model_pca32.py:15:from .polynomial import eval_power_polynomial, relu
+src/model_pca32.py:37:    def poly_forward(self, x32: np.ndarray, coeffs: np.ndarray) -> dict[str, np.ndarray]:
+src/model_pca32.py:39:        h1 = eval_power_polynomial(z1, coeffs)
+src/model_pca32.py:44:def expand_eval_split(
+src/model_pca32.py:60:def require_sample_count(n_samples: int, available: int, *, label: str) -> None:
+src/model_pca32.py:113:        x_test_32, y_test_eval = expand_eval_split(x_test_32_base, y_test, target_size=test_eval_size)
+src/overhead_metrics.py:11:    polynomial_degree: int,
+src/overhead_metrics.py:23:        "polynomial_degree": polynomial_degree,
+src/fhe_ckks.py:41:    ct = engine.evaluate_polynomial(ct, [float(c) for c in coeffs], relin_key)
+src/gl_encrypted_weight.py:17:from .polynomial import eval_power_polynomial, fit_relu_power_polynomial
+src/gl_encrypted_weight.py:67:def require_sample_count(n_samples: int, available: int, *, label: str) -> None:
+src/gl_encrypted_weight.py:79:    require_sample_count(n_samples, arrays["x_test_32"].shape[0], label="x_test_32")
+src/gl_encrypted_weight.py:152:    require_sample_count(n_samples, arrays["x_test_32"].shape[0], label="x_test_32")
+src/gl_encrypted_weight.py:237:    require_sample_count(n_samples, arrays["x_test_32"].shape[0], label="x_test_32")
+src/gl_encrypted_weight.py:243:    coeffs = fit_relu_power_polynomial(degree, (-radius, radius)).astype(np.float64)
+src/gl_encrypted_weight.py:244:    logits_plain = model.poly_forward(x, coeffs)["logits"]
+src/gl_encrypted_weight.py:279:    ct_a = engine.evaluate_polynomial(ct_h, coeffs, had_key)
+src/gl_encrypted_weight.py:298:        "task_type": "mlp_poly_relu",
+src/gl_encrypted_weight.py:300:        "activation": f"degree{degree}_poly",
+src/gl_encrypted_weight.py:301:        "polynomial_degree": degree,
+src/gl_encrypted_weight.py:302:        "polynomial_radius": radius,
+src/gl_encrypted_weight.py:350:        h1 = eval_power_polynomial(z1, coeffs)
+src/gl_encrypted_weight.py:360:    require_sample_count(n_samples, arrays["x_test_32"].shape[0], label="x_test_32")
+src/gl_encrypted_weight.py:366:    coeffs = fit_relu_power_polynomial(degree, (-radius, radius)).astype(np.float64)
+src/gl_encrypted_weight.py:449:        ct_a = engine.evaluate_polynomial(ct_h, coeffs, had_key)
+src/gl_encrypted_weight.py:461:        correct_plain = model.poly_forward(x, coeffs)["logits"]
+src/model.py:15:from .polynomial import eval_power_polynomial, relu
+src/model.py:36:    def poly_forward(self, x_scaled: np.ndarray, coeffs: np.ndarray, clip_interval: tuple[float, float] | None = None) -> dict[str, np.ndarray]:
+src/model.py:38:        poly_input = np.clip(z1, *clip_interval) if clip_interval else z1
+src/model.py:39:        h1 = eval_power_polynomial(poly_input, coeffs)
+src/polynomial.py:10:def fit_relu_power_polynomial(degree: int, interval: tuple[float, float], n_grid: int = 4001) -> np.ndarray:
+src/polynomial.py:14:    # np.polyfit returns descending powers; FHE APIs here expect ascending powers.
+src/polynomial.py:15:    return np.polyfit(xs, ys, degree).astype(np.float64)[::-1]
+src/polynomial.py:18:def eval_power_polynomial(x: np.ndarray, coeffs: np.ndarray) -> np.ndarray:
+scripts/10_run_gl_native_toy.py:15:from src.polynomial import eval_power_polynomial, fit_relu_power_polynomial
+scripts/10_run_gl_native_toy.py:31:    coeffs = fit_relu_power_polynomial(args.degree, (-3.0, 3.0))
+scripts/10_run_gl_native_toy.py:33:    h1 = eval_power_polynomial(z1, coeffs)
+scripts/10_run_gl_native_toy.py:57:    ct = engine.evaluate_polynomial(ct, coeffs.astype(np.float64), had_key)
+scripts/10_run_gl_native_toy.py:80:        "operation_counts": {"matrix_multiply": 2, "add": 2, "polynomial": 1},
+scripts/25_run_steady_state_packed_pca32.py:18:from src.polynomial import fit_relu_power_polynomial
+scripts/25_run_steady_state_packed_pca32.py:65:        ct = engine.evaluate_polynomial(ct, [float(c) for c in coeffs], relk)
+scripts/25_run_steady_state_packed_pca32.py:82:        "semantic_validation_passed": bool(error_metrics(model.poly_forward(x, coeffs)["logits"], logits, "logits")["logits_relative_l2"] < 1e-5),
+scripts/25_run_steady_state_packed_pca32.py:84:        "argmax_agreement_poly_vs_fhe": argmax_agreement(model.poly_forward(x, coeffs)["logits"], logits),
+scripts/25_run_steady_state_packed_pca32.py:85:        "error_metrics": error_metrics(model.poly_forward(x, coeffs)["logits"], logits, "logits"),
+scripts/25_run_steady_state_packed_pca32.py:146:        ct = engine.evaluate_polynomial(ct, [float(c) for c in coeffs], relk)
+scripts/25_run_steady_state_packed_pca32.py:163:        "semantic_validation_passed": bool(error_metrics(model.poly_forward(x, coeffs)["logits"], logits, "logits")["logits_relative_l2"] < 1e-5),
+scripts/25_run_steady_state_packed_pca32.py:165:        "argmax_agreement_poly_vs_fhe": argmax_agreement(model.poly_forward(x, coeffs)["logits"], logits),
+scripts/25_run_steady_state_packed_pca32.py:166:        "error_metrics": error_metrics(model.poly_forward(x, coeffs)["logits"], logits, "logits"),
+scripts/25_run_steady_state_packed_pca32.py:222:    ct = engine.evaluate_polynomial(ct, coeffs, had)
+scripts/25_run_steady_state_packed_pca32.py:242:        "semantic_validation_passed": bool(error_metrics(model.poly_forward(x, coeffs)["logits"], logits, "logits")["logits_relative_l2"] < 1e-5),
+scripts/25_run_steady_state_packed_pca32.py:244:        "argmax_agreement_poly_vs_fhe": argmax_agreement(model.poly_forward(x, coeffs)["logits"], logits),
+scripts/25_run_steady_state_packed_pca32.py:245:        "error_metrics": error_metrics(model.poly_forward(x, coeffs)["logits"], logits, "logits"),
+scripts/25_run_steady_state_packed_pca32.py:266:    coeffs = fit_relu_power_polynomial(args.degree, (-radius, radius)).astype(np.float64)
+scripts/25_run_steady_state_packed_pca32.py:294:                "argmax_agreement_poly_vs_fhe": result.get("argmax_agreement_poly_vs_fhe"),
+scripts/03_run_plain_baselines.py:14:from src.polynomial import out_of_interval_fraction
+scripts/03_run_plain_baselines.py:22:    poly = np.load(DATA / f"relu_poly_degree{args.degree}.npz")
+scripts/03_run_plain_baselines.py:23:    coeffs = poly["coeffs"]
+scripts/03_run_plain_baselines.py:24:    interval = tuple(float(x) for x in poly["interval"])
+scripts/03_run_plain_baselines.py:28:    poly_out = model.poly_forward(x, coeffs)
+scripts/03_run_plain_baselines.py:29:    clipped_out = model.poly_forward(x, coeffs, clip_interval=interval)
+scripts/03_run_plain_baselines.py:35:        "accuracy_poly_plain": accuracy(poly_out["logits"], y),
+scripts/03_run_plain_baselines.py:36:        "accuracy_poly_plain_clipped": accuracy(clipped_out["logits"], y),
+scripts/03_run_plain_baselines.py:37:        "argmax_agreement_relu_poly": argmax_agreement(relu_out["logits"], poly_out["logits"]),
+scripts/03_run_plain_baselines.py:39:        **error_metrics(relu_out["h1"], poly_out["h1"], "hidden_relu_vs_poly"),
+scripts/03_run_plain_baselines.py:40:        **error_metrics(relu_out["logits"], poly_out["logits"], "logits_relu_vs_poly"),
+scripts/03_run_plain_baselines.py:41:        **error_metrics(poly_out["logits"], clipped_out["logits"], "logits_poly_vs_clipped"),
+scripts/05_check_gl_capabilities.py:29:            "has_evaluate_polynomial": hasattr(e, "evaluate_polynomial"),
+scripts/05_check_gl_capabilities.py:30:            "has_evaluate_chebyshev_polynomial": hasattr(e, "evaluate_chebyshev_polynomial"),
+scripts/05_check_gl_capabilities.py:49:            "has_evaluate_polynomial": hasattr(g, "evaluate_polynomial"),
+scripts/22_run_gl_pca32_packed_sweep.py:15:from src.model_pca32 import load_pca32_model, require_sample_count
+scripts/22_run_gl_pca32_packed_sweep.py:16:from src.polynomial import fit_relu_power_polynomial
+scripts/22_run_gl_pca32_packed_sweep.py:28:        "argmax_agreement_poly_vs_fhe": meta.get("argmax_agreement_poly_vs_gl"),
+scripts/22_run_gl_pca32_packed_sweep.py:53:    require_sample_count(n, arrays["x_test_32"].shape[0], label="x_test_32")
+scripts/22_run_gl_pca32_packed_sweep.py:58:    coeffs = fit_relu_power_polynomial(degree, (-radius, radius)).astype(np.float64)
+scripts/22_run_gl_pca32_packed_sweep.py:59:    poly_plain = model.poly_forward(x, coeffs)["logits"]
+scripts/22_run_gl_pca32_packed_sweep.py:93:    ct = engine.evaluate_polynomial(ct, coeffs, had_key)
+scripts/22_run_gl_pca32_packed_sweep.py:105:    err = error_metrics(poly_plain, logits, "logits")
+scripts/22_run_gl_pca32_packed_sweep.py:111:        "argmax_agreement_poly_vs_gl": argmax_agreement(poly_plain, logits),
+scripts/22_run_gl_pca32_packed_sweep.py:113:        "polynomial_degree": degree,
+scripts/22_run_gl_pca32_packed_sweep.py:119:        "operation_counts": {"matrix_multiply": 2, "add": 2, "polynomial": 1},
+scripts/15_run_gl_padded_pca32_packed.py:14:from src.model_pca32 import load_pca32_model, require_sample_count
+scripts/15_run_gl_padded_pca32_packed.py:15:from src.polynomial import fit_relu_power_polynomial
+scripts/15_run_gl_padded_pca32_packed.py:34:    require_sample_count(args.n_samples, arrays["x_test_32"].shape[0], label="x_test_32")
+scripts/15_run_gl_padded_pca32_packed.py:40:    coeffs = fit_relu_power_polynomial(args.degree, (-radius, radius)).astype(np.float64)
+scripts/15_run_gl_padded_pca32_packed.py:42:    poly_plain = model.poly_forward(x, coeffs)["logits"]
+scripts/15_run_gl_padded_pca32_packed.py:70:    ct = engine.evaluate_polynomial(ct, coeffs, had_key)
+scripts/15_run_gl_padded_pca32_packed.py:83:    err = error_metrics(poly_plain, logits, "logits")
+scripts/15_run_gl_padded_pca32_packed.py:84:    rows = [{"sample_index": i, "true_label": int(y[i]), "relu_pred": int(np.argmax(relu_plain[i])), "poly_pred": int(np.argmax(poly_plain[i])), "gl_pred": int(np.argmax(logits[i]))} for i in range(n)]
+scripts/15_run_gl_padded_pca32_packed.py:93:        "accuracy_poly_plain": accuracy(poly_plain, y),
+scripts/15_run_gl_padded_pca32_packed.py:95:        "argmax_agreement_poly_vs_gl": argmax_agreement(poly_plain, logits),
+scripts/15_run_gl_padded_pca32_packed.py:97:        "operation_counts": {"matrix_multiply": 2, "add": 2, "polynomial": 1},
+scripts/15_run_gl_padded_pca32_packed.py:98:        "polynomial_degree": args.degree,
+scripts/17_compare_single_vs_packed_gl.py:56:        "argmax_agreement": meta.get("argmax_agreement_poly_vs_gl") or meta.get("argmax_agreement"),
+scripts/06_run_gl_poly_inference.py:55:    poly = np.load(Path("data") / f"relu_poly_degree{args.degree}.npz")
+scripts/06_run_gl_poly_inference.py:56:    coeffs = poly["coeffs"]
+scripts/06_run_gl_poly_inference.py:59:    plain = model.poly_forward(x, coeffs)["logits"]
+scripts/06_run_gl_poly_inference.py:97:                    ct = engine.evaluate_polynomial(ct, coeffs.astype(np.float64), had_key)
+scripts/06_run_gl_poly_inference.py:112:                        "plain_poly_pred": int(np.argmax(plain[i])),
+scripts/06_run_gl_poly_inference.py:125:                    rec = exception_record(exc, sample_index=i, api="GL plaintext-weight polynomial MLP", ciphertext_level=getattr(locals().get("ct", None), "level", None))
+scripts/06_run_gl_poly_inference.py:140:                        "GLEngine.matrix_multiply accepts plaintext weights, but this padded vector-to-GL-matrix mapping did not reproduce the plaintext polynomial MLP within tolerance.",
+scripts/07_summarize_results.py:36:            "condition": "plain_polynomial_relu",
+scripts/07_summarize_results.py:37:            "accuracy": plain.get("accuracy_poly_plain"),
+scripts/07_summarize_results.py:38:            "argmax_agreement": plain.get("argmax_agreement_relu_poly"),
+scripts/07_summarize_results.py:39:            "notes": "same trained weights, ReLU replaced by fitted power polynomial",
+scripts/07_summarize_results.py:42:            "condition": "ckks_polynomial_relu",
+scripts/07_summarize_results.py:50:            "condition": "gl_polynomial_relu",
+scripts/26_run_large_batch_packed_pca32.py:24:from src.polynomial import fit_relu_power_polynomial
+scripts/26_run_large_batch_packed_pca32.py:65:    ct = engine.evaluate_polynomial(ct, coeffs, had)
+scripts/26_run_large_batch_packed_pca32.py:75:    plain = model.poly_forward(x, coeffs)["logits"]
+scripts/26_run_large_batch_packed_pca32.py:84:        "argmax_agreement_poly_vs_fhe": argmax_agreement(plain, logits),
+scripts/26_run_large_batch_packed_pca32.py:142:        ct = engine.evaluate_polynomial(ct, coeffs, relk)
+scripts/26_run_large_batch_packed_pca32.py:152:    plain = model.poly_forward(x, coeffs)["logits"]
+scripts/26_run_large_batch_packed_pca32.py:161:        "argmax_agreement_poly_vs_fhe": argmax_agreement(plain, logits),
+scripts/26_run_large_batch_packed_pca32.py:183:        "argmax_agreement_poly_vs_fhe": result.get("argmax_agreement_poly_vs_fhe"),
+scripts/26_run_large_batch_packed_pca32.py:207:    coeffs = fit_relu_power_polynomial(args.degree, (-radius, radius)).astype(np.float64)
+scripts/24_measure_object_sizes.py:18:from src.polynomial import fit_relu_power_polynomial
+scripts/24_measure_object_sizes.py:61:    coeffs = np.load(Path("data") / "relu_poly_degree3.npz")["coeffs"].astype(np.float64)
+scripts/21_run_ckks_pca32_packed_sweep.py:22:from src.model_pca32 import load_pca32_model, require_sample_count
+scripts/21_run_ckks_pca32_packed_sweep.py:23:from src.polynomial import fit_relu_power_polynomial
+scripts/21_run_ckks_pca32_packed_sweep.py:41:        "argmax_agreement_poly_vs_fhe": meta.get("argmax_agreement_poly_vs_fhe"),
+scripts/21_run_ckks_pca32_packed_sweep.py:68:    require_sample_count(n, arrays["x_test_32"].shape[0], label="x_test_32")
+scripts/21_run_ckks_pca32_packed_sweep.py:73:    coeffs = fit_relu_power_polynomial(degree, (-radius, radius)).astype(np.float64)
+scripts/21_run_ckks_pca32_packed_sweep.py:74:    poly_plain = model.poly_forward(x, coeffs)["logits"]
+scripts/21_run_ckks_pca32_packed_sweep.py:130:        ct = engine.evaluate_polynomial(ct, [float(c) for c in coeffs], relin_key)
+scripts/21_run_ckks_pca32_packed_sweep.py:145:    err = error_metrics(poly_plain, logits, "logits")
+scripts/21_run_ckks_pca32_packed_sweep.py:152:        "argmax_agreement_poly_vs_fhe": argmax_agreement(poly_plain, logits),
+scripts/21_run_ckks_pca32_packed_sweep.py:154:        "polynomial_degree": degree,
+scripts/21_run_ckks_pca32_packed_sweep.py:160:        "operation_counts": {"matrix_multiply": 2 * len(chunks), "add": 2 * len(chunks), "polynomial": len(chunks)},
+scripts/18_run_ckks_pca32_packed.py:20:from src.model_pca32 import load_pca32_model, require_sample_count
+scripts/18_run_ckks_pca32_packed.py:21:from src.polynomial import fit_relu_power_polynomial
+scripts/18_run_ckks_pca32_packed.py:49:        require_sample_count(args.n_samples, arrays["x_test_32"].shape[0], label="x_test_32")
+scripts/18_run_ckks_pca32_packed.py:55:        coeffs = fit_relu_power_polynomial(args.degree, (-radius, radius)).astype(np.float64)
+scripts/18_run_ckks_pca32_packed.py:56:        poly_plain = model.poly_forward(x, coeffs)["logits"]
+scripts/18_run_ckks_pca32_packed.py:95:            ct = engine.evaluate_polynomial(ct, [float(c) for c in coeffs], relin_key)
+scripts/18_run_ckks_pca32_packed.py:110:        err = error_metrics(poly_plain, logits, "logits")
+scripts/18_run_ckks_pca32_packed.py:116:                "poly_pred": int(np.argmax(poly_plain[i])),
+scripts/18_run_ckks_pca32_packed.py:125:            "accuracy_poly_plain": accuracy(poly_plain, y),
+scripts/18_run_ckks_pca32_packed.py:126:            "argmax_agreement_poly_vs_fhe": argmax_agreement(poly_plain, logits),
+scripts/18_run_ckks_pca32_packed.py:134:            "polynomial_degree": args.degree,
+scripts/18_run_ckks_pca32_packed.py:135:            "operation_counts": {"matrix_multiply": 2 * len(chunks), "add": 2 * len(chunks), "polynomial": len(chunks)},
+scripts/02_fit_relu_polynomial.py:13:from src.polynomial import choose_interval, fit_relu_power_polynomial, out_of_interval_fraction
+scripts/02_fit_relu_polynomial.py:24:    coeffs = fit_relu_power_polynomial(args.degree, interval)
+scripts/02_fit_relu_polynomial.py:25:    path = DATA / f"relu_poly_degree{args.degree}.npz"
+scripts/02_fit_relu_polynomial.py:27:    write_json(RESULTS / "relu_polynomial.json", {
+scripts/12_run_gl_blocked_digits64_mlp.py:27:    poly = np.load(DATA / f"relu_poly_degree{args.degree}.npz")
+scripts/12_run_gl_blocked_digits64_mlp.py:28:    coeffs = poly["coeffs"].astype(np.float64)
+scripts/12_run_gl_blocked_digits64_mlp.py:31:    poly_plain = model.poly_forward(x, coeffs)["logits"]
+scripts/12_run_gl_blocked_digits64_mlp.py:66:        ct = engine.evaluate_polynomial(ct, coeffs, had_key)
+scripts/12_run_gl_blocked_digits64_mlp.py:81:        rows.append({"sample_index": i, "true_label": int(y[i]), "poly_pred": int(np.argmax(poly_plain[i])), "gl_pred": int(np.argmax(logits)), "linear1_level": l1["level"], "activation_level": lact["level"], "linear2_level": l2["level"]})
+scripts/12_run_gl_blocked_digits64_mlp.py:86:    err = error_metrics(poly_plain[: len(gl)], gl, "logits")
+scripts/12_run_gl_blocked_digits64_mlp.py:94:        "argmax_agreement_poly_vs_gl": argmax_agreement(poly_plain[: len(gl)], gl),
+scripts/12_run_gl_blocked_digits64_mlp.py:100:        "operation_counts": {"matrix_multiply": 3, "add": 3, "polynomial": 1, "mask": 0},
+scripts/14_summarize_layout_overhead.py:49:        "polynomial_degree": meta.get("polynomial_degree"),
+scripts/14_summarize_layout_overhead.py:50:        "argmax_agreement": meta.get("argmax_agreement") or meta.get("argmax_agreement_poly_vs_gl") or meta.get("argmax_agreement_poly_vs_ckks"),
+scripts/14_summarize_layout_overhead.py:67:            "accuracy_poly_plain": plain.get("accuracy_poly_plain"),
+scripts/14_summarize_layout_overhead.py:68:            "argmax_agreement": plain.get("argmax_agreement_relu_poly"),
+scripts/14_summarize_layout_overhead.py:71:        row("ckks_digits64_poly", read_json("ckks_results.json"), "existing 64->16->10 CKKS baseline"),
+scripts/14_summarize_layout_overhead.py:72:        row("ckks_pca32_poly", read_json("ckks_pca32_results.json"), "PCA32 32->32->10 CKKS baseline"),
+scripts/11_run_gl_padded_pca32_classifier.py:14:from src.model_pca32 import load_pca32_model, require_sample_count
+scripts/11_run_gl_padded_pca32_classifier.py:16:from src.polynomial import fit_relu_power_polynomial
+scripts/11_run_gl_padded_pca32_classifier.py:28:    require_sample_count(args.n_samples, arrays["x_test_32"].shape[0], label="x_test_32")
+scripts/11_run_gl_padded_pca32_classifier.py:31:    coeffs = fit_relu_power_polynomial(args.degree, (-radius, radius))
+scripts/11_run_gl_padded_pca32_classifier.py:35:    poly_plain = model.poly_forward(x, coeffs)["logits"]
+scripts/11_run_gl_padded_pca32_classifier.py:62:        ct = engine.evaluate_polynomial(ct, coeffs.astype(np.float64), had_key)
+scripts/11_run_gl_padded_pca32_classifier.py:75:        rows.append({"sample_index": i, "true_label": int(y[i]), "relu_pred": int(np.argmax(relu_plain[i])), "poly_pred": int(np.argmax(poly_plain[i])), "gl_pred": int(np.argmax(logits)), "linear1_level": l1["level"], "activation_level": lact["level"], "linear2_level": l2["level"]})
+scripts/11_run_gl_padded_pca32_classifier.py:80:    err = error_metrics(poly_plain[: len(gl)], gl, "logits")
+scripts/11_run_gl_padded_pca32_classifier.py:89:        "accuracy_poly_plain": accuracy(poly_plain, y),
+scripts/11_run_gl_padded_pca32_classifier.py:91:        "argmax_agreement_poly_vs_gl": argmax_agreement(poly_plain[: len(gl)], gl),
+scripts/11_run_gl_padded_pca32_classifier.py:96:        "operation_counts": {"matrix_multiply": 2, "add": 2, "polynomial": 1},
+scripts/16_run_gl_blocked_digits64_packed.py:36:    coeffs = np.load(DATA / f"relu_poly_degree{args.degree}.npz")["coeffs"].astype(np.float64)
+scripts/16_run_gl_blocked_digits64_packed.py:37:    poly_plain = model.poly_forward(x, coeffs)["logits"]
+scripts/16_run_gl_blocked_digits64_packed.py:70:    ct = engine.evaluate_polynomial(ct, coeffs, had_key)
+scripts/16_run_gl_blocked_digits64_packed.py:83:    err = error_metrics(poly_plain, logits, "logits")
+scripts/16_run_gl_blocked_digits64_packed.py:84:    rows = [{"sample_index": i, "true_label": int(y[i]), "poly_pred": int(np.argmax(poly_plain[i])), "gl_pred": int(np.argmax(logits[i]))} for i in range(n)]
+scripts/16_run_gl_blocked_digits64_packed.py:92:        "accuracy_poly_plain": accuracy(poly_plain, y),
+scripts/16_run_gl_blocked_digits64_packed.py:94:        "argmax_agreement_poly_vs_gl": argmax_agreement(poly_plain, logits),
+scripts/16_run_gl_blocked_digits64_packed.py:96:        "operation_counts": {"matrix_multiply": 3, "add": 3, "polynomial": 1, "mask": 0},
+scripts/16_run_gl_blocked_digits64_packed.py:97:        "polynomial_degree": args.degree,
+scripts/33_run_gl_encrypted_weight_pca32_mlp.py:20:        "task_type": meta.get("task_type", "mlp_poly_relu"),
+scripts/33_run_gl_encrypted_weight_pca32_mlp.py:23:        "polynomial_degree": meta.get("polynomial_degree"),
+scripts/33_run_gl_encrypted_weight_pca32_mlp.py:54:            task_type="mlp_poly_relu",
+scripts/33_run_gl_encrypted_weight_pca32_mlp.py:56:            activation=f"degree{args.degree}_poly",
+scripts/33_run_gl_encrypted_weight_pca32_mlp.py:57:            polynomial_degree=args.degree,
+scripts/34_compare_gl_plain_vs_encrypted_weight.py:80:            "task_type": "mlp_poly_relu",
+scripts/34_compare_gl_plain_vs_encrypted_weight.py:82:            "activation": "degree3_poly",
+scripts/34_compare_gl_plain_vs_encrypted_weight.py:88:            "argmax_agreement": meta.get("argmax_agreement_poly_vs_gl"),
+scripts/34_compare_gl_plain_vs_encrypted_weight.py:103:        "task_type": "mlp_poly_relu",
+scripts/34_compare_gl_plain_vs_encrypted_weight.py:105:        "activation": "degree3_poly",
+scripts/34_compare_gl_plain_vs_encrypted_weight.py:111:        "argmax_agreement": r.get("argmax_agreement_poly_vs_fhe"),
+scripts/19_compare_gl_ckks_packed.py:29:        "argmax_agreement": meta.get("argmax_agreement_poly_vs_fhe") or meta.get("argmax_agreement_poly_vs_gl"),
+scripts/13_run_ckks_pca32_classifier.py:13:from src.model_pca32 import load_pca32_model, require_sample_count
+scripts/13_run_ckks_pca32_classifier.py:14:from src.polynomial import fit_relu_power_polynomial
+scripts/13_run_ckks_pca32_classifier.py:45:    require_sample_count(args.n_samples, arrays["x_test_32"].shape[0], label="x_test_32")
+scripts/13_run_ckks_pca32_classifier.py:48:    coeffs = fit_relu_power_polynomial(args.degree, (-radius, radius))
+scripts/13_run_ckks_pca32_classifier.py:51:    poly_plain = model.poly_forward(x, coeffs)["logits"]
+scripts/13_run_ckks_pca32_classifier.py:77:        ct = engine.evaluate_polynomial(ct, [float(c) for c in coeffs], relin_key)
+scripts/13_run_ckks_pca32_classifier.py:90:        rows.append({"sample_index": i, "true_label": int(y[i]), "poly_pred": int(np.argmax(poly_plain[i])), "ckks_pred": int(np.argmax(logits)), "linear1_level": l1["level"], "activation_level": lact["level"], "linear2_level": l2["level"]})
+scripts/13_run_ckks_pca32_classifier.py:95:    err = error_metrics(poly_plain[: len(ckks)], ckks, "logits")
+scripts/13_run_ckks_pca32_classifier.py:105:        "polynomial_degree": args.degree,
+scripts/13_run_ckks_pca32_classifier.py:106:        "accuracy_poly_plain": accuracy(poly_plain, y),
+scripts/13_run_ckks_pca32_classifier.py:108:        "argmax_agreement_poly_vs_ckks": argmax_agreement(poly_plain[: len(ckks)], ckks),
+scripts/13_run_ckks_pca32_classifier.py:110:        "operation_counts": {"matrix_multiply": 2, "add": 2, "polynomial": 1},
+scripts/45_collect_report_inputs.sh:129:if [ -f src/polynomial.py ]; then
+scripts/45_collect_report_inputs.sh:130:  nl -ba src/polynomial.py | sed -n '1,160p' > "$OUT/source_snippets/polynomial_l1_160.txt"
+scripts/45_collect_report_inputs.sh:138:  -e "degree3" \
+scripts/45_collect_report_inputs.sh:139:  -e "poly" \
+scripts/45_collect_report_inputs.sh:140:  -e "evaluate_polynomial" \
+scripts/45_collect_report_inputs.sh:141:  -e "polynomial_radius" \
+scripts/45_collect_report_inputs.sh:142:  -e "expand_eval_split" \
+scripts/45_collect_report_inputs.sh:143:  -e "require_sample_count" \
+scripts/45_collect_report_inputs.sh:213:        "polynomial_degree": safe_get(data, "polynomial_degree"),
+scripts/45_collect_report_inputs.sh:214:        "polynomial_radius": safe_get(data, "polynomial_radius"),
+scripts/45_collect_report_inputs.sh:293:# Try to extract polynomial/model metadata if joblib exists.
+scripts/45_collect_report_inputs.sh:314:            if any(s in lower for s in ["poly", "coeff", "radius", "relu", "pca", "x_test", "base"]):
+scripts/04_run_ckks_poly_inference.py:27:    poly = np.load(Path("data") / f"relu_poly_degree{args.degree}.npz")
+scripts/04_run_ckks_poly_inference.py:28:    coeffs = poly["coeffs"]
+scripts/04_run_ckks_poly_inference.py:31:    plain = model.poly_forward(x, coeffs)["logits"]
+scripts/04_run_ckks_poly_inference.py:54:                    "plain_poly_pred": int(np.argmax(plain[i])),
+scripts/04_run_ckks_poly_inference.py:66:                rows.append(exception_record(exc, sample_index=i, api="CKKS polynomial MLP"))

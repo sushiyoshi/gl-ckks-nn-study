@@ -1,0 +1,7 @@
+library,scheme_or_backend,d,encrypted_operands,packing_layout,semantic_validation_passed,relative_l2,keygen_s,rotation_or_mm_keygen_s,encryption_s,matmul_s,decryption_s,runtime_total_s,notes
+GL,GL ct-ct matrix_multiply,32,ct_ct,batch x 32 x 32,True,9.912692346573798e-08,6.500766582999859,,0.9576074589999735,4.614102583000204,0.7726533330001075,18.2369107909999,GL ct-ct probe is batch-oriented and not packing-matched with OpenFHE-NumPy
+OpenFHE-NumPy,CKKS,2,ct_ct,single-ciphertext row-major matrix,False,,,,,,,5.000001692678779e-07,numpy is required for OpenFHE-NumPy experiments
+OpenFHE-NumPy,CKKS,4,ct_ct,single-ciphertext row-major matrix,False,,,,,,,2.920005499618128e-07,numpy is required for OpenFHE-NumPy experiments
+OpenFHE-NumPy,CKKS,8,ct_ct,single-ciphertext row-major matrix,False,,,,,,,1.6699959815014154e-07,numpy is required for OpenFHE-NumPy experiments
+OpenFHE-NumPy,CKKS,16,ct_ct,single-ciphertext row-major matrix,False,,,,,,,1.249991328222677e-07,numpy is required for OpenFHE-NumPy experiments
+OpenFHE-NumPy,CKKS,32,ct_ct,single-ciphertext row-major matrix,False,,,,,,,4.1000021155923605e-08,numpy is required for OpenFHE-NumPy experiments

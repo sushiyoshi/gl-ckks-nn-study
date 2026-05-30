@@ -1,0 +1,134 @@
+     1	from __future__ import annotations
+     2	
+     3	from dataclasses import dataclass
+     4	from pathlib import Path
+     5	from typing import Any
+     6	
+     7	import joblib
+     8	import numpy as np
+     9	from sklearn.decomposition import PCA
+    10	from sklearn.neural_network import MLPClassifier
+    11	from sklearn.preprocessing import StandardScaler
+    12	
+    13	from .logging_utils import DATA, SEED
+    14	from .model import load_digits_split
+    15	from .polynomial import eval_power_polynomial, relu
+    16	
+    17	
+    18	@dataclass
+    19	class PCA32MLP:
+    20	    scaler: StandardScaler
+    21	    pca: PCA
+    22	    w1: np.ndarray
+    23	    b1: np.ndarray
+    24	    w2: np.ndarray
+    25	    b2: np.ndarray
+    26	    metadata: dict[str, Any]
+    27	
+    28	    def transform(self, x: np.ndarray) -> np.ndarray:
+    29	        return self.pca.transform(self.scaler.transform(x))
+    30	
+    31	    def relu_forward(self, x32: np.ndarray) -> dict[str, np.ndarray]:
+    32	        z1 = x32 @ self.w1 + self.b1
+    33	        h1 = relu(z1)
+    34	        logits = h1 @ self.w2 + self.b2
+    35	        return {"z1": z1, "h1": h1, "logits": logits}
+    36	
+    37	    def poly_forward(self, x32: np.ndarray, coeffs: np.ndarray) -> dict[str, np.ndarray]:
+    38	        z1 = x32 @ self.w1 + self.b1
+    39	        h1 = eval_power_polynomial(z1, coeffs)
+    40	        logits = h1 @ self.w2 + self.b2
+    41	        return {"z1": z1, "h1": h1, "logits": logits}
+    42	
+    43	
+    44	def expand_eval_split(
+    45	    x_test: np.ndarray,
+    46	    y_test: np.ndarray,
+    47	    *,
+    48	    target_size: int,
+    49	    seed: int = SEED,
+    50	) -> tuple[np.ndarray, np.ndarray]:
+    51	    if target_size < 0:
+    52	        raise ValueError(f"target_size must be non-negative, got {target_size}")
+    53	    if target_size <= len(x_test):
+    54	        return x_test[:target_size], y_test[:target_size]
+    55	    rng = np.random.default_rng(seed)
+    56	    idx = rng.choice(len(x_test), size=target_size, replace=True)
+    57	    return x_test[idx], y_test[idx]
+    58	
+    59	
+    60	def require_sample_count(n_samples: int, available: int, *, label: str) -> None:
+    61	    if n_samples < 0:
+    62	        raise ValueError(f"{label} must be non-negative, got {n_samples}")
+    63	    if n_samples > available:
+    64	        raise ValueError(f"requested {n_samples} samples for {label}, but only {available} are available")
+    65	
+    66	
+    67	def train_pca32_model(
+    68	    hidden: int = 32,
+    69	    max_iter: int = 800,
+    70	    test_eval_size: int | None = None,
+    71	) -> tuple[PCA32MLP, dict[str, np.ndarray]]:
+    72	    x_train, x_test, y_train, y_test = load_digits_split()
+    73	    scaler = StandardScaler()
+    74	    x_train_s = scaler.fit_transform(x_train)
+    75	    x_test_s = scaler.transform(x_test)
+    76	    pca = PCA(n_components=32, random_state=SEED)
+    77	    x_train_32 = pca.fit_transform(x_train_s)
+    78	    x_test_32_base = pca.transform(x_test_s)
+    79	    clf = MLPClassifier(
+    80	        hidden_layer_sizes=(hidden,),
+    81	        activation="relu",
+    82	        solver="adam",
+    83	        alpha=1e-4,
+    84	        batch_size=64,
+    85	        learning_rate_init=1e-3,
+    86	        max_iter=max_iter,
+    87	        random_state=SEED,
+    88	        early_stopping=True,
+    89	        n_iter_no_change=30,
+    90	    )
+    91	    clf.fit(x_train_32, y_train)
+    92	    model = PCA32MLP(
+    93	        scaler=scaler,
+    94	        pca=pca,
+    95	        w1=clf.coefs_[0].astype(np.float64),
+    96	        b1=clf.intercepts_[0].astype(np.float64),
+    97	        w2=clf.coefs_[1].astype(np.float64),
+    98	        b2=clf.intercepts_[1].astype(np.float64),
+    99	        metadata={
+   100	            "hidden": hidden,
+   101	            "pca_components": 32,
+   102	            "classes": clf.classes_.tolist(),
+   103	            "n_iter": int(clf.n_iter_),
+   104	            "loss": float(clf.loss_),
+   105	            "pca_explained_variance_ratio_sum": float(np.sum(pca.explained_variance_ratio_)),
+   106	            "seed": SEED,
+   107	        },
+   108	    )
+   109	    if test_eval_size is None:
+   110	        x_test_32 = x_test_32_base
+   111	        y_test_eval = y_test
+   112	    else:
+   113	        x_test_32, y_test_eval = expand_eval_split(x_test_32_base, y_test, target_size=test_eval_size)
+   114	    arrays = {
+   115	        "x_train": x_train,
+   116	        "x_test": x_test,
+   117	        "y_train": y_train,
+   118	        "y_test": y_test_eval,
+   119	        "x_train_32": x_train_32,
+   120	        "x_test_32": x_test_32,
+   121	        "x_test_32_base": x_test_32_base,
+   122	        "y_test_base": y_test,
+   123	    }
+   124	    return model, arrays
+   125	
+   126	
+   127	def save_pca32_model(model: PCA32MLP, arrays: dict[str, np.ndarray], path: Path = DATA / "pca32_mlp.joblib") -> None:
+   128	    path.parent.mkdir(exist_ok=True)
+   129	    joblib.dump({"model": model, "arrays": arrays}, path)
+   130	
+   131	
+   132	def load_pca32_model(path: Path = DATA / "pca32_mlp.joblib") -> tuple[PCA32MLP, dict[str, np.ndarray]]:
+   133	    payload = joblib.load(path)
+   134	    return payload["model"], payload["arrays"]

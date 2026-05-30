@@ -1,0 +1,60 @@
+===== DATE =====
+2026年 5月30日 土曜日 11時11分57秒 JST
+
+===== PWD / HOST =====
+/Users/Eito_1/gl
+MacBook-Pro-14-M2Pro.local
+
+===== OS =====
+Darwin MacBook-Pro-14-M2Pro.local 24.3.0 Darwin Kernel Version 24.3.0: Thu Jan  2 20:24:23 PST 2025; root:xnu-11215.81.4~3/RELEASE_ARM64_T6020 arm64
+ProductName:		macOS
+ProductVersion:		15.3.1
+BuildVersion:		24D70
+
+===== CPU =====
+Apple M2 Pro
+10
+17179869184
+
+===== MEMORY =====
+Mach Virtual Memory Statistics: (page size of 16384 bytes)
+Pages free:                               75876.
+Pages active:                            296015.
+Pages inactive:                          293714.
+Pages speculative:                         7082.
+Pages throttled:                              0.
+Pages wired down:                        132635.
+Pages purgeable:                          15713.
+"Translation faults":                  61572629.
+Pages copy-on-write:                    3358269.
+Pages zero filled:                     35858013.
+Pages reactivated:                      3709502.
+Pages purged:                            980515.
+File-backed pages:                       228386.
+Anonymous pages:                         368425.
+Pages stored in compressor:              465883.
+Pages occupied by compressor:            190795.
+Decompressions:                         1593501.
+Compressions:                           2610305.
+Pageins:                                1708386.
+Pageouts:                                 18883.
+Swapins:                                      0.
+Swapouts:                                     0.
+
+===== DISK =====
+Filesystem      Size    Used   Avail Capacity iused ifree %iused  Mounted on
+/dev/disk3s5   926Gi   613Gi   295Gi    68%    4.5M  3.1G    0%   /System/Volumes/Data
+
+===== PYTHON =====
+/Users/Eito_1/gl/bin/python3
+Python 3.13.4
+pip 25.1.1 from /Users/Eito_1/gl/lib/python3.13/site-packages/pip (python 3.13)
+
+===== LOCAL DESILOFHE PYTHON =====
+Python 3.13.4
+executable: /Users/Eito_1/gl/bin/python3
+desilofhe OK no_version
+numpy OK 2.4.6
+pandas OK 3.0.3
+sklearn OK 1.8.0
+joblib OK 1.5.3
