@@ -1,0 +1,88 @@
+{
+  "ok": false,
+  "cases": [
+    {
+      "ok": false,
+      "d": 2,
+      "scheme_or_backend": "CKKS",
+      "library": "OpenFHE-NumPy",
+      "encrypted_operands": "ct_ct",
+      "packing_layout": "single-ciphertext row-major matrix",
+      "semantic_validation_passed": false,
+      "failure_category": "build_dependency_missing",
+      "unsupported_reason": "numpy_missing",
+      "exception_type": "ModuleNotFoundError",
+      "exception": "No module named 'numpy'",
+      "runtime_total_s": 5.000001692678779e-07,
+      "notes": "numpy is required for OpenFHE-NumPy experiments"
+    },
+    {
+      "ok": false,
+      "d": 4,
+      "scheme_or_backend": "CKKS",
+      "library": "OpenFHE-NumPy",
+      "encrypted_operands": "ct_ct",
+      "packing_layout": "single-ciphertext row-major matrix",
+      "semantic_validation_passed": false,
+      "failure_category": "build_dependency_missing",
+      "unsupported_reason": "numpy_missing",
+      "exception_type": "ModuleNotFoundError",
+      "exception": "No module named 'numpy'",
+      "runtime_total_s": 2.920005499618128e-07,
+      "notes": "numpy is required for OpenFHE-NumPy experiments"
+    },
+    {
+      "ok": false,
+      "d": 8,
+      "scheme_or_backend": "CKKS",
+      "library": "OpenFHE-NumPy",
+      "encrypted_operands": "ct_ct",
+      "packing_layout": "single-ciphertext row-major matrix",
+      "semantic_validation_passed": false,
+      "failure_category": "build_dependency_missing",
+      "unsupported_reason": "numpy_missing",
+      "exception_type": "ModuleNotFoundError",
+      "exception": "No module named 'numpy'",
+      "runtime_total_s": 1.6699959815014154e-07,
+      "notes": "numpy is required for OpenFHE-NumPy experiments"
+    },
+    {
+      "ok": false,
+      "d": 16,
+      "scheme_or_backend": "CKKS",
+      "library": "OpenFHE-NumPy",
+      "encrypted_operands": "ct_ct",
+      "packing_layout": "single-ciphertext row-major matrix",
+      "semantic_validation_passed": false,
+      "failure_category": "build_dependency_missing",
+      "unsupported_reason": "numpy_missing",
+      "exception_type": "ModuleNotFoundError",
+      "exception": "No module named 'numpy'",
+      "runtime_total_s": 1.249991328222677e-07,
+      "notes": "numpy is required for OpenFHE-NumPy experiments"
+    },
+    {
+      "ok": false,
+      "d": 32,
+      "scheme_or_backend": "CKKS",
+      "library": "OpenFHE-NumPy",
+      "encrypted_operands": "ct_ct",
+      "packing_layout": "single-ciphertext row-major matrix",
+      "semantic_validation_passed": false,
+      "failure_category": "build_dependency_missing",
+      "unsupported_reason": "numpy_missing",
+      "exception_type": "ModuleNotFoundError",
+      "exception": "No module named 'numpy'",
+      "runtime_total_s": 4.1000021155923605e-08,
+      "notes": "numpy is required for OpenFHE-NumPy experiments"
+    }
+  ],
+  "semantic_validation_passed": true,
+  "requested_ds": [
+    2,
+    4,
+    8,
+    16,
+    32
+  ]
+}

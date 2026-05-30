@@ -1,0 +1,169 @@
+{
+  "n_samples": 450,
+  "synthetic": false,
+  "modes": [
+    "dense",
+    "plainmatrix",
+    "lightplainmatrix",
+    "gl"
+  ],
+  "results": [
+    {
+      "mode": "dense",
+      "n_samples": 450,
+      "slots": 8192,
+      "ciphertext_count": 2,
+      "samples_per_ciphertext": 256,
+      "sample_utilization": 0.87890625,
+      "semantic_validation_passed": true,
+      "accuracy": 0.9488888888888889,
+      "argmax_agreement_poly_vs_fhe": 1.0,
+      "error_metrics": {
+        "logits_linf": 3.299983086790803e-08,
+        "logits_mae": 4.652865675523118e-09,
+        "logits_relative_l2": 1.697168174583501e-09
+      },
+      "offline": {
+        "key_generation_s": 0.0025902500201482326,
+        "evaluation_key_generation_s": 15.336113249999471,
+        "input_tensor_construction_s": 0.0002194170083384961,
+        "matrix_construction_s": 0.011719875008566305,
+        "bias_construction_s": 0.00012687500566244125
+      },
+      "online": {
+        "encryption_s_total": 0.029359875014051795,
+        "linear1_s_total": 161.31248291701195,
+        "activation_s_total": 0.08237083299900405,
+        "linear2_s_total": 47.22593300000881,
+        "decryption_s_total": 0.029883374023484066
+      },
+      "server_only_online_s": 208.62078675001976,
+      "runtime_total_s": 208.6800299990573,
+      "runtime_per_sample_s": 0.4637333999979051,
+      "server_only_runtime_per_sample_s": 0.46360174833337725,
+      "dense_matrix_mib_total": 1024.0,
+      "synthetic": false,
+      "offline_total_s": 15.350769667042186,
+      "online_total_s": 208.6800299990573
+    },
+    {
+      "mode": "plainmatrix",
+      "n_samples": 450,
+      "slots": 8192,
+      "ciphertext_count": 2,
+      "samples_per_ciphertext": 256,
+      "sample_utilization": 0.87890625,
+      "semantic_validation_passed": true,
+      "accuracy": 0.9488888888888889,
+      "argmax_agreement_poly_vs_fhe": 1.0,
+      "error_metrics": {
+        "logits_linf": 1.8124659325879922e-06,
+        "logits_mae": 2.1977135349063547e-08,
+        "logits_relative_l2": 1.5169225775211115e-08
+      },
+      "offline": {
+        "key_generation_s": 0.0025550000136718154,
+        "evaluation_key_generation_s": 15.485929167014547,
+        "input_tensor_construction_s": 0.00025412498507648706,
+        "matrix_encode_s": 39.61240137499408,
+        "matrix_construction_s": 0.011487458017654717,
+        "bias_construction_s": 0.0002897920203395188
+      },
+      "online": {
+        "encryption_s_total": 0.02950270799919963,
+        "linear1_s_total": 18.095793790969765,
+        "activation_s_total": 0.10295508400304243,
+        "linear2_s_total": 70.18992145798984,
+        "decryption_s_total": 0.0341668339970056
+      },
+      "server_only_online_s": 88.38867033296265,
+      "runtime_total_s": 88.45233987495885,
+      "runtime_per_sample_s": 0.19656075527768635,
+      "server_only_runtime_per_sample_s": 0.19641926740658366,
+      "dense_matrix_mib_total": 1024.0,
+      "synthetic": false,
+      "offline_total_s": 55.11291691704537,
+      "online_total_s": 88.45233987495885
+    },
+    {
+      "mode": "lightplainmatrix",
+      "n_samples": 450,
+      "slots": 8192,
+      "ciphertext_count": 2,
+      "samples_per_ciphertext": 256,
+      "sample_utilization": 0.87890625,
+      "semantic_validation_passed": true,
+      "accuracy": 0.9488888888888889,
+      "argmax_agreement_poly_vs_fhe": 1.0,
+      "error_metrics": {
+        "logits_linf": 2.2494357594382564e-06,
+        "logits_mae": 2.2605246162096737e-08,
+        "logits_relative_l2": 1.858271063171535e-08
+      },
+      "offline": {
+        "key_generation_s": 0.002526374999433756,
+        "evaluation_key_generation_s": 15.473497124999994,
+        "input_tensor_construction_s": 0.00020829198183491826,
+        "matrix_encode_s": 6.32257029201719,
+        "matrix_construction_s": 0.011335167015204206,
+        "bias_construction_s": 0.000171584018971771
+      },
+      "online": {
+        "encryption_s_total": 0.02893291600048542,
+        "linear1_s_total": 40.451140040997416,
+        "activation_s_total": 0.10318004200235009,
+        "linear2_s_total": 22.83176224998897,
+        "decryption_s_total": 0.03418200003216043
+      },
+      "server_only_online_s": 63.386082332988735,
+      "runtime_total_s": 63.44919724902138,
+      "runtime_per_sample_s": 0.1409982161089364,
+      "server_only_runtime_per_sample_s": 0.14085796073997497,
+      "dense_matrix_mib_total": 1024.0,
+      "synthetic": false,
+      "offline_total_s": 21.81030883503263,
+      "online_total_s": 63.44919724902138
+    },
+    {
+      "mode": "gl",
+      "n_samples": 450,
+      "slot_count": 262144,
+      "ciphertext_count": 1,
+      "samples_per_ciphertext": 8192,
+      "used_batches": 15,
+      "used_columns_last_batch": 2,
+      "sample_utilization": 0.054931640625,
+      "matrix_entry_utilization_input": 0.054931640625,
+      "semantic_validation_passed": true,
+      "accuracy": 0.9488888888888889,
+      "argmax_agreement_poly_vs_fhe": 1.0,
+      "error_metrics": {
+        "logits_linf": 2.5830404837279275e-07,
+        "logits_mae": 4.3367088238831007e-08,
+        "logits_relative_l2": 1.584359696621958e-08
+      },
+      "offline": {
+        "key_generation_s": 0.0038092499889899045,
+        "evaluation_key_generation_s": 6.644316666992381,
+        "input_tensor_construction_s": 0.000435416994150728,
+        "weight_encoding_s": 0.16768383301678114,
+        "matrix_construction_s": 0.0,
+        "bias_construction_s": 0.1622620830021333
+      },
+      "online": {
+        "encryption_s_total": 0.4809362909873016,
+        "linear1_s_total": 3.0962524589849636,
+        "activation_s_total": 4.002086666005198,
+        "linear2_s_total": 1.0432773340144195,
+        "decryption_s_total": 0.486668791010743
+      },
+      "server_only_online_s": 8.141616459004581,
+      "runtime_total_s": 9.109221541002626,
+      "runtime_per_sample_s": 0.02024271453556139,
+      "server_only_runtime_per_sample_s": 0.01809248102001018,
+      "synthetic": false,
+      "offline_total_s": 6.978507249994436,
+      "online_total_s": 9.109221541002626
+    }
+  ]
+}

@@ -1,0 +1,574 @@
+{
+  "ok": true,
+  "degree": 3,
+  "n_samples": 32,
+  "cases": [
+    {
+      "ok": true,
+      "mutation": "correct_weight",
+      "n_samples": 32,
+      "degree": 3,
+      "shape": [
+        256,
+        32,
+        32
+      ],
+      "used_batches": 1,
+      "semantic_validation_passed_against_correct": true,
+      "semantic_validation_passed_against_mutated": true,
+      "correct_relative_l2": 6.032062436155187e-08,
+      "mutated_relative_l2": 6.032062436757205e-08,
+      "argmax_agreement_against_correct": 1.0,
+      "argmax_agreement_against_mutated": 1.0,
+      "ct_W1_type": "GLCiphertext",
+      "ct_W2_type": "GLCiphertext",
+      "ct_X_type": "GLCiphertext",
+      "matrix_multiply_operand_kinds": {
+        "W1": "ciphertext",
+        "W2": "ciphertext",
+        "X": "ciphertext"
+      },
+      "weight_encryption_s": 0.9482588339997164,
+      "input_encryption_s": 0.4691569169990544,
+      "server_only_s": 10.041140833998725,
+      "total_s": 18.613430707999214,
+      "runtime_total_s": 18.613430707999214,
+      "runtime_per_sample_s": 0.5816697096249754,
+      "timing_log": {
+        "encryption_input_s": 0.4691569169990544,
+        "encryption_weight_s": 0.9482588339997164,
+        "linear1_matrix_multiply_s": 4.680592666998564,
+        "activation_s": 3.8203017499999987,
+        "linear2_matrix_multiply_s": 1.5402464170001622,
+        "decryption_s": 0.4983605420002277
+      },
+      "level_log": [
+        {
+          "stage": "input",
+          "type": "GLCiphertext",
+          "level": 6,
+          "nbytes": null,
+          "serialized_nbytes": null
+        },
+        {
+          "stage": "weight_w1",
+          "type": "GLCiphertext",
+          "level": 6,
+          "nbytes": null,
+          "serialized_nbytes": null
+        },
+        {
+          "stage": "weight_w2",
+          "type": "GLCiphertext",
+          "level": 6,
+          "nbytes": null,
+          "serialized_nbytes": null
+        },
+        {
+          "stage": "linear1",
+          "type": "GLCiphertext",
+          "level": 5,
+          "nbytes": null,
+          "serialized_nbytes": null
+        },
+        {
+          "stage": "activation",
+          "type": "GLCiphertext",
+          "level": 2,
+          "nbytes": null,
+          "serialized_nbytes": null
+        },
+        {
+          "stage": "linear2",
+          "type": "GLCiphertext",
+          "level": 1,
+          "nbytes": null,
+          "serialized_nbytes": null
+        }
+      ],
+      "mutation_record": {
+        "mutation": "correct_weight"
+      }
+    },
+    {
+      "ok": true,
+      "mutation": "zero_W1",
+      "n_samples": 32,
+      "degree": 3,
+      "shape": [
+        256,
+        32,
+        32
+      ],
+      "used_batches": 1,
+      "semantic_validation_passed_against_correct": false,
+      "semantic_validation_passed_against_mutated": true,
+      "correct_relative_l2": 0.9304423546882723,
+      "mutated_relative_l2": 1.5319094207218617e-07,
+      "argmax_agreement_against_correct": 0.0625,
+      "argmax_agreement_against_mutated": 1.0,
+      "ct_W1_type": "GLCiphertext",
+      "ct_W2_type": "GLCiphertext",
+      "ct_X_type": "GLCiphertext",
+      "matrix_multiply_operand_kinds": {
+        "W1": "ciphertext",
+        "W2": "ciphertext",
+        "X": "ciphertext"
+      },
+      "weight_encryption_s": 0.9944222499998432,
+      "input_encryption_s": 0.479008000000249,
+      "server_only_s": 10.132077707998178,
+      "total_s": 18.759980415999962,
+      "runtime_total_s": 18.759980415999962,
+      "runtime_per_sample_s": 0.5862493879999988,
+      "timing_log": {
+        "encryption_input_s": 0.479008000000249,
+        "encryption_weight_s": 0.9944222499998432,
+        "linear1_matrix_multiply_s": 4.731398874999286,
+        "activation_s": 3.8273762079988956,
+        "linear2_matrix_multiply_s": 1.5733026249999966,
+        "decryption_s": 0.4905221659992094
+      },
+      "level_log": [
+        {
+          "stage": "input",
+          "type": "GLCiphertext",
+          "level": 6,
+          "nbytes": null,
+          "serialized_nbytes": null
+        },
+        {
+          "stage": "weight_w1",
+          "type": "GLCiphertext",
+          "level": 6,
+          "nbytes": null,
+          "serialized_nbytes": null
+        },
+        {
+          "stage": "weight_w2",
+          "type": "GLCiphertext",
+          "level": 6,
+          "nbytes": null,
+          "serialized_nbytes": null
+        },
+        {
+          "stage": "linear1",
+          "type": "GLCiphertext",
+          "level": 5,
+          "nbytes": null,
+          "serialized_nbytes": null
+        },
+        {
+          "stage": "activation",
+          "type": "GLCiphertext",
+          "level": 2,
+          "nbytes": null,
+          "serialized_nbytes": null
+        },
+        {
+          "stage": "linear2",
+          "type": "GLCiphertext",
+          "level": 1,
+          "nbytes": null,
+          "serialized_nbytes": null
+        }
+      ],
+      "mutation_record": {
+        "mutation": "zero_W1"
+      }
+    },
+    {
+      "ok": true,
+      "mutation": "zero_W2",
+      "n_samples": 32,
+      "degree": 3,
+      "shape": [
+        256,
+        32,
+        32
+      ],
+      "used_batches": 1,
+      "semantic_validation_passed_against_correct": false,
+      "semantic_validation_passed_against_mutated": true,
+      "correct_relative_l2": 1.0086531224873847,
+      "mutated_relative_l2": 5.693148755690446e-07,
+      "argmax_agreement_against_correct": 0.125,
+      "argmax_agreement_against_mutated": 1.0,
+      "ct_W1_type": "GLCiphertext",
+      "ct_W2_type": "GLCiphertext",
+      "ct_X_type": "GLCiphertext",
+      "matrix_multiply_operand_kinds": {
+        "W1": "ciphertext",
+        "W2": "ciphertext",
+        "X": "ciphertext"
+      },
+      "weight_encryption_s": 0.944455332999496,
+      "input_encryption_s": 0.476944915999411,
+      "server_only_s": 10.039490874998592,
+      "total_s": 18.53602058300021,
+      "runtime_total_s": 18.53602058300021,
+      "runtime_per_sample_s": 0.5792506432187565,
+      "timing_log": {
+        "encryption_input_s": 0.476944915999411,
+        "encryption_weight_s": 0.944455332999496,
+        "linear1_matrix_multiply_s": 4.6454363749999175,
+        "activation_s": 3.835289874999944,
+        "linear2_matrix_multiply_s": 1.5587646249987301,
+        "decryption_s": 0.486498833000951
+      },
+      "level_log": [
+        {
+          "stage": "input",
+          "type": "GLCiphertext",
+          "level": 6,
+          "nbytes": null,
+          "serialized_nbytes": null
+        },
+        {
+          "stage": "weight_w1",
+          "type": "GLCiphertext",
+          "level": 6,
+          "nbytes": null,
+          "serialized_nbytes": null
+        },
+        {
+          "stage": "weight_w2",
+          "type": "GLCiphertext",
+          "level": 6,
+          "nbytes": null,
+          "serialized_nbytes": null
+        },
+        {
+          "stage": "linear1",
+          "type": "GLCiphertext",
+          "level": 5,
+          "nbytes": null,
+          "serialized_nbytes": null
+        },
+        {
+          "stage": "activation",
+          "type": "GLCiphertext",
+          "level": 2,
+          "nbytes": null,
+          "serialized_nbytes": null
+        },
+        {
+          "stage": "linear2",
+          "type": "GLCiphertext",
+          "level": 1,
+          "nbytes": null,
+          "serialized_nbytes": null
+        }
+      ],
+      "mutation_record": {
+        "mutation": "zero_W2"
+      }
+    },
+    {
+      "ok": true,
+      "mutation": "random_W1",
+      "n_samples": 32,
+      "degree": 3,
+      "shape": [
+        256,
+        32,
+        32
+      ],
+      "used_batches": 1,
+      "semantic_validation_passed_against_correct": false,
+      "semantic_validation_passed_against_mutated": true,
+      "correct_relative_l2": 1.0144735128321936,
+      "mutated_relative_l2": 1.1732093796780206e-07,
+      "argmax_agreement_against_correct": 0.125,
+      "argmax_agreement_against_mutated": 1.0,
+      "ct_W1_type": "GLCiphertext",
+      "ct_W2_type": "GLCiphertext",
+      "ct_X_type": "GLCiphertext",
+      "matrix_multiply_operand_kinds": {
+        "W1": "ciphertext",
+        "W2": "ciphertext",
+        "X": "ciphertext"
+      },
+      "weight_encryption_s": 0.9622788750002655,
+      "input_encryption_s": 0.4756780420011637,
+      "server_only_s": 9.989635959002044,
+      "total_s": 18.59812108299957,
+      "runtime_total_s": 18.59812108299957,
+      "runtime_per_sample_s": 0.5811912838437365,
+      "timing_log": {
+        "encryption_input_s": 0.4756780420011637,
+        "encryption_weight_s": 0.9622788750002655,
+        "linear1_matrix_multiply_s": 4.629820875001315,
+        "activation_s": 3.8221496250007476,
+        "linear2_matrix_multiply_s": 1.5376654589999816,
+        "decryption_s": 0.4894607080004789
+      },
+      "level_log": [
+        {
+          "stage": "input",
+          "type": "GLCiphertext",
+          "level": 6,
+          "nbytes": null,
+          "serialized_nbytes": null
+        },
+        {
+          "stage": "weight_w1",
+          "type": "GLCiphertext",
+          "level": 6,
+          "nbytes": null,
+          "serialized_nbytes": null
+        },
+        {
+          "stage": "weight_w2",
+          "type": "GLCiphertext",
+          "level": 6,
+          "nbytes": null,
+          "serialized_nbytes": null
+        },
+        {
+          "stage": "linear1",
+          "type": "GLCiphertext",
+          "level": 5,
+          "nbytes": null,
+          "serialized_nbytes": null
+        },
+        {
+          "stage": "activation",
+          "type": "GLCiphertext",
+          "level": 2,
+          "nbytes": null,
+          "serialized_nbytes": null
+        },
+        {
+          "stage": "linear2",
+          "type": "GLCiphertext",
+          "level": 1,
+          "nbytes": null,
+          "serialized_nbytes": null
+        }
+      ],
+      "mutation_record": {
+        "mutation": "random_W1"
+      }
+    },
+    {
+      "ok": true,
+      "mutation": "shuffled_W1_batches",
+      "n_samples": 32,
+      "degree": 3,
+      "shape": [
+        256,
+        32,
+        32
+      ],
+      "used_batches": 1,
+      "semantic_validation_passed_against_correct": false,
+      "semantic_validation_passed_against_mutated": true,
+      "correct_relative_l2": 1.1827193885790785,
+      "mutated_relative_l2": 8.568571640759217e-08,
+      "argmax_agreement_against_correct": 0.09375,
+      "argmax_agreement_against_mutated": 1.0,
+      "ct_W1_type": "GLCiphertext",
+      "ct_W2_type": "GLCiphertext",
+      "ct_X_type": "GLCiphertext",
+      "matrix_multiply_operand_kinds": {
+        "W1": "ciphertext",
+        "W2": "ciphertext",
+        "X": "ciphertext"
+      },
+      "weight_encryption_s": 0.9436002910006209,
+      "input_encryption_s": 0.47572137499992095,
+      "server_only_s": 10.398069708002367,
+      "total_s": 18.925962792000064,
+      "runtime_total_s": 18.925962792000064,
+      "runtime_per_sample_s": 0.591436337250002,
+      "timing_log": {
+        "encryption_input_s": 0.47572137499992095,
+        "encryption_weight_s": 0.9436002910006209,
+        "linear1_matrix_multiply_s": 4.81816845800131,
+        "activation_s": 3.924377875000573,
+        "linear2_matrix_multiply_s": 1.6555233750004845,
+        "decryption_s": 0.49859516700053064
+      },
+      "level_log": [
+        {
+          "stage": "input",
+          "type": "GLCiphertext",
+          "level": 6,
+          "nbytes": null,
+          "serialized_nbytes": null
+        },
+        {
+          "stage": "weight_w1",
+          "type": "GLCiphertext",
+          "level": 6,
+          "nbytes": null,
+          "serialized_nbytes": null
+        },
+        {
+          "stage": "weight_w2",
+          "type": "GLCiphertext",
+          "level": 6,
+          "nbytes": null,
+          "serialized_nbytes": null
+        },
+        {
+          "stage": "linear1",
+          "type": "GLCiphertext",
+          "level": 5,
+          "nbytes": null,
+          "serialized_nbytes": null
+        },
+        {
+          "stage": "activation",
+          "type": "GLCiphertext",
+          "level": 2,
+          "nbytes": null,
+          "serialized_nbytes": null
+        },
+        {
+          "stage": "linear2",
+          "type": "GLCiphertext",
+          "level": 1,
+          "nbytes": null,
+          "serialized_nbytes": null
+        }
+      ],
+      "mutation_record": {
+        "mutation": "shuffled_W1_batches",
+        "batch_shuffle": [
+          31,
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30
+        ]
+      }
+    },
+    {
+      "ok": true,
+      "mutation": "wrong_key_or_wrong_weight",
+      "n_samples": 32,
+      "degree": 3,
+      "shape": [
+        256,
+        32,
+        32
+      ],
+      "used_batches": 1,
+      "semantic_validation_passed_against_correct": false,
+      "semantic_validation_passed_against_mutated": false,
+      "correct_relative_l2": 5.107096273426965e+19,
+      "mutated_relative_l2": 5.107096273426965e+19,
+      "argmax_agreement_against_correct": 0.15625,
+      "argmax_agreement_against_mutated": 0.15625,
+      "ct_W1_type": "GLCiphertext",
+      "ct_W2_type": "GLCiphertext",
+      "ct_X_type": "GLCiphertext",
+      "matrix_multiply_operand_kinds": {
+        "W1": "ciphertext",
+        "W2": "ciphertext",
+        "X": "ciphertext"
+      },
+      "weight_encryption_s": 0.995536667000124,
+      "input_encryption_s": 0.5007322080000449,
+      "server_only_s": 10.26407158300026,
+      "total_s": 18.89552379199995,
+      "runtime_total_s": 18.89552379199995,
+      "runtime_per_sample_s": 0.5904851184999984,
+      "timing_log": {
+        "encryption_weight_s": 0.995536667000124,
+        "encryption_input_s": 0.5007322080000449,
+        "linear1_matrix_multiply_s": 4.6198167909988115,
+        "activation_s": 4.071362624999892,
+        "linear2_matrix_multiply_s": 1.5728921670015552,
+        "decryption_s": 0.49588766699889675
+      },
+      "level_log": [
+        {
+          "stage": "input",
+          "type": "GLCiphertext",
+          "level": 6,
+          "nbytes": null,
+          "serialized_nbytes": null
+        },
+        {
+          "stage": "weight_w1",
+          "type": "GLCiphertext",
+          "level": 6,
+          "nbytes": null,
+          "serialized_nbytes": null
+        },
+        {
+          "stage": "weight_w2",
+          "type": "GLCiphertext",
+          "level": 6,
+          "nbytes": null,
+          "serialized_nbytes": null
+        },
+        {
+          "stage": "linear1",
+          "type": "GLCiphertext",
+          "level": 5,
+          "nbytes": null,
+          "serialized_nbytes": null
+        },
+        {
+          "stage": "activation",
+          "type": "GLCiphertext",
+          "level": 2,
+          "nbytes": null,
+          "serialized_nbytes": null
+        },
+        {
+          "stage": "linear2",
+          "type": "GLCiphertext",
+          "level": 1,
+          "nbytes": null,
+          "serialized_nbytes": null
+        }
+      ],
+      "mutation_record": {
+        "mutation": "wrong_key_or_wrong_weight",
+        "attempted": "wrong_key"
+      }
+    }
+  ],
+  "mutation_summary": {
+    "correct_weight_passed": true,
+    "mutations_failed_against_correct": [
+      "zero_W1",
+      "zero_W2",
+      "random_W1",
+      "shuffled_W1_batches",
+      "wrong_key_or_wrong_weight"
+    ]
+  }
+}

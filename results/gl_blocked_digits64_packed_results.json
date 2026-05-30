@@ -1,0 +1,89 @@
+{
+  "ok": true,
+  "semantic_validation_passed": true,
+  "shape": [
+    256,
+    32,
+    32
+  ],
+  "logical_dims": [
+    64,
+    16,
+    10
+  ],
+  "physical_dim": 32,
+  "slot_count": 262144,
+  "accuracy_poly_plain": 0.9577777777777777,
+  "accuracy_gl_decrypted": 0.9577777777777777,
+  "argmax_agreement_poly_vs_gl": 1.0,
+  "error_metrics": {
+    "logits_linf": 3.864441282530606e-07,
+    "logits_mae": 4.584357378189563e-08,
+    "logits_relative_l2": 1.2199178803480246e-08
+  },
+  "operation_counts": {
+    "matrix_multiply": 3,
+    "add": 3,
+    "polynomial": 1,
+    "mask": 0
+  },
+  "polynomial_degree": 3,
+  "block_count_first_layer": 2,
+  "hidden_padding_ratio": 0.5,
+  "output_padding_ratio": 0.6875,
+  "used_batches": 15,
+  "used_columns_last_batch": 2,
+  "n_samples": 450,
+  "feature_dim": 64,
+  "samples_per_ciphertext_capacity": 8192,
+  "sample_packing_utilization": 0.054931640625,
+  "matrix_entry_utilization_input": 0.10986328125,
+  "used_input_entries": 28800,
+  "total_matrix_entries": 262144,
+  "level_log": [
+    {
+      "stage": "input0",
+      "type": "GLCiphertext",
+      "level": 6,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    {
+      "stage": "input1",
+      "type": "GLCiphertext",
+      "level": 6,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    {
+      "stage": "linear1_block_sum",
+      "type": "GLCiphertext",
+      "level": 5,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    {
+      "stage": "activation",
+      "type": "GLCiphertext",
+      "level": 2,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    {
+      "stage": "linear2",
+      "type": "GLCiphertext",
+      "level": 1,
+      "nbytes": null,
+      "serialized_nbytes": null
+    }
+  ],
+  "timing_log": {
+    "encrypt_s": 0.9700574580056127,
+    "linear1_blocks_s": 6.225732542021433,
+    "activation_s": 3.8965937080211006,
+    "linear2_add_s": 1.1009654579975177,
+    "decrypt_s": 0.49397654199856333
+  },
+  "runtime_total_s": 19.73600579201593,
+  "runtime_per_sample_amortized_s": 0.04385779064892429
+}

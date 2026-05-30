@@ -1,0 +1,2 @@
+ok,d,semantic_validation_passed,failure_category,unsupported_reason,exception_type,exception,runtime_total_s,notes
+False,2,False,build_dependency_missing,numpy_missing,ModuleNotFoundError,No module named 'numpy',4.579997039400041e-07,numpy is required for OpenFHE-NumPy experiments

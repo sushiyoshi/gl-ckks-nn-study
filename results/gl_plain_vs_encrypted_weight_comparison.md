@@ -1,0 +1,8 @@
+| condition | same_task | comparison_role | n_samples | semantic_validation_passed | task_type | weight_privacy | activation | runtime_total_s | runtime_per_sample_s | relative_l2 | argmax_agreement | failure_category |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| gl_plaintext_weight_pca32_packed | True | main | 450 | True | mlp_poly_relu | plaintext_weight | degree3_poly | 16.110371583985398 | 0.03580082574218977 | 1.5286723707269977e-08 | 1.0 | None |
+| gl_encrypted_weight_mlp_450 | True | main | 450 | True | mlp_poly_relu | encrypted_weight | degree3_poly | 18.75568791600017 | 0.04167930648000038 | 6.917405816014872e-08 | 1.0 | None |
+| gl_encrypted_weight_linear_450 | False | auxiliary | 450 | True | linear | encrypted_weight | none | 12.987725417000547 | 0.028861612037778994 | 5.931200241536784e-08 | None | None |
+| gl_encrypted_weight_two_linear_450 | False | auxiliary | 450 | True | two_linear | encrypted_weight | none | 17.355269457999384 | 0.038567265462220855 | 6.217061730230042e-08 | 1.0 | None |
+| gl_encrypted_weight_mlp_1 | False | auxiliary | 1 | True | mlp_poly_relu | encrypted_weight | degree3_poly | 18.700840167000024 | 18.700840167000024 | 4.610697531712777e-08 | 1.0 | None |
+| gl_encrypted_weight_mlp_32 | False | auxiliary | 32 | True | mlp_poly_relu | encrypted_weight | degree3_poly | 18.63443179199976 | 0.5823259934999925 | 5.0847456880180104e-08 | 1.0 | None |

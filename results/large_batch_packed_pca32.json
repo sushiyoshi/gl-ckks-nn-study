@@ -1,0 +1,320 @@
+{
+  "modes": [
+    "gl",
+    "lightplainmatrix"
+  ],
+  "samples": [
+    450,
+    1024,
+    2048,
+    4096,
+    8192
+  ],
+  "results": [
+    {
+      "mode": "gl",
+      "n_samples": 450,
+      "synthetic": false,
+      "semantic_validation_passed": true,
+      "accuracy": 0.9488888888888889,
+      "argmax_agreement_poly_vs_fhe": 1.0,
+      "error_metrics": {
+        "logits_linf": 2.1892889057184561e-07,
+        "logits_mae": 4.268484200630636e-08,
+        "logits_relative_l2": 1.5400110273468985e-08
+      },
+      "ciphertext_count": 1,
+      "used_batches": 15,
+      "used_columns_last_batch": 2,
+      "samples_per_ciphertext": 8192,
+      "sample_utilization": 0.054931640625,
+      "slot_utilization": 0.054931640625,
+      "matrix_entry_utilization_input": 0.054931640625,
+      "runtime_total_s": 8.99566491600126,
+      "runtime_per_sample_s": 0.0199903664800028,
+      "server_only_runtime_per_sample_s": 0.017842541664463675,
+      "offline": {},
+      "online": {
+        "encrypt_s_total": 0.47384216700447723,
+        "linear1_s_total": 3.1458449579949956,
+        "activation_s_total": 3.844728958007181,
+        "linear2_s_total": 1.038569833006477,
+        "decryption_s_total": 0.49267899998812936
+      },
+      "dense_matrix_mib_total": null
+    },
+    {
+      "mode": "lightplainmatrix",
+      "n_samples": 450,
+      "synthetic": false,
+      "semantic_validation_passed": true,
+      "accuracy": 0.9488888888888889,
+      "argmax_agreement_poly_vs_fhe": 1.0,
+      "error_metrics": {
+        "logits_linf": 1.2017112314688383e-06,
+        "logits_mae": 2.1395741601423074e-08,
+        "logits_relative_l2": 1.3222592184726688e-08
+      },
+      "ciphertext_count": 2,
+      "samples_per_ciphertext": 256,
+      "sample_utilization": 0.87890625,
+      "slot_utilization": 0.87890625,
+      "runtime_total_s": 63.273896292055724,
+      "runtime_per_sample_s": 0.1406086584267905,
+      "server_only_runtime_per_sample_s": 0.1404669643512332,
+      "offline": {},
+      "online": {
+        "encrypt_s_total": 0.02978120799525641,
+        "linear1_s_total": 40.6603445840301,
+        "activation_s_total": 0.10150391602655873,
+        "linear2_s_total": 22.44828545799828,
+        "decryption_s_total": 0.033981126005528495
+      },
+      "dense_matrix_mib_total": 1024.0
+    },
+    {
+      "mode": "gl",
+      "n_samples": 1024,
+      "synthetic": true,
+      "semantic_validation_passed": true,
+      "accuracy": 0.94921875,
+      "argmax_agreement_poly_vs_fhe": 1.0,
+      "error_metrics": {
+        "logits_linf": 2.594021075719155e-07,
+        "logits_mae": 4.237215894914277e-08,
+        "logits_relative_l2": 1.6078050778559584e-08
+      },
+      "ciphertext_count": 1,
+      "used_batches": 32,
+      "used_columns_last_batch": 32,
+      "samples_per_ciphertext": 8192,
+      "sample_utilization": 0.125,
+      "slot_utilization": 0.125,
+      "matrix_entry_utilization_input": 0.125,
+      "runtime_total_s": 9.57619183397037,
+      "runtime_per_sample_s": 0.00935174983786169,
+      "server_only_runtime_per_sample_s": 0.008400664021479542,
+      "offline": {},
+      "online": {
+        "encrypt_s_total": 0.4792882089968771,
+        "linear1_s_total": 3.215583874989534,
+        "activation_s_total": 4.318761167000048,
+        "linear2_s_total": 1.0679349160054699,
+        "decryption_s_total": 0.4946236669784412
+      },
+      "dense_matrix_mib_total": null
+    },
+    {
+      "mode": "lightplainmatrix",
+      "n_samples": 1024,
+      "synthetic": true,
+      "semantic_validation_passed": true,
+      "accuracy": 0.94921875,
+      "argmax_agreement_poly_vs_fhe": 1.0,
+      "error_metrics": {
+        "logits_linf": 1.5073490902128839e-06,
+        "logits_mae": 2.1987983114144836e-08,
+        "logits_relative_l2": 1.4846306329643956e-08
+      },
+      "ciphertext_count": 4,
+      "samples_per_ciphertext": 256,
+      "sample_utilization": 1.0,
+      "slot_utilization": 1.0,
+      "runtime_total_s": 120.77777887295815,
+      "runtime_per_sample_s": 0.1179470496806232,
+      "server_only_runtime_per_sample_s": 0.11782409627241464,
+      "offline": {},
+      "online": {
+        "encrypt_s_total": 0.058316375012509525,
+        "linear1_s_total": 78.08272616699105,
+        "activation_s_total": 0.19675199998891912,
+        "linear2_s_total": 42.37239641597262,
+        "decryption_s_total": 0.06758791499305516
+      },
+      "dense_matrix_mib_total": 1024.0
+    },
+    {
+      "mode": "gl",
+      "n_samples": 2048,
+      "synthetic": true,
+      "semantic_validation_passed": true,
+      "accuracy": 0.951171875,
+      "argmax_agreement_poly_vs_fhe": 1.0,
+      "error_metrics": {
+        "logits_linf": 2.826791591914457e-07,
+        "logits_mae": 4.1131160457314555e-08,
+        "logits_relative_l2": 1.5339533946971477e-08
+      },
+      "ciphertext_count": 1,
+      "used_batches": 64,
+      "used_columns_last_batch": 32,
+      "samples_per_ciphertext": 8192,
+      "sample_utilization": 0.25,
+      "slot_utilization": 0.25,
+      "matrix_entry_utilization_input": 0.25,
+      "runtime_total_s": 8.802756999997655,
+      "runtime_per_sample_s": 0.004298221191405105,
+      "server_only_runtime_per_sample_s": 0.003830830281728481,
+      "offline": {},
+      "online": {
+        "encrypt_s_total": 0.47262233300716616,
+        "linear1_s_total": 3.0427256249822676,
+        "activation_s_total": 3.7697930420108605,
+        "linear2_s_total": 1.0330217499868013,
+        "decryption_s_total": 0.48459425001055934
+      },
+      "dense_matrix_mib_total": null
+    },
+    {
+      "mode": "lightplainmatrix",
+      "n_samples": 2048,
+      "synthetic": true,
+      "semantic_validation_passed": true,
+      "accuracy": 0.951171875,
+      "argmax_agreement_poly_vs_fhe": 1.0,
+      "error_metrics": {
+        "logits_linf": 2.262317700285621e-06,
+        "logits_mae": 2.1452713747117286e-08,
+        "logits_relative_l2": 1.6119918301396873e-08
+      },
+      "ciphertext_count": 8,
+      "samples_per_ciphertext": 256,
+      "sample_utilization": 1.0,
+      "slot_utilization": 1.0,
+      "runtime_total_s": 241.38053837706684,
+      "runtime_per_sample_s": 0.11786159100442717,
+      "server_only_runtime_per_sample_s": 0.117739856832074,
+      "offline": {},
+      "online": {
+        "encrypt_s_total": 0.11386129393940791,
+        "linear1_s_total": 155.60253420702065,
+        "activation_s_total": 0.39744100207462907,
+        "linear2_s_total": 85.13125158299226,
+        "decryption_s_total": 0.13545029103988782
+      },
+      "dense_matrix_mib_total": 1024.0
+    },
+    {
+      "mode": "gl",
+      "n_samples": 4096,
+      "synthetic": true,
+      "semantic_validation_passed": true,
+      "accuracy": 0.945068359375,
+      "argmax_agreement_poly_vs_fhe": 1.0,
+      "error_metrics": {
+        "logits_linf": 4.1983936682754575e-07,
+        "logits_mae": 4.156746077310998e-08,
+        "logits_relative_l2": 1.5249468407423758e-08
+      },
+      "ciphertext_count": 1,
+      "used_batches": 128,
+      "used_columns_last_batch": 32,
+      "samples_per_ciphertext": 8192,
+      "sample_utilization": 0.5,
+      "slot_utilization": 0.5,
+      "matrix_entry_utilization_input": 0.5,
+      "runtime_total_s": 9.020979417022318,
+      "runtime_per_sample_s": 0.0022023875529839643,
+      "server_only_runtime_per_sample_s": 0.0019594088745122917,
+      "offline": {},
+      "online": {
+        "encrypt_s_total": 0.46895525002037175,
+        "linear1_s_total": 3.0694830409775022,
+        "activation_s_total": 3.9136491250246763,
+        "linear2_s_total": 1.0426065840001684,
+        "decryption_s_total": 0.526285416999599
+      },
+      "dense_matrix_mib_total": null
+    },
+    {
+      "mode": "lightplainmatrix",
+      "n_samples": 4096,
+      "synthetic": true,
+      "semantic_validation_passed": true,
+      "accuracy": 0.945068359375,
+      "argmax_agreement_poly_vs_fhe": 1.0,
+      "error_metrics": {
+        "logits_linf": 1.5638892750802214e-06,
+        "logits_mae": 2.1777525669859227e-08,
+        "logits_relative_l2": 1.433240046193239e-08
+      },
+      "ciphertext_count": 16,
+      "samples_per_ciphertext": 256,
+      "sample_utilization": 1.0,
+      "slot_utilization": 1.0,
+      "runtime_total_s": 496.0360257139837,
+      "runtime_per_sample_s": 0.12110254534032805,
+      "server_only_runtime_per_sample_s": 0.12097932054687277,
+      "offline": {},
+      "online": {
+        "encrypt_s_total": 0.23319354397244751,
+        "linear1_s_total": 318.9547039589961,
+        "activation_s_total": 0.8403983360040002,
+        "linear2_s_total": 175.73619466499076,
+        "decryption_s_total": 0.2715352100203745
+      },
+      "dense_matrix_mib_total": 1024.0
+    },
+    {
+      "mode": "gl",
+      "n_samples": 8192,
+      "synthetic": true,
+      "semantic_validation_passed": true,
+      "accuracy": 0.9454345703125,
+      "argmax_agreement_poly_vs_fhe": 1.0,
+      "error_metrics": {
+        "logits_linf": 3.929558269888389e-07,
+        "logits_mae": 4.176986238487148e-08,
+        "logits_relative_l2": 1.541780303953407e-08
+      },
+      "ciphertext_count": 1,
+      "used_batches": 256,
+      "used_columns_last_batch": 32,
+      "samples_per_ciphertext": 8192,
+      "sample_utilization": 1.0,
+      "slot_utilization": 1.0,
+      "matrix_entry_utilization_input": 1.0,
+      "runtime_total_s": 9.163500875991303,
+      "runtime_per_sample_s": 0.0011185914155262822,
+      "server_only_runtime_per_sample_s": 0.0009998137359623627,
+      "offline": {},
+      "online": {
+        "encrypt_s_total": 0.47164745899499394,
+        "linear1_s_total": 3.120912166981725,
+        "activation_s_total": 3.998886167013552,
+        "linear2_s_total": 1.070675791008398,
+        "decryption_s_total": 0.5013792919926345
+      },
+      "dense_matrix_mib_total": null
+    },
+    {
+      "mode": "lightplainmatrix",
+      "n_samples": 8192,
+      "synthetic": true,
+      "semantic_validation_passed": true,
+      "accuracy": 0.9454345703125,
+      "argmax_agreement_poly_vs_fhe": 1.0,
+      "error_metrics": {
+        "logits_linf": 1.7918637595926157e-06,
+        "logits_mae": 2.1093173564538133e-08,
+        "logits_relative_l2": 1.2380319697012167e-08
+      },
+      "ciphertext_count": 32,
+      "samples_per_ciphertext": 256,
+      "sample_utilization": 1.0,
+      "slot_utilization": 1.0,
+      "runtime_total_s": 1000.5833382108831,
+      "runtime_per_sample_s": 0.12214152077769569,
+      "server_only_runtime_per_sample_s": 0.12201199287927977,
+      "offline": {},
+      "online": {
+        "encrypt_s_total": 0.4802156258665491,
+        "linear1_s_total": 643.3077809579845,
+        "activation_s_total": 1.6234119169821497,
+        "linear2_s_total": 354.59105279209325,
+        "decryption_s_total": 0.5808769179566298
+      },
+      "dense_matrix_mib_total": 1024.0
+    }
+  ]
+}

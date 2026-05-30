@@ -1,0 +1,60 @@
+{
+  "ok": true,
+  "semantic_validation_passed": true,
+  "shape": [
+    8192
+  ],
+  "logical_dims": [
+    32,
+    32,
+    10
+  ],
+  "physical_dim": 8192,
+  "slot_count": 8192,
+  "used_slots": 32,
+  "packing_utilization": 0.00390625,
+  "polynomial_degree": 3,
+  "accuracy_poly_plain": 1.0,
+  "accuracy_ckks_decrypted": 1.0,
+  "argmax_agreement_poly_vs_ckks": 1.0,
+  "error_metrics": {
+    "logits_linf": 3.431357509242616e-08,
+    "logits_mae": 1.7451522495853798e-08,
+    "logits_relative_l2": 9.079653202921593e-09
+  },
+  "operation_counts": {
+    "matrix_multiply": 2,
+    "add": 2,
+    "polynomial": 1
+  },
+  "level_log": [
+    {
+      "stage": "linear1",
+      "type": "Ciphertext",
+      "level": 5,
+      "nbytes": 1835320,
+      "serialized_nbytes": 1835046
+    },
+    {
+      "stage": "activation",
+      "type": "Ciphertext",
+      "level": 2,
+      "nbytes": 1048888,
+      "serialized_nbytes": 1048614
+    },
+    {
+      "stage": "linear2",
+      "type": "Ciphertext",
+      "level": 1,
+      "nbytes": 786744,
+      "serialized_nbytes": 786470
+    }
+  ],
+  "timing_log": {
+    "encrypt_s": 0.015364499995484948,
+    "linear1_add_s": 82.2335904170177,
+    "activation_s": 0.04289433397934772,
+    "linear2_add_s": 23.603640500019537,
+    "decrypt_s": 0.014620625006500632
+  }
+}

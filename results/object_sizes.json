@@ -1,0 +1,158 @@
+{
+  "objects": [
+    {
+      "scheme": "CKKS",
+      "object_name": "secret_key",
+      "supported": true,
+      "method": "serialize_secret_key",
+      "serialized_nbytes": 1310754,
+      "python_object_size": 56,
+      "notes": "CKKS secret key",
+      "exception": null
+    },
+    {
+      "scheme": "CKKS",
+      "object_name": "rotation_key",
+      "supported": true,
+      "method": "serialize_rotation_key",
+      "serialized_nbytes": 245367110,
+      "python_object_size": 56,
+      "notes": "CKKS rotation key",
+      "exception": null
+    },
+    {
+      "scheme": "CKKS",
+      "object_name": "relinearization_key",
+      "supported": true,
+      "method": "serialize_relinearization_key",
+      "serialized_nbytes": 18874402,
+      "python_object_size": 56,
+      "notes": "CKKS relinearization key",
+      "exception": null
+    },
+    {
+      "scheme": "CKKS",
+      "object_name": "matrix_multiplication_key",
+      "supported": true,
+      "method": "serialize_matrix_multiplication_key",
+      "serialized_nbytes": 3605008886,
+      "python_object_size": 56,
+      "notes": "CKKS matrix multiplication key",
+      "exception": null
+    },
+    {
+      "scheme": "CKKS",
+      "object_name": "ciphertext",
+      "supported": true,
+      "method": "serialize_ciphertext",
+      "serialized_nbytes": 2359334,
+      "python_object_size": 56,
+      "notes": "CKKS ciphertext",
+      "exception": null
+    },
+    {
+      "scheme": "CKKS",
+      "object_name": "plainmatrix_w1",
+      "supported": true,
+      "method": "serialize_plain_matrix",
+      "serialized_nbytes": 9663906586,
+      "python_object_size": 56,
+      "notes": "CKKS PlainMatrix encoded W1",
+      "exception": null
+    },
+    {
+      "scheme": "CKKS",
+      "object_name": "plainmatrix_w2",
+      "supported": true,
+      "method": "serialize_plain_matrix",
+      "serialized_nbytes": 9663906586,
+      "python_object_size": 56,
+      "notes": "CKKS PlainMatrix encoded W2",
+      "exception": null
+    },
+    {
+      "scheme": "CKKS",
+      "object_name": "lightplainmatrix_w1",
+      "supported": true,
+      "method": "serialize_light_plain_matrix",
+      "serialized_nbytes": 1073939226,
+      "python_object_size": 56,
+      "notes": "CKKS LightPlainMatrix encoded W1",
+      "exception": null
+    },
+    {
+      "scheme": "CKKS",
+      "object_name": "lightplainmatrix_w2",
+      "supported": true,
+      "method": "serialize_light_plain_matrix",
+      "serialized_nbytes": 1073939226,
+      "python_object_size": 56,
+      "notes": "CKKS LightPlainMatrix encoded W2",
+      "exception": null
+    },
+    {
+      "scheme": "GL",
+      "object_name": "secret_key",
+      "supported": false,
+      "method": "n/a",
+      "serialized_nbytes": null,
+      "python_object_size": 56,
+      "notes": "GL secret key",
+      "exception": "No serialize_* API exposed by GLEngine"
+    },
+    {
+      "scheme": "GL",
+      "object_name": "matrix_multiplication_key",
+      "supported": false,
+      "method": "n/a",
+      "serialized_nbytes": null,
+      "python_object_size": 56,
+      "notes": "GL matrix multiplication key",
+      "exception": "No serialize_* API exposed by GLEngine"
+    },
+    {
+      "scheme": "GL",
+      "object_name": "hadamard_multiplication_key",
+      "supported": false,
+      "method": "n/a",
+      "serialized_nbytes": null,
+      "python_object_size": 56,
+      "notes": "GL hadamard multiplication key",
+      "exception": "No serialize_* API exposed by GLEngine"
+    },
+    {
+      "scheme": "GL",
+      "object_name": "ciphertext",
+      "supported": false,
+      "method": "n/a",
+      "serialized_nbytes": null,
+      "python_object_size": 56,
+      "notes": "GL ciphertext",
+      "exception": "No serialize_* API exposed by GLEngine"
+    },
+    {
+      "scheme": "GL",
+      "object_name": "glplaintext_w1",
+      "supported": false,
+      "method": "n/a",
+      "serialized_nbytes": null,
+      "python_object_size": 56,
+      "notes": "GLPlaintext encoded W1",
+      "exception": "No serialize_* API exposed by GLEngine"
+    },
+    {
+      "scheme": "GL",
+      "object_name": "glplaintext_w2",
+      "supported": false,
+      "method": "n/a",
+      "serialized_nbytes": null,
+      "python_object_size": 56,
+      "notes": "GLPlaintext encoded W2",
+      "exception": "No serialize_* API exposed by GLEngine"
+    }
+  ],
+  "summary": {
+    "ckks_rows": 9,
+    "gl_rows": 6
+  }
+}

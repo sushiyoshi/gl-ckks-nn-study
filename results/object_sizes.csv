@@ -1,0 +1,16 @@
+scheme,object_name,supported,method,serialized_nbytes,python_object_size,notes,exception
+CKKS,secret_key,True,serialize_secret_key,1310754,56,CKKS secret key,
+CKKS,rotation_key,True,serialize_rotation_key,245367110,56,CKKS rotation key,
+CKKS,relinearization_key,True,serialize_relinearization_key,18874402,56,CKKS relinearization key,
+CKKS,matrix_multiplication_key,True,serialize_matrix_multiplication_key,3605008886,56,CKKS matrix multiplication key,
+CKKS,ciphertext,True,serialize_ciphertext,2359334,56,CKKS ciphertext,
+CKKS,plainmatrix_w1,True,serialize_plain_matrix,9663906586,56,CKKS PlainMatrix encoded W1,
+CKKS,plainmatrix_w2,True,serialize_plain_matrix,9663906586,56,CKKS PlainMatrix encoded W2,
+CKKS,lightplainmatrix_w1,True,serialize_light_plain_matrix,1073939226,56,CKKS LightPlainMatrix encoded W1,
+CKKS,lightplainmatrix_w2,True,serialize_light_plain_matrix,1073939226,56,CKKS LightPlainMatrix encoded W2,
+GL,secret_key,False,n/a,,56,GL secret key,No serialize_* API exposed by GLEngine
+GL,matrix_multiplication_key,False,n/a,,56,GL matrix multiplication key,No serialize_* API exposed by GLEngine
+GL,hadamard_multiplication_key,False,n/a,,56,GL hadamard multiplication key,No serialize_* API exposed by GLEngine
+GL,ciphertext,False,n/a,,56,GL ciphertext,No serialize_* API exposed by GLEngine
+GL,glplaintext_w1,False,n/a,,56,GLPlaintext encoded W1,No serialize_* API exposed by GLEngine
+GL,glplaintext_w2,False,n/a,,56,GLPlaintext encoded W2,No serialize_* API exposed by GLEngine

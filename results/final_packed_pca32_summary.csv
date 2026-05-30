@@ -1,0 +1,54 @@
+section,scheme,object_name,supported,serialized_nbytes,python_object_size,notes,mode,n_samples,semantic_validation_passed,accuracy,runtime_total_s,runtime_per_sample_s,server_only_runtime_per_sample_s,offline_total_s,online_total_s,skip_reason,condition,speedup_vs_ckks_dense,speedup_vs_gl
+object_sizes,CKKS,secret_key,True,1310754,56,CKKS secret key,,,,,,,,,,,,,
+object_sizes,CKKS,rotation_key,True,245367110,56,CKKS rotation key,,,,,,,,,,,,,
+object_sizes,CKKS,relinearization_key,True,18874402,56,CKKS relinearization key,,,,,,,,,,,,,
+object_sizes,CKKS,matrix_multiplication_key,True,3605008886,56,CKKS matrix multiplication key,,,,,,,,,,,,,
+object_sizes,CKKS,ciphertext,True,2359334,56,CKKS ciphertext,,,,,,,,,,,,,
+object_sizes,CKKS,plainmatrix_w1,True,9663906586,56,CKKS PlainMatrix encoded W1,,,,,,,,,,,,,
+object_sizes,CKKS,plainmatrix_w2,True,9663906586,56,CKKS PlainMatrix encoded W2,,,,,,,,,,,,,
+object_sizes,CKKS,lightplainmatrix_w1,True,1073939226,56,CKKS LightPlainMatrix encoded W1,,,,,,,,,,,,,
+object_sizes,CKKS,lightplainmatrix_w2,True,1073939226,56,CKKS LightPlainMatrix encoded W2,,,,,,,,,,,,,
+object_sizes,GL,secret_key,False,,56,GL secret key,,,,,,,,,,,,,
+object_sizes,GL,matrix_multiplication_key,False,,56,GL matrix multiplication key,,,,,,,,,,,,,
+object_sizes,GL,hadamard_multiplication_key,False,,56,GL hadamard multiplication key,,,,,,,,,,,,,
+object_sizes,GL,ciphertext,False,,56,GL ciphertext,,,,,,,,,,,,,
+object_sizes,GL,glplaintext_w1,False,,56,GLPlaintext encoded W1,,,,,,,,,,,,,
+object_sizes,GL,glplaintext_w2,False,,56,GLPlaintext encoded W2,,,,,,,,,,,,,
+steady_state,,,,,,,dense,450,True,0.9488888888888889,208.6800299990573,0.4637333999979051,0.46360174833337725,15.350769667042186,208.6800299990573,,,,
+steady_state,,,,,,,plainmatrix,450,True,0.9488888888888889,88.45233987495885,0.19656075527768635,0.19641926740658366,55.11291691704537,88.45233987495885,,,,
+steady_state,,,,,,,lightplainmatrix,450,True,0.9488888888888889,63.44919724902138,0.1409982161089364,0.14085796073997497,21.81030883503263,63.44919724902138,,,,
+steady_state,,,,,,,gl,450,True,0.9488888888888889,9.109221541002626,0.02024271453556139,0.01809248102001018,6.978507249994436,9.109221541002626,,,,
+large_batch,,,,,,,gl,450,True,0.9488888888888889,8.99566491600126,0.0199903664800028,0.017842541664463675,,,,,,
+large_batch,,,,,,,lightplainmatrix,450,True,0.9488888888888889,63.273896292055724,0.1406086584267905,0.1404669643512332,,,,,,
+large_batch,,,,,,,gl,1024,True,0.94921875,9.57619183397037,0.00935174983786169,0.008400664021479542,,,,,,
+large_batch,,,,,,,lightplainmatrix,1024,True,0.94921875,120.77777887295815,0.1179470496806232,0.11782409627241464,,,,,,
+large_batch,,,,,,,gl,2048,True,0.951171875,8.802756999997655,0.004298221191405105,0.003830830281728481,,,,,,
+large_batch,,,,,,,lightplainmatrix,2048,True,0.951171875,241.38053837706684,0.11786159100442717,0.117739856832074,,,,,,
+large_batch,,,,,,,gl,4096,True,0.945068359375,9.020979417022318,0.0022023875529839643,0.0019594088745122917,,,,,,
+large_batch,,,,,,,lightplainmatrix,4096,True,0.945068359375,496.0360257139837,0.12110254534032805,0.12097932054687277,,,,,,
+large_batch,,,,,,,gl,8192,True,0.9454345703125,9.163500875991303,0.0011185914155262822,0.0009998137359623627,,,,,,
+large_batch,,,,,,,lightplainmatrix,8192,True,0.9454345703125,1000.5833382108831,0.12214152077769569,0.12201199287927977,,,,,,
+throughput_compare,,,,,,,,1,,,,102.26478854200104,,,,,ckks_pca32_packed_dense,1.0,0.15901874460249515
+throughput_compare,,,,,,,,1,,,,51.3525337909814,,,,,ckks_pca32_packed_lightplainmatrix,1.9914263424322196,0.31667411694191017
+throughput_compare,,,,,,,,1,,,,94.20435237500351,,,,,ckks_pca32_packed_plainmatrix,1.0855633095901025,0.17262491467754787
+throughput_compare,,,,,,,,1,,,,16.262018290988635,,,,,gl_pca32_packed,6.288566813300758,1.0
+throughput_compare,,,,,,,,32,,,,3.2091991536244677,,,,,ckks_pca32_packed_dense,1.0,0.15823556179919207
+throughput_compare,,,,,,,,32,,,,1.6358551002813329,,,,,ckks_pca32_packed_lightplainmatrix,1.9617869290944856,0.3104244568555777
+throughput_compare,,,,,,,,32,,,,2.94454774478163,,,,,ckks_pca32_packed_plainmatrix,1.0898784573324907,0.17245752998884345
+throughput_compare,,,,,,,,32,,,,0.5078094309992593,,,,,gl_pca32_packed,6.319691911411446,1.0
+throughput_compare,,,,,,,,64,,,,1.6058976705626264,,,,,ckks_pca32_packed_dense,1.0,0.15718492583728103
+throughput_compare,,,,,,,,64,,,,0.8148347949218078,,,,,ckks_pca32_packed_lightplainmatrix,1.9708260871662087,0.30978415234939927
+throughput_compare,,,,,,,,64,,,,1.478182356124762,,,,,ckks_pca32_packed_plainmatrix,1.0864002427770048,0.1707657415905076
+throughput_compare,,,,,,,,64,,,,0.2524229062496488,,,,,gl_pca32_packed,6.361933211300473,1.0
+throughput_compare,,,,,,,,128,,,,0.8059306907500741,,,,,ckks_pca32_packed_dense,1.0,0.15815730634327124
+throughput_compare,,,,,,,,128,,,,0.40636264810950706,,,,,ckks_pca32_packed_lightplainmatrix,1.983279453708282,0.3136701361244564
+throughput_compare,,,,,,,,128,,,,0.7369042946015725,,,,,ckks_pca32_packed_plainmatrix,1.0936707746910643,0.17297202375149742
+throughput_compare,,,,,,,,128,,,,0.12746382714840365,,,,,gl_pca32_packed,6.3228188638314196,1.0
+throughput_compare,,,,,,,,256,,,,0.4037270216444995,,,,,ckks_pca32_packed_dense,1.0,0.15974746355375388
+throughput_compare,,,,,,,,256,,,,0.2046019918593629,,,,,ckks_pca32_packed_lightplainmatrix,1.973231140007713,0.31521866962151435
+throughput_compare,,,,,,,,256,,,,0.3703856870116624,,,,,ckks_pca32_packed_plainmatrix,1.0900178808253658,0.17412759169009018
+throughput_compare,,,,,,,,256,,,,0.06449436767582029,,,,,gl_pca32_packed,6.259880299529808,1.0
+throughput_compare,,,,,,,,450,,,,0.45485370138892905,,,,,ckks_pca32_packed_dense,1.0,0.07975710627221229
+throughput_compare,,,,,,,,450,,,,0.18947029638893179,,,,,ckks_pca32_packed_lightplainmatrix,2.4006596815325407,0.19146966934340612
+throughput_compare,,,,,,,,450,,,,0.3088670789822289,,,,,ckks_pca32_packed_plainmatrix,1.4726519345724756,0.11745445684767594
+throughput_compare,,,,,,,,450,,,,0.036277814999985926,,,,,gl_pca32_packed,12.538067725112594,1.0

@@ -1,0 +1,72 @@
+{
+  "ok": true,
+  "semantic_validation_passed": true,
+  "accuracy": 0.9375,
+  "accuracy_poly_plain": 0.9375,
+  "argmax_agreement_poly_vs_fhe": 1.0,
+  "error_metrics": {
+    "logits_linf": 2.654082464914609e-08,
+    "logits_mae": 4.727742107621825e-09,
+    "logits_relative_l2": 1.9511268156535356e-09
+  },
+  "n_samples": 32,
+  "slot_count": 8192,
+  "block_dim": 32,
+  "samples_per_ciphertext": 256,
+  "ciphertext_count": 1,
+  "sample_packing_utilization": 0.125,
+  "used_slots": 1024,
+  "total_slots_across_ciphertexts": 8192,
+  "slot_utilization": 0.125,
+  "output_padding_ratio": 0.6875,
+  "matrix_multiply_count": 2,
+  "add_count": 2,
+  "polynomial_degree": 3,
+  "operation_counts": {
+    "matrix_multiply": 2,
+    "add": 2,
+    "polynomial": 1
+  },
+  "matrix_build_s": 0.012103292014217004,
+  "level_log": [
+    {
+      "stage": "input",
+      "type": "Ciphertext",
+      "level": 7,
+      "nbytes": 2359608,
+      "serialized_nbytes": 2359334
+    },
+    {
+      "stage": "linear1",
+      "type": "Ciphertext",
+      "level": 5,
+      "nbytes": 1835320,
+      "serialized_nbytes": 1835046
+    },
+    {
+      "stage": "activation",
+      "type": "Ciphertext",
+      "level": 2,
+      "nbytes": 1048888,
+      "serialized_nbytes": 1048614
+    },
+    {
+      "stage": "linear2",
+      "type": "Ciphertext",
+      "level": 1,
+      "nbytes": 786744,
+      "serialized_nbytes": 786470
+    }
+  ],
+  "timing_log": {
+    "key_generation_s": 1.0522459170024376,
+    "encryption_s_total": 0.014638833003118634,
+    "linear1_s_total": 81.3472487090039,
+    "activation_s_total": 0.04246229201089591,
+    "linear2_s_total": 23.038112290989375,
+    "decryption_s_total": 0.014253166998969391
+  },
+  "runtime_total_s": 105.53348766700947,
+  "runtime_per_sample_amortized_s": 3.297921489594046,
+  "memory_notes": "Dense numpy 8192x8192 block diagonal matrices are used for semantic validation."
+}

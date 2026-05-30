@@ -1,0 +1,2 @@
+condition,n_samples,ok,semantic_validation_passed,task_type,weight_privacy,activation,ciphertext_count,runtime_total_s,runtime_per_sample_s,encryption_weight_s,encryption_input_s,matrix_multiply_s,decryption_s,hidden_relative_l2,hidden_linf,hidden_mae,failure_category,failure_reason
+gl_encrypted_weight_pca32_linear,1,True,True,linear,encrypted_weight,none,2,13.015665417000037,13.015665417000037,0.4756187919997501,0.4713403330001711,4.706572083000083,0.7442802079999637,8.271299956007156e-08,3.223513567185421e-07,7.175277696406124e-08,,

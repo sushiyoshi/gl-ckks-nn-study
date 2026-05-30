@@ -1,0 +1,37 @@
+{
+  "platform": "macOS-15.3.1-arm64-arm-64bit-Mach-O",
+  "sys_version": "3.13.4 (main, Jun  3 2025, 15:34:24) [Clang 17.0.0 (clang-1700.0.13.3)]",
+  "sys_executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+  "machine": "arm64",
+  "processor": "arm",
+  "cwd": "/Users/Eito_1/gl",
+  "env": {
+    "PYTHONPATH": null,
+    "LD_LIBRARY_PATH": null,
+    "DYLD_LIBRARY_PATH": null
+  },
+  "pip": {
+    "ok": true,
+    "value": "pip 25.1.1 from /opt/homebrew/lib/python3.13/site-packages/pip (python 3.13)"
+  },
+  "modules": {
+    "openfhe": {
+      "name": "openfhe",
+      "found": false,
+      "origin": null,
+      "import_ok": false,
+      "version": null,
+      "module_file": null,
+      "error": "module_not_found"
+    },
+    "openfhe_numpy": {
+      "name": "openfhe_numpy",
+      "found": false,
+      "origin": null,
+      "import_ok": false,
+      "version": null,
+      "module_file": null,
+      "error": "module_not_found"
+    }
+  }
+}

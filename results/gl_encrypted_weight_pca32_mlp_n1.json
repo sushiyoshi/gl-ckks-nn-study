@@ -1,0 +1,91 @@
+{
+  "ok": true,
+  "semantic_validation_passed": true,
+  "failure_category": null,
+  "task_type": "mlp_poly_relu",
+  "weight_privacy": "encrypted_weight",
+  "activation": "degree3_poly",
+  "polynomial_degree": 3,
+  "polynomial_radius": 6.0,
+  "shape": [
+    256,
+    32,
+    32
+  ],
+  "logical_dims": [
+    32,
+    32,
+    10
+  ],
+  "n_samples": 1,
+  "ciphertext_count": 3,
+  "key_generation_s": 6.472750875000202,
+  "used_batches": 1,
+  "used_columns_last_batch": 1,
+  "feature_dim": 32,
+  "samples_per_ciphertext_capacity": 8192,
+  "sample_packing_utilization": 0.0001220703125,
+  "matrix_entry_utilization_input": 0.0001220703125,
+  "used_input_entries": 32,
+  "total_matrix_entries": 262144,
+  "logits_relative_l2": 4.610697531712777e-08,
+  "logits_linf": 2.1668241956263046e-07,
+  "logits_mae": 8.157334591071818e-08,
+  "logits_allclose": true,
+  "accuracy": 1.0,
+  "argmax_agreement": 1.0,
+  "level_log": [
+    {
+      "stage": "input",
+      "type": "GLCiphertext",
+      "level": 6,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    {
+      "stage": "weight_w1",
+      "type": "GLCiphertext",
+      "level": 6,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    {
+      "stage": "weight_w2",
+      "type": "GLCiphertext",
+      "level": 6,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    {
+      "stage": "linear1",
+      "type": "GLCiphertext",
+      "level": 5,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    {
+      "stage": "activation",
+      "type": "GLCiphertext",
+      "level": 2,
+      "nbytes": null,
+      "serialized_nbytes": null
+    },
+    {
+      "stage": "linear2",
+      "type": "GLCiphertext",
+      "level": 1,
+      "nbytes": null,
+      "serialized_nbytes": null
+    }
+  ],
+  "timing_log": {
+    "encryption_input_s": 0.4746492079998461,
+    "encryption_weight_s": 0.957864083000004,
+    "linear1_matrix_multiply_s": 4.6713011669999105,
+    "activation_s": 3.8339177500001824,
+    "linear2_matrix_multiply_s": 1.608638707999944,
+    "decryption_s": 0.4843457499996475
+  },
+  "runtime_total_s": 18.700840167000024,
+  "runtime_per_sample_s": 18.700840167000024
+}

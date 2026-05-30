@@ -1,0 +1,22 @@
+{
+  "hidden": 32,
+  "pca_components": 32,
+  "classes": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "n_iter": 71,
+  "loss": 0.03803738325271932,
+  "pca_explained_variance_ratio_sum": 0.9095439859157219,
+  "seed": 42,
+  "accuracy_train_relu": 0.9851521900519673,
+  "accuracy_test_relu": 0.9555555555555556
+}

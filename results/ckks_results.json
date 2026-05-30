@@ -1,0 +1,13 @@
+{
+  "desilofhe_version_attr": null,
+  "n_samples_requested": 1,
+  "slot_count": 8192,
+  "packing_utilization_input": 0.0079345703125,
+  "padding_input": 8127,
+  "key_generation_s": 1.0547584999876563,
+  "accuracy_fhe_decrypted": 1.0,
+  "argmax_agreement": 1.0,
+  "fhe_numeric_logits_linf": 0.18797993320510997,
+  "fhe_numeric_logits_mae": 0.06293557795434093,
+  "fhe_numeric_logits_relative_l2": 0.03239368196959225
+}

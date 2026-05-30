@@ -1,0 +1,93 @@
+{
+  "engine": {
+    "slot_count": 8192,
+    "max_level": 7
+  },
+  "docstrings": {
+    "multiply_matrix": "multiply_matrix(*args, **kwargs)\nOverloaded function.\n\n1. multiply_matrix(self: desilofhe.Engine, matrix: typing.Annotated[numpy.typing.ArrayLike, numpy.float64], ciphertext: desilofhe.Ciphertext, rotation_key: desilofhe.RotationKey) -> desilofhe.Ciphertext\n\n2. multiply_matrix(self: desilofhe.Engine, matrix: typing.Annotated[numpy.typing.ArrayLike, numpy.complex128], ciphertext: desilofhe.Ciphertext, rotation_key: desilofhe.RotationKey) -> desilofhe.Ciphertext\n\n3. multiply_matrix(self: desilofhe.Engine, plain_matrix: desilofhe.PlainMatrix, ciphertext: desilofhe.Ciphertext, matrix_multiplication_key: desilofhe.MatrixMultiplicationKey) -> desilofhe.Ciphertext\n\n4. multiply_matrix(self: desilofhe.Engine, light_plain_matrix: desilofhe.LightPlainMatrix, ciphertext: desilofhe.Ciphertext, matrix_multiplication_key: desilofhe.MatrixMultiplicationKey) -> desilofhe.Ciphertext\n",
+    "encode_to_plain_matrix": "encode_to_plain_matrix(*args, **kwargs)\nOverloaded function.\n\n1. encode_to_plain_matrix(self: desilofhe.Engine, matrix: typing.Annotated[numpy.typing.ArrayLike, numpy.float64]) -> desilofhe.PlainMatrix\n\n2. encode_to_plain_matrix(self: desilofhe.Engine, matrix: typing.Annotated[numpy.typing.ArrayLike, numpy.float64], level: typing.SupportsInt | typing.SupportsIndex) -> desilofhe.PlainMatrix\n\n3. encode_to_plain_matrix(self: desilofhe.Engine, matrix: typing.Annotated[numpy.typing.ArrayLike, numpy.complex128]) -> desilofhe.PlainMatrix\n\n4. encode_to_plain_matrix(self: desilofhe.Engine, matrix: typing.Annotated[numpy.typing.ArrayLike, numpy.complex128], level: typing.SupportsInt | typing.SupportsIndex) -> desilofhe.PlainMatrix\n\n5. encode_to_plain_matrix(self: desilofhe.Engine, matrix: typing.Annotated[numpy.typing.ArrayLike, numpy.float64], level: typing.SupportsInt | typing.SupportsIndex, diagonal_indices: collections.abc.Sequence[typing.SupportsInt | typing.SupportsIndex]) -> desilofhe.PlainMatrix\n\n6. encode_to_plain_matrix(self: desilofhe.Engine, matrix: typing.Annotated[numpy.typing.ArrayLike, numpy.complex128], level: typing.SupportsInt | typing.SupportsIndex, diagonal_indices: collections.abc.Sequence[typing.SupportsInt | typing.SupportsIndex]) -> desilofhe.PlainMatrix\n\n7. encode_to_plain_matrix(self: desilofhe.Engine, matrix: typing.Annotated[numpy.typing.ArrayLike, numpy.float64], diagonal_indices: collections.abc.Sequence[typing.SupportsInt | typing.SupportsIndex]) -> desilofhe.PlainMatrix\n\n8. encode_to_plain_matrix(self: desilofhe.Engine, matrix: typing.Annotated[numpy.typing.ArrayLike, numpy.complex128], diagonal_indices: collections.abc.Sequence[typing.SupportsInt | typing.SupportsIndex]) -> desilofhe.PlainMatrix\n",
+    "encode_to_light_plain_matrix": "encode_to_light_plain_matrix(*args, **kwargs)\nOverloaded function.\n\n1. encode_to_light_plain_matrix(self: desilofhe.Engine, matrix: typing.Annotated[numpy.typing.ArrayLike, numpy.float64]) -> desilofhe.LightPlainMatrix\n\n2. encode_to_light_plain_matrix(self: desilofhe.Engine, matrix: typing.Annotated[numpy.typing.ArrayLike, numpy.float64], level: typing.SupportsInt | typing.SupportsIndex) -> desilofhe.LightPlainMatrix\n\n3. encode_to_light_plain_matrix(self: desilofhe.Engine, matrix: typing.Annotated[numpy.typing.ArrayLike, numpy.complex128]) -> desilofhe.LightPlainMatrix\n\n4. encode_to_light_plain_matrix(self: desilofhe.Engine, matrix: typing.Annotated[numpy.typing.ArrayLike, numpy.complex128], level: typing.SupportsInt | typing.SupportsIndex) -> desilofhe.LightPlainMatrix\n\n5. encode_to_light_plain_matrix(self: desilofhe.Engine, matrix: typing.Annotated[numpy.typing.ArrayLike, numpy.float64], level: typing.SupportsInt | typing.SupportsIndex, diagonal_indices: collections.abc.Sequence[typing.SupportsInt | typing.SupportsIndex]) -> desilofhe.LightPlainMatrix\n\n6. encode_to_light_plain_matrix(self: desilofhe.Engine, matrix: typing.Annotated[numpy.typing.ArrayLike, numpy.complex128], level: typing.SupportsInt | typing.SupportsIndex, diagonal_indices: collections.abc.Sequence[typing.SupportsInt | typing.SupportsIndex]) -> desilofhe.LightPlainMatrix\n\n7. encode_to_light_plain_matrix(self: desilofhe.Engine, matrix: typing.Annotated[numpy.typing.ArrayLike, numpy.float64], diagonal_indices: collections.abc.Sequence[typing.SupportsInt | typing.SupportsIndex]) -> desilofhe.LightPlainMatrix\n\n8. encode_to_light_plain_matrix(self: desilofhe.Engine, matrix: typing.Annotated[numpy.typing.ArrayLike, numpy.complex128], diagonal_indices: collections.abc.Sequence[typing.SupportsInt | typing.SupportsIndex]) -> desilofhe.LightPlainMatrix\n"
+  },
+  "dense_identity_plus_one": {
+    "dense_matrix_count": 1,
+    "dense_matrix_nbytes_total": 536870912,
+    "dense_matrix_mib_total": 512.0,
+    "dense_matrix_shapes": [
+      [
+        8192,
+        8192
+      ]
+    ],
+    "dense_matrix_dtypes": [
+      "float64"
+    ]
+  },
+  "cases": {
+    "dense_numpy_rotation_key": {
+      "ok": true,
+      "elapsed_s": 80.52673787501408,
+      "ciphertext": {
+        "type": "Ciphertext",
+        "level": 5,
+        "nbytes": 1835320,
+        "serialized_nbytes": 1835046
+      }
+    },
+    "encode_plain_matrix": {
+      "ok": true,
+      "elapsed_s": 19.601504333986668,
+      "encoded": {
+        "type": "PlainMatrix",
+        "nbytes": 9665055624,
+        "serialized_nbytes": 9663906586
+      }
+    },
+    "plain_matrix_multiply": {
+      "ok": true,
+      "elapsed_s": 8.657542208995437,
+      "ciphertext": {
+        "type": "Ciphertext",
+        "level": 6,
+        "nbytes": 2097464,
+        "serialized_nbytes": 2097190
+      }
+    },
+    "encode_light_plain_matrix": {
+      "ok": true,
+      "elapsed_s": 3.285999624989927,
+      "encoded": {
+        "type": "LightPlainMatrix",
+        "nbytes": 1075055496,
+        "serialized_nbytes": 1073939226
+      }
+    },
+    "light_plain_matrix_multiply": {
+      "ok": true,
+      "elapsed_s": 19.75690675000078,
+      "ciphertext": {
+        "type": "Ciphertext",
+        "level": 6,
+        "nbytes": 2097464,
+        "serialized_nbytes": 2097190
+      }
+    },
+    "encode_plain_matrix_diagonal_indices": {
+      "ok": true,
+      "elapsed_s": 0.9130997920001391,
+      "encoded": {
+        "type": "PlainMatrix",
+        "nbytes": 2360568,
+        "serialized_nbytes": 2360146
+      }
+    },
+    "encode_light_plain_matrix_diagonal_indices": {
+      "ok": true,
+      "elapsed_s": 0.40565358399180695,
+      "encoded": {
+        "type": "LightPlainMatrix",
+        "nbytes": 263400,
+        "serialized_nbytes": 262986
+      }
+    }
+  }
+}
