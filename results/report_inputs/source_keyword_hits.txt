@@ -64,6 +64,14 @@ scripts/03_run_plain_baselines.py:37:        "argmax_agreement_relu_poly": argma
 scripts/03_run_plain_baselines.py:39:        **error_metrics(relu_out["h1"], poly_out["h1"], "hidden_relu_vs_poly"),
 scripts/03_run_plain_baselines.py:40:        **error_metrics(relu_out["logits"], poly_out["logits"], "logits_relu_vs_poly"),
 scripts/03_run_plain_baselines.py:41:        **error_metrics(poly_out["logits"], clipped_out["logits"], "logits_poly_vs_clipped"),
+scripts/44_benchmark_plaintext_mlp_vs_gl_layout.py:20:from src.polynomial import eval_power_polynomial, fit_relu_power_polynomial
+scripts/44_benchmark_plaintext_mlp_vs_gl_layout.py:87:    coeffs = fit_relu_power_polynomial(3, (-radius, radius)).astype(np.float64)
+scripts/44_benchmark_plaintext_mlp_vs_gl_layout.py:91:        h1 = eval_power_polynomial(z1, coeffs)
+scripts/44_benchmark_plaintext_mlp_vs_gl_layout.py:103:        activated = eval_power_polynomial(hidden, coeffs)
+scripts/44_benchmark_plaintext_mlp_vs_gl_layout.py:131:        "polynomial_degree": 3,
+scripts/44_benchmark_plaintext_mlp_vs_gl_layout.py:132:        "polynomial_radius": radius,
+scripts/44_benchmark_plaintext_mlp_vs_gl_layout.py:158:        "polynomial_degree": payload["polynomial_degree"],
+scripts/44_benchmark_plaintext_mlp_vs_gl_layout.py:159:        "polynomial_radius": payload["polynomial_radius"],
 scripts/05_check_gl_capabilities.py:29:            "has_evaluate_polynomial": hasattr(e, "evaluate_polynomial"),
 scripts/05_check_gl_capabilities.py:30:            "has_evaluate_chebyshev_polynomial": hasattr(e, "evaluate_chebyshev_polynomial"),
 scripts/05_check_gl_capabilities.py:49:            "has_evaluate_polynomial": hasattr(g, "evaluate_polynomial"),

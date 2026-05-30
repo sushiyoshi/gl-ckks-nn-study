@@ -1,5 +1,5 @@
 ===== DATE =====
-2026年 5月30日 土曜日 11時11分57秒 JST
+Sat May 30 11:17:34 JST 2026
 
 ===== PWD / HOST =====
 /Users/Eito_1/gl
@@ -12,31 +12,28 @@ ProductVersion:		15.3.1
 BuildVersion:		24D70
 
 ===== CPU =====
-Apple M2 Pro
-10
-17179869184
 
 ===== MEMORY =====
 Mach Virtual Memory Statistics: (page size of 16384 bytes)
-Pages free:                               75876.
-Pages active:                            296015.
-Pages inactive:                          293714.
-Pages speculative:                         7082.
+Pages free:                                7607.
+Pages active:                            329900.
+Pages inactive:                          318150.
+Pages speculative:                        12010.
 Pages throttled:                              0.
-Pages wired down:                        132635.
-Pages purgeable:                          15713.
-"Translation faults":                  61572629.
-Pages copy-on-write:                    3358269.
-Pages zero filled:                     35858013.
-Pages reactivated:                      3709502.
-Pages purged:                            980515.
-File-backed pages:                       228386.
-Anonymous pages:                         368425.
-Pages stored in compressor:              465883.
-Pages occupied by compressor:            190795.
-Decompressions:                         1593501.
+Pages wired down:                        142102.
+Pages purgeable:                           8868.
+"Translation faults":                  63098280.
+Pages copy-on-write:                    3496349.
+Pages zero filled:                     36535280.
+Pages reactivated:                      3711897.
+Pages purged:                            999897.
+File-backed pages:                       239614.
+Anonymous pages:                         420446.
+Pages stored in compressor:              454281.
+Pages occupied by compressor:            186122.
+Decompressions:                         1603568.
 Compressions:                           2610305.
-Pageins:                                1708386.
+Pageins:                                1726792.
 Pageouts:                                 18883.
 Swapins:                                      0.
 Swapouts:                                     0.

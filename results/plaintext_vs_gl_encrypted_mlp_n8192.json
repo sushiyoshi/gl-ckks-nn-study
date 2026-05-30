@@ -1,0 +1,60 @@
+{
+  "n_samples": 8192,
+  "logical_dims": [
+    32,
+    32,
+    10
+  ],
+  "gl_shape": [
+    256,
+    32,
+    32
+  ],
+  "warmup": 5,
+  "repeat": 50,
+  "model_path": "data/pca32_mlp.joblib",
+  "coefficient_source": "src.gl_encrypted_weight.encrypted_weight_mlp-compatible fit from pca32 train z1",
+  "polynomial_degree": 3,
+  "polynomial_radius": 6.0,
+  "coefficients_power_basis_ascending": [
+    0.5626404141151885,
+    0.5000000000000014,
+    0.0781054882690525,
+    -6.452486067025442e-17
+  ],
+  "used_batches": 256,
+  "logical_mlp": {
+    "min_s": 0.001052958999935072,
+    "median_s": 0.0015505829996982357,
+    "mean_s": 0.001634690019855043,
+    "max_s": 0.0035121250002703164
+  },
+  "gl_layout_mlp": {
+    "min_s": 0.0040062909974949434,
+    "median_s": 0.004537478998827282,
+    "mean_s": 0.0045541949597100026,
+    "max_s": 0.0055088339977373835
+  },
+  "encrypted_reference": {
+    "server_only_s": 9.750431624994235,
+    "total_s": 18.13020904199948,
+    "key_generation_s": 6.289987874999497,
+    "total_minus_keygen_s": 11.840221166999982
+  },
+  "slowdown": {
+    "encrypted_server_only_over_plaintext_logical_median": 6288.235861538402,
+    "encrypted_no_keygen_over_plaintext_logical_median": 7635.980253429999,
+    "encrypted_server_only_over_plaintext_gl_layout_median": 2148.865400261742,
+    "encrypted_no_keygen_over_plaintext_gl_layout_median": 2609.42721058546
+  },
+  "validation": {
+    "gl_layout_vs_logical_linf": 0.0,
+    "gl_layout_vs_logical_mae": 0.0,
+    "gl_layout_vs_logical_relative_l2": 0.0,
+    "allclose": true,
+    "logical_accuracy": 0.9454345703125,
+    "argmax_agreement": 1.0,
+    "logical_checksum": -103935.11804801402,
+    "gl_layout_checksum": -103935.11804801402
+  }
+}
