@@ -111,6 +111,17 @@ python3 scripts/33_run_gl_encrypted_weight_pca32_mlp.py --degree 3 --n-samples 3
 python3 scripts/34_compare_gl_plain_vs_encrypted_weight.py
 ```
 
+Transformer FFN component examples (`512 -> 2048 -> 512`):
+
+```bash
+python3 scripts/53_dryrun_transformer_ffn_schedule.py
+python3 scripts/64_probe_large_gl_shapes.py
+python3 scripts/65_run_gl_transformer_ffn_plain_weight.py --n-in 512 --n-hidden 2048 --n-out 512 --n-samples 8192 --shape 16,512,512 --dry-run
+python3 scripts/65_run_gl_transformer_ffn_plain_weight.py --n-in 512 --n-hidden 2048 --n-out 512 --n-samples 8192 --shape 16,512,512
+python3 scripts/63_run_gl_transformer_ffn_supported_shape.py --n-in 512 --n-hidden 2048 --n-out 512 --n-samples 8192 --shape 16,512,512 --dry-run
+python3 scripts/63_run_gl_transformer_ffn_supported_shape.py --n-in 512 --n-hidden 2048 --n-out 512 --n-samples 8192 --shape 16,512,512
+```
+
 ## Fairness Condition
 
 The intended comparison is only fair if both CKKS and GL can run the same threat model:
